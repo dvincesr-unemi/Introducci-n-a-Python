@@ -216,9 +216,47 @@ def intercam_valores():
 
     print (f"a: {a}, b: {b}")
 
-intercam_valores()
+#intercam_valores()
 
 #5. Prueba de escritorio
+#EJERCICIO 7: Leer el precio de un producto sin IVA y mostrar el IVA y el precio final. El IVA en Ecuador es 15%.
+#Añadir un descuento del 10% que se aplique antes del IVA. Muestra los tres valores: descuento, iva, total
+
+#1. Entender el problema
+#Entrada: Precio de un producto (float)
+#Proceso: Aplicar primero el descuento y despues el iva correspondiente 
+#Salida:  Muestra los tres valores: descuento, iva, total
+
+#2. Bosquejo a mano
+#precio=float(input("mensaje"))
+#descuento= precio * 0.10
+#precio_des= precio - descuento
+#iva= precio_des + (precio_des * 0.15)
+#mostrar mensaje mediante print 
+
+#3. Descubrir el patron 
+#se recibe un precio al cual se le calcula un descuento del 10% y al final se le agrega un iva del 15%
+
+#4. Escribir codigo
+def iva_descuento():
+    precio = float(input("Ingrese el precio del producto: "))
+    descuento = precio * 0.10
+    precio_des = precio - descuento
+    iva = precio_des * 0.15
+    total = precio_des + iva
+
+    print(f"Valor inicial: ${precio:.2f}")
+    print(f"Descuento del 10% aplicado: ${descuento:.2f}, por lo que el nuevo valor seria ${precio_des:.2f}")
+    print(f"IVA del 15% aplicado: ${iva:.2f} ")
+    print(f"Total a pagar ${total:.2f}")
+
+iva_descuento()
+
+#Prueba de escritorio
+
+
+
+
 
 
 
