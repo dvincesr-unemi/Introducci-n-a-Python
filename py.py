@@ -219,6 +219,7 @@ def intercam_valores():
 #intercam_valores()
 
 #5. Prueba de escritorio
+
 #EJERCICIO 7: Leer el precio de un producto sin IVA y mostrar el IVA y el precio final. El IVA en Ecuador es 15%.
 #Añadir un descuento del 10% que se aplique antes del IVA. Muestra los tres valores: descuento, iva, total
 
@@ -231,7 +232,8 @@ def intercam_valores():
 #precio=float(input("mensaje"))
 #descuento= precio * 0.10
 #precio_des= precio - descuento
-#iva= precio_des + (precio_des * 0.15)
+#iva = precio_des * 0.15
+#total = precio_des + iva
 #mostrar mensaje mediante print 
 
 #3. Descubrir el patron 
@@ -250,9 +252,57 @@ def iva_descuento():
     print(f"IVA del 15% aplicado: ${iva:.2f} ")
     print(f"Total a pagar ${total:.2f}")
 
-iva_descuento()
+#iva_descuento()
 
-#Prueba de escritorio
+#5. Prueba de escritorio
+
+#EJERCICIO 8: Leer un número entero y determinar si es par o impar
+#Modifícalo para que además diga si es múltiplo de 3, de 5, o de ambos.
+
+#1. Entender el problema
+#Entrada: Variable (int)
+#Proceso: Usar valor % (int) para aplicar las condiciones 
+#Salida: Mostrar si es par o impar, mutiplo de 3 o de 5 mediante un print 
+
+#2. Bosquejo a mano
+#numero=int(input("Mensaje"))
+#if numero % 2 ==0: es par
+#else: es impar 
+#if numero % 3 == 0 and numero % 5 == 0
+#elif numero %3 == 0: es mutiplo de 3
+#elif numero % 5 == 0: es mutiplo de 5
+#else: no es mutiplo ni de 3 ni de 5 
+
+#3. Descubrir el patron 
+#Smplemente de usan condiciones en este caso aplicando % ya que para que sea par o mutiplo al aplicar % debe ser 0
+
+#4. Escribir codigo 
+def par_impar_muti():
+    numero = int(input("Ingrese un numero para saber si es par, impar, mutiplo de 3, de 5 o de ambos: "))
+
+    if numero % 2 == 0:
+        print("El numero es par.")
+    else: 
+        print ("El numerp es impar.")
+
+    if numero % 3 == 0 and numero % 5 == 0:
+        print ("El mutiplo de 3 y de 5 a la vez.")
+    elif numero % 3 == 0:
+         print ("Es multiplo de 3")
+    elif numero % 5 == 0: 
+         print ("Es mutiplo de 5")
+    else:
+         print("No es multiplo ni de 3 ni de 5. ")
+
+par_impar_muti()
+
+#5: Prueba de escritorio
+
+    
+
+
+
+
 
 
 
