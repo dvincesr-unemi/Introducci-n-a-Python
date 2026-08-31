@@ -294,12 +294,40 @@ def par_impar_muti():
     else:
          print("No es multiplo ni de 3 ni de 5. ")
 
-par_impar_muti()
+#par_impar_muti()
 
 #5: Prueba de escritorio
 
-    
+#EJERCICIO 9: Leer hh:mm:ss y convertir a segundos totales. 
 
+#1.Entender el problema 
+#Entrada: Tiempo en el formato 1:02:04
+#Proceso: Uso de split() para convertir el tiempo en una lista por posiciones (Horas, minutos, segundos)
+#Salida: Mostrar los segundos totales mediante print 
+
+#2. Bosquejo a mano
+#tiempo = input("Mensaje")
+#horas, minutos, segundos = tiempo.split(":")
+# total_segundos = int(horas) * 3600 + int(minutos) * 60 + int(segundos)
+#Mensaje mediante print
+
+#3. Descubrir el patron
+#Se recibe el tiempo total el formato h:min:seg, se debe transformar a segundos totales, mediante un solo input el usuario ingresa el tiempo
+#Se usa Split() para separar horas, minutos y segundos en una lista 
+#Se realizan los calculos correspondientes 
+
+#4. Escribir codigo 
+
+def tiempot_seg():
+    tiempo = input("Ingrese la hora (hh:mm:ss): ")
+    horas, minutos, segundos = tiempo.split(":")
+    total_segundos = int(horas) * 3600 + int(minutos) * 60 + int(segundos)
+
+    print(f"Total de segundos: {total_segundos}")
+
+tiempot_seg()
+
+ #5. Prueba de escritorio 
 
 
 
