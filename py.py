@@ -325,15 +325,248 @@ def tiempot_seg():
 
     print(f"Total de segundos: {total_segundos}")
 
-tiempot_seg()
+#tiempot_seg()
 
  #5. Prueba de escritorio 
 
+#EJERCICIO 10: Un cajero solo tiene billetes de $50 $20, $10, $5 y $1. Dado un monto, mostrar cuántos billetes de cada uno se necesitan (usando la mínima cantidad).
+#Después probar con monedas de $0.25, $0.10, $0.05 y $0.01 (necesitas trabajar con centavos).
+
+#1.Entender el problema
+#Entrada: monto (int)
+#Proceso: Dividir sucesivamente de mayor a menor usando // y %
+#Salida: Cantidad de billetes de cada tipo
+
+#2. Bosquejo a mano
+#monto = int(input("Mensaje"))
+#b50 = monto // 50
+#monto = monto % 50
+#b20 = monto // 20
+#monto = monto % 20
+#b10 = monto // 10
+#monto = monto % 10
+#b5 = monto // 5
+#monto = monto % 5
+#b1 = monto // 1
+
+#3. Descubrir el patron 
+#En cada paso agarras la mayor denominación que quepa. Trabajamos siempre con el resto, no con el monto original.
+
+#4. Escribir codigo
+def billetes():
+    monto = int(input("Ingrese el monto total: "))
+
+    b50 = monto // 50 
+    monto = monto % 50
+
+    b20 = monto // 20
+    monto = monto % 20
+
+    b10 = monto // 10
+    monto = monto % 10
+
+    b5 = monto // 5
+    monto = monto % 5
+
+    b1 = monto // 1
+
+    print(f"$50 × {b50}")
+    print(f"$20 × {b20}")
+    print(f"$10 × {b10}")
+    print(f"$5  × {b5}")
+    print(f"$1  × {b1}")
+
+#billetes()
+
+#5. Prueba de escritorio
+
+#Con monedas es casi igual, pero usaremos centavos = round(monto * 100) para mayor precision con los decimales 
+#Escribir codigo:
+
+def monedas ():
+    monto = float(input("Ingrese el monto total en dolares: "))
+    centavos = round(monto * 100)
+
+    m25 = centavos // 25
+    centavos = centavos % 25
+
+    m10 = centavos // 10
+    centavos = centavos % 10
+
+    m5 = centavos // 5
+    centavos = centavos % 5
+
+    m1 = centavos
+
+    print("\nCantidad de monedas:")
+    print(f"25¢: {m25}")
+    print(f"10¢: {m10}")
+    print(f"5¢ : {m5}")
+    print(f"1¢ : {m1}")
+
+#monedas()
+#Prueba de escritorio 
+
+#EJERCICIO 11: Lee un número de 3 cifras y muestra la suma de sus dígitos. Ejemplo: 435 → 4+3+5 = 12.
+#1.Entender el problema
+#Misma logica del problema anterior, que en esta ocasion se debe sumar  suma = centenas + decenas + unidades 
+
+#2. Bosquejo a mano 
+#Misma logica del problema anterior, que en esta ocasion se debe sumar  suma = centenas + decenas + unidades 
+
+#3. Descubrir el patron 
+##Misma logica del problema anterior, que en esta ocasion se debe sumar  suma = centenas + decenas + unidades 
+
+#4. Escribir codigo
+
+def suma_digitos():
+    numero = int(input("Ingrese un numero de 3 cifras: "))
+
+    centenas = numero // 100 
+    numero = numero % 100
+
+    decenas = numero // 10
+    numero = numero % 10
+
+    unidades = numero
+
+    suma = centenas + decenas + unidades 
+
+    print (f"Suma: {suma}")
+
+#suma_digitos()
+
+#5. Prueba de escritorio 
+                 
+#EJERCICIO 12: Lee una cantidad de minutos y muéstrala como «X horas Y minutos». Ejemplo: 135 → «2 horas 15 minutos».
+#1.Entender el problema
+#Misma logica del problema anterior
+
+#2. Bosquejo a mano 
+#Misma logica del problema anterior
+
+#3. Descubrir el patron 
+##Misma logica del problema anterior 
+
+#4. Escribir codigo
+def minutos_horasm():
+    minutos_totales = int(input("Ingrese el tiempo total en minutos: "))
+
+    horas = minutos_totales // 60
+    minutos = minutos_totales % 60
+
+    print(f"{horas} horas {minutos} minutos")
+
+#minutos_horasm()
+
+#5. Prueba de escritorio 
+
+#EJERCICIO 13: Lee peso (kg) y estatura (m) y calcula el IMC. Fórmula: IMC = peso / estatura². Muestra el IMC con 2 decimales.
+
+#1. Entender el problema
+#Entrada: Se lee peso (float) y estatura (float)
+#Proceso: Se aplica el calculo para IMC (IMC = peso / estatura² )
+#Salida: Se usa print para mostrar el resultado en este caso su IMC redondeado a dos decimales 
+
+#2. Bosquejo a mano 
+#peso(float)
+#estatura(float)
+#imc = peso / estatura ** 2
+#print( {imc})
+
+#3. Descubrir el patron 
+#Se reciben dos variables (float) y se le aplica el calculo correspondiente en este caso para calcular el IMC
+
+#4. Escribir codigo 
+
+def imc():
+    peso = float(input("Ingrese su peso (kg): "))
+    estatura = float(input("Ingrese su estatura (m): "))
+
+    imc_v = peso / (estatura ** 2 )
+
+    print (f"Su Indice de Masa Corporal es: {imc_v:.2f}")
+
+#imc()
+#5. Prueba de escritorio 
 
 
+#EJERCICIO 14: Lee un número decimal y una cantidad de decimales, y muéstralo redondeado. Ejemplo: 3.14159 con 2 decimales → 3.14.
+#1. Entender el problema 
+#Entrada: decimal(float), redondeo(int)
+#Proceso: resultado = round(decimal, redondeo)
+#Salida: Mensaje con el numero redondeado
 
+#2. Bosquejo a mano
+#decimal(float), redondeo(int)
+#resultado =  round(decimal, redondeo)
+#print({resultado})
 
+#3. Descubrir el patron 
+#Se recibe un numero decimal, segun lo que el usuario desee se redondeara usando round(decimal, redondeo)
 
+#4. Escribir codigo
+def decimal_redondeo():
+    decimal = float(input("Ingrese el numero decimal: "))
+    redondeo = int(input("¿A cuantas cifras desea redondearlo?: "))
+
+    resultado = round (decimal, redondeo)
+
+    print(resultado)
+
+#redondeo()
+
+#5. Prueba de escritorio 
+
+#EJERCICIO 15: Un producto vale $12. Si compras 10 o más te dan 15% de descuento, si compras entre 5 y 9 te dan 5%. Calcula el total.
+
+#1. Entender el problema 
+#Entrada: Se tiene un precio inicial de 12 y se le solicita al usuario que ingrese cuantos productos compro a ese precio 
+#Proceso: Se usan condiciones (if, else)
+#Salida: Se muestra el total a pagar 
+
+#2. Bosquejo a mano
+##Entrada:
+# cantidad = int(input("Mensaje"))
+
+#Proceso:
+# Si cantidad >= 10 → descuento = 15%
+# Si cantidad >= 5 → descuento = 5%
+# Caso contrario → descuento = 0%
+# Calcular subtotal
+# Calcular descuento
+# Calcular total
+#Salida: Mostrar subtotal, descuento y total a pagar
+
+#3. Descubrir el patron
+#Simplemente se usan condiciones para establecer el descuento 
+
+#4. Escribir codigo 
+
+def descuento():
+    PRECIO = 12 
+    cantidad = int(input("Cantidad: "))
+
+    if cantidad >= 10:
+        descuento = 0.15
+    elif cantidad >= 5:
+        descuento = 0.05
+    else:
+        descuento = 0
+
+    precio_inicial = PRECIO * cantidad
+    valor_descueto = precio_inicial * descuento
+    total = precio_inicial - valor_descueto
+
+    print(f"Precio unitario: {PRECIO}")
+    print(f"Cantidad a comprar: {cantidad}")
+    print(f"Total inicial a pagar: {precio_inicial:.2f}")
+    print(f"Descuento aplicado en %: {int(descuento * 100)}%")
+    print(f"Descuento aplicado en $: {valor_descueto:.2f}")
+    print(f"Total final a pagar: {total:.2f}")
+
+descuento()
+#5. Prueba de escritorio 
 
 
 
