@@ -565,8 +565,386 @@ def descuento():
     print(f"Descuento aplicado en $: {valor_descueto:.2f}")
     print(f"Total final a pagar: {total:.2f}")
 
-descuento()
+#descuento()
 #5. Prueba de escritorio 
+
+#EJERCICIO 16: Leer un número N y mostrar los números del 1 al N.
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema )
+#Proceso: Se usa un proceso repetitivo (for) para mostrar los numeros de 1 a N
+#Salida: Se incluye el print dentro del ciclo para mostrar los numeros del 1 a N
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para mostrar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+#Si fuera a mano sin for se deberia hacer print(1), print(2), print(3).... hasta llegar a N, pero esto no es eficiente
+
+#3. Descubrir el patron
+#Se usa un ciclo for para mostrar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+
+#4. Escribir codigo
+def primerfor(n):
+    for i in range (1, n + 1):
+        print(i)
+#primerfor(10)
+
+#Tambien se puede hacer que vaya al reves, es decir de N a 1, para esto se usa range(n, 0, -1)
+def primerfor_reves(n):
+    for i in range( n, 0, -1):
+        print(i)
+#primerfor_reves(10)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 17: Leer N y calcular la suma de 1 + 2 + 3 + ... + N.
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema )
+#Proceso: Se usa un proceso repetitivo (for) para sumar los numeros de 1 a N
+#Salida: Se incluye el print fuera del ciclo para mostrar la suma de los numeros del 1 a N
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para sumar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+# Leer N
+# suma = 0
+# Repetir desde 1 hasta N
+# Sumar el número actual a la variable suma
+# Mostrar la suma
+
+#3. Descubrir el patron
+#Se usa un ciclo for para sumar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+
+#4. Escribir codigo
+def suma_numeros(n):
+    suma = 0 
+    for i in range (1, n +1):
+        suma += i
+    return suma
+#print(suma_numeros(10))
+
+#Adaptarlo para calcular la suma de los pares del 2 al 100. Pista: range(2, 101, 2).
+def suma_pares(n):
+    suma = 0 
+    for i in range (2, n +1, 2):
+        suma += i
+    return suma
+#print(suma_pares(100))
+
+#5. Prueba de escritorio
+
+#EJERCICIO 18: Leer N y calcular el factorial (N! = 1 × 2 × 3 × ... × N). Ejemplo: 5! = 120.
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema )
+#Proceso: Se usa un proceso repetitivo (for) para multiplicar los numeros de 1 a N
+#Salida: Se incluye el print fuera del ciclo para mostrar el factorial de los numeros del 1 a N
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para multiplicar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+# Leer N
+# factorial = 1
+# Repetir desde 1 hasta N
+# Multiplicar el número actual a la variable factorial
+# Mostrar el factorial  
+
+#3. Descubrir el patron
+#Se usa un ciclo for para multiplicar los numeros del 1 a N, en este caso se usara range(1, n + 1)
+
+#4. Escribir codigo
+def factorial(n): 
+    factorial = 1
+    for i in range (1, n + 1):
+        factorial *= i
+    return factorial
+#print(factorial(5))
+
+#¿Qué pasa con N muy grande (100!)? Python maneja enteros infinitos, pruébalo. En JS con enteros normales explotaría.
+#print(factorial(100))
+
+#5. Prueba de escritorio
+
+#EJERCICIO 19: Leer las notas de N estudiantes (una por una) y contar cuántos aprobaron (nota ≥ 70).
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema ) y luego se ingresan las notas de los estudiantes (una por una)
+#Proceso: Se usa un proceso repetitivo (for) para contar cuantas notas son mayores o iguales a 70
+#Salida: Se muestra el conteo de estudiantes que aprobaron
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para contar cuantas notas son mayores o iguales a 70        
+# Leer N
+# contador_aprobados = 0    
+# Repetir N veces
+# Leer nota 
+# Si nota >= 70, incrementar contador_aprobados
+# Mostrar contador_aprobados
+
+#3. Descubrir el patron
+#Se usa un ciclo for para contar cuantas notas son mayores o iguales a 70   
+
+#4. Escribir codigo
+
+def contar_aprobados(n):
+    contador_aprobados = 0
+    for i in range(1, n + 1):
+        nota = float(input(f"Ingrese la nota del estudiante {i}: "))
+        if nota >= 70:
+            contador_aprobados += 1
+    return contador_aprobados
+#print(f"Cantidad de estudiantes aprobados: {contar_aprobados(5)}") 
+
+#Añade un contador para reprobados y muestra el porcentaje de aprobación.
+
+def contar_aprobados_reprobados(n):
+    contador_aprobados = 0
+    contador_reprobados = 0 
+    for i in range (1, n+1):
+        nota = float(input(f"Ingrese la nota del estudiante {i}: "))
+        if nota >= 70:
+            contador_aprobados += 1
+        else:
+            contador_reprobados += 1
+    porcentaje_aprobados = (contador_aprobados / n) * 100
+    porcentaje_reprobados = (contador_reprobados / n) * 100
+    return contador_aprobados, contador_reprobados, porcentaje_aprobados, porcentaje_reprobados
+#resultado = contar_aprobados_reprobados(5)
+
+#print(f"Cantidad de estudiantes aprobados: {resultado[0]}")
+#print(f"Cantidad de estudiantes reprobados: {resultado[1]}")
+#print(f"Porcentaje de estudiantes aprobados: {resultado[2]}%")
+#print(f"Porcentaje de estudiantes reprobados: {resultado[3]}%")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 20: Leer las notas de N estudiantes y mostrar la nota más alta.
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema ) y luego se ingresan las notas de los estudiantes (una por una)
+#Proceso: Se usa un proceso repetitivo (for) para comparar las notas y obtener la nota mas alta
+#Salida: Se muestra la nota mas alta                                                                                
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para comparar las notas y obtener la nota mas alta
+# Leer N
+
+#4. Escribir codigo
+def nota_mas_alta(n):
+    nota_maxima = float('-inf')  
+    for i in range(1, n + 1):
+        nota = float(input(f"Ingrese la nota del estudiante {i}: "))
+        if nota > nota_maxima:
+            nota_maxima = nota
+    return nota_maxima
+
+#Adaptarlo para encontrar la menor nota. Cambio: float("inf") y if nota < minima:.
+def nota_mas_baja(n):
+    nota_minima = float('inf')
+    for i in range(1, n + 1):
+        nota = float(input(f"Ingrese la nota del estudiante {i}: "))
+        if nota < nota_minima:
+            nota_minima = nota
+    return nota_minima
+
+#5. Prueba de escritorio
+
+#EJERCICIO 21: Leer un número y determinar si es primo (solo divisible entre 1 y él mismo), CON BANDERAS Y BREAK. Ejemplo: 7 es primo, 8 no es primo.
+#1. Entender el problema
+#Entrada: Se ingresa un numero (sera N segun el problema )
+#Proceso: Se usa un proceso repetitivo (for) para verificar si el numero es divisible entre algun numero entre 2 y n-1
+#Salida: Se muestra si el numero es primo o no
+
+#2. Bosquejo a mano
+#Es necesario usar un ciclo for para verificar si el numero es divisible entre algun numero entre 2 y n-1
+# Leer N
+# bandera = False
+# for i in range(2, N):
+#     if N % i == 0:
+#         bandera = True
+#         break
+# if not bandera:
+#     print("El número es primo")
+# else:
+#     print("El número no es primo")
+
+#3. Descubrir el patron
+#Se usa un ciclo for para verificar si el numero es divisible entre algun numero entre 2 y n-1, si es divisible se cambia la bandera a True y se rompe el ciclo con break
+
+#4. Escribir codigo
+def es_primo(n):
+    if n <= 1:
+        return False
+    divisor_extra = False
+    for i in range(2, n):
+        if n % i == 0:
+            divisor_extra = True
+            break
+    return not divisor_extra
+#Genera una lista de todos los primos entre 2 y 100.
+#primos = [i for i in range(2, 101) if es_primo(i)]
+#print("Números primos entre 2 y 100:", primos)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 22: Lee un número N y muestra su tabla de multiplicar (del 1 al 12).
+
+#1. Entender el problema
+#Entrada: Se ingresa un número (N).
+#Proceso: Se utiliza un ciclo for para recorrer los números del 2 al 12 y multiplicarlos por N.
+#Salida: Se muestra la tabla de multiplicar del número ingresado.
+
+#2. Bosquejo a mano
+# Leer N
+# Repetir desde 2 hasta 12
+#     Multiplicar N por el número actual
+#     Mostrar la operación y el resultado
+
+#3. Descubrir el patrón
+# Se usa un ciclo for para recorrer los números del 2 al 12.
+# En cada iteración se multiplica el número ingresado por el valor actual del ciclo y se muestra el resultado.
+
+#4. Escribir código
+def tabla_multiplicar(n):
+    for i in range(1, 13):
+        print(f"{n} × {i} = {n * i}")
+
+#tabla_multiplicar(9)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 23: Lee un número y cuenta cuántos dígitos tiene (sin convertir a string).
+
+#1. Entender el problema
+#Entrada: Se ingresa un número entero (positivo, negativo o cero).
+#Proceso: Se obtiene el valor absoluto del número y se elimina un dígito en cada iteración mediante división entera entre 10, contando cuántas veces se realiza este proceso.
+#Salida: Se muestra la cantidad de dígitos del número.
+
+#2. Bosquejo a mano
+# Leer número
+# Obtener su valor absoluto
+# Si el número es 0
+#     La cantidad de dígitos es 1
+# Si no
+#     Mientras el número sea diferente de 0
+#         Aumentar el contador
+#         Dividir el número entre 10 usando división entera
+# Mostrar la cantidad de dígitos
+
+#3. Descubrir el patrón
+# En cada iteración se elimina el último dígito del número utilizando la división entera (// 10).
+# El proceso se repite hasta que el número llegue a 0, mientras un contador registra cuántos dígitos tenía originalmente.
+
+#4. Escribir código
+
+def digitos(num):
+    n = abs(num)
+    contador = 0
+
+    if n == 0:
+        contador = 1
+    else:
+        while n != 0:
+            contador += 1
+            n = n // 10
+
+    print(f"Dígitos: {contador}")
+
+#digitos(108972)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 24: Leer N números y mostrar la suma de los números pares y la suma de los números impares.
+
+#1. Entender el problema
+#Entrada: Se ingresa un número N que representa la cantidad de valores a leer. Luego se ingresan los N números.
+#Proceso: Se utiliza un ciclo for para recorrer los números ingresados. Si un número es par se suma al acumulador de pares; de lo contrario, se suma al acumulador de impares.
+#Salida: Se muestra la suma de los números pares y la suma de los números impares.
+
+#2. Bosquejo a mano
+# Leer N
+# Inicializar suma_pares = 0
+# Inicializar suma_impares = 0
+# Repetir desde 1 hasta N
+#     Leer número
+#     Si el número es par
+#         Sumarlo a suma_pares
+#     Si no
+#         Sumarlo a suma_impares
+# Mostrar la suma de los pares
+# Mostrar la suma de los impares
+
+#3. Descubrir el patrón
+# Se usan dos acumuladores para guardar las sumas.
+# En cada iteración se determina si el número es par o impar mediante el operador módulo (%) y se acumula en la variable correspondiente.
+
+#4. Escribir código
+
+def suma_pares_impares(n):
+    suma_pares = 0
+    suma_impares = 0
+
+    for i in range(1, n + 1):
+        numero = int(input(f"Ingrese el valor #{i}: "))
+
+        if numero % 2 == 0:
+            suma_pares += numero
+        else:
+            suma_impares += numero
+
+    return suma_pares, suma_impares
+
+#resultado = suma_pares_impares(4)
+
+#print(f"La suma de los pares es: {resultado[0]}")
+#print(f"La suma de los impares es: {resultado[1]}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 25: Pedir una edad y validar que esté entre 0 y 120. Si es inválida, volver a solicitarla.
+
+#1. Entender el problema
+#Entrada: Se ingresa una edad (int).
+#Proceso: Se crea una función que valida si la edad está entre 0 y 120. Si no cumple la condición, se vuelve a pedir mediante un ciclo while.
+#Salida: Se muestra la edad válida ingresada por el usuario.
+
+#2. Bosquejo a mano
+# Crear una función validar_edad(edad)
+#     Verificar si la edad está entre 0 y 120
+#     Devolver True si es válida o False si no lo es
+#
+# Repetir indefinidamente
+#     Leer una edad
+#     Si la función devuelve True
+#         Salir del ciclo
+#     Si no
+#         Mostrar mensaje de error
+#
+# Mostrar la edad válida
+
+#3. Descubrir el patrón
+# Se utiliza una función para validar una condición y devolver un valor booleano (True o False).
+# El ciclo while True repite la solicitud de datos hasta que la función indique que la edad es válida mediante un break.
+
+#4. Escribir código
+
+def validar_edad(edad):
+    return 0 <= edad <= 120
+
+def principal():
+    while True:
+        edad = int(input("Edad (0-120): "))
+
+        if validar_edad(edad):
+            break
+
+        print("Inválida, intenta de nuevo")
+
+    print(f"Edad válida: {edad}")
+
+# principal()
+
+#5. Prueba de escritorio
+
+
+
+
+            
+
+
 
 
 
