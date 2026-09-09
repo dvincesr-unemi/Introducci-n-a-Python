@@ -841,9 +841,9 @@ def digitos(num):
             contador += 1
             n = n // 10
 
-    print(f"Dígitos: {contador}")
+    return contador
 
-#digitos(108972)
+#print(digitos(108972))
 
 #5. Prueba de escritorio
 
@@ -939,8 +939,247 @@ def principal():
 
 #5. Prueba de escritorio
 
+#EJERCICIO 26: Adivinar un número aleatorio entre 1 y 100.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa números enteros del 1 al 100.
+#Proceso: Se genera un número aleatorio. Mediante un ciclo while se comparan los intentos del usuario con el número secreto. Si el número es menor o mayor, se muestra una pista. El ciclo termina cuando el usuario acierta.
+#Salida: Se muestra un mensaje indicando que acertó y la cantidad de intentos realizados.
+
+#2. Bosquejo a mano
+# Generar un número aleatorio
+# Inicializar el contador de intentos en 0
+# Repetir hasta adivinar el número
+#     Leer un intento
+#     Aumentar el contador
+#     Si el intento es igual al número secreto
+#         Mostrar mensaje y terminar
+#     Si el intento es menor
+#         Mostrar "Es mayor"
+#     Si no
+#         Mostrar "Es menor"
+
+#3. Descubrir el patrón
+# Se utiliza un ciclo while True porque no se sabe cuántos intentos necesitará el usuario.
+# En cada repetición se compara el número ingresado con el número secreto.
+# Cuando el usuario acierta, se utiliza break para salir del ciclo.
+
+#4. Escribir código
+
+import random
+
+def adivinar_numero(secreto):
+
+    intentos = 0
+
+    while True:
+        intento = int(input("Adivina el numero del 1 al 100: "))
+        intentos += 1
+
+        if intento == secreto:
+            print(f"Felicidades lo adivinaste en {intentos} intentos")
+            break
+
+        elif intento < secreto:
+            print("Es mayor")
+
+        else:
+            print("Es menor")
+
+numero = random.randint(1,100)
+
+#adivinar_numero(numero)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 27: Mostrar los primeros N números de la serie de Fibonacci.
+
+#1. Entender el problema
+#Entrada: Se ingresa un número N, que representa la cantidad de términos de la serie.
+#Proceso: Se inicializan los dos primeros términos (0 y 1). Mediante un ciclo for se muestran los términos y en cada iteración se actualizan para obtener el siguiente número de la serie.
+#Salida: Se muestran los primeros N números de la serie de Fibonacci.
+
+#2. Bosquejo a mano
+# Leer N
+# Inicializar los dos primeros números de la serie (0 y 1)
+# Repetir N veces
+#     Mostrar el primer número
+#     Actualizar ambos números para obtener el siguiente término
+# Al finalizar, hacer un salto de línea
+
+#3. Descubrir el patrón
+# Se utilizan dos variables para almacenar los dos últimos términos de la serie.
+# En cada repetición se imprime el primer término y luego ambos valores se actualizan simultáneamente para avanzar al siguiente par de números.
+
+#4. Escribir código
+
+def fibonacci(n):
+
+    a, b = 0, 1
+
+    for _ in range(n):
+
+        print(a, end=" ")
+
+        a, b = b, a + b
+
+    print()
+
+fibonacci(10)
+
+#5. Prueba de escritorio
+
+#EJERCICIO: Escribir una función calcular_iva(precio) que reciba un precio y retorne el IVA (15%). Luego crear una función calcular_total(precio) que retorne el precio más el IVA utilizando la función anterior.
+
+#1. Entender el problema
+#Entrada: Se ingresa un precio.
+#Proceso: Se crea una función que calcula el IVA (15%) y otra función que utiliza la primera para calcular el precio total.
+#Salida: Se muestra el valor del IVA y el total a pagar.
+
+#2. Bosquejo a mano
+# Leer el precio
+# Crear una función para calcular el IVA
+#     Multiplicar el precio por 15%
+#     Retornar el IVA
+# Crear una función para calcular el total
+#     Llamar a la función que calcula el IVA
+#     Sumar el precio y el IVA
+#     Retornar el total
+# Mostrar el IVA
+# Mostrar el total
+
+#3. Descubrir el patrón
+# Se divide el problema en dos funciones con responsabilidades diferentes.
+# Una función puede llamar a otra para reutilizar código y evitar repetir operaciones.
+
+#4. Escribir código
+
+def calcular_iva(precio):
+
+    iva = precio * 0.15
+
+    return iva
 
 
+def calcular_total(precio):
+
+    total = precio + calcular_iva(precio)
+
+    return total
+
+
+#precio = float(input("Ingrese el precio: "))
+
+#print(f"IVA: ${calcular_iva(precio):.2f}")
+#print(f"Total: ${calcular_total(precio):.2f}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 29: Escribir una función que reciba un número y retorne True si es primo, False si no.
+#Luego escribir una función contar_primos(a, b) que cuente cuántos números primos hay entre a y b.
+
+#1. Entender el problema
+#Entrada: Se ingresan dos números (a y b) que representan el inicio y el fin de un intervalo.
+#Proceso: Se crea una función para determinar si un número es primo. Luego se crea otra función que recorra todos los números entre a y b, utilizando la función anterior para contar cuántos son primos.
+#Salida: Se muestra la cantidad de números primos encontrados entre a y b.
+
+#2. Bosquejo a mano
+# Leer el número inicial y el número final
+# Crear una función para verificar si un número es primo
+#     Si el número es menor o igual a 1, retornar False
+#     Buscar divisores entre 2 y el número menos uno
+#     Si encuentra un divisor, retornar False
+#     Si no encuentra divisores, retornar True
+# Crear una función para contar los primos
+#     Inicializar un contador en 0
+#     Recorrer todos los números entre a y b
+#     Si el número es primo
+#         Aumentar el contador
+#     Retornar el contador
+# Mostrar la cantidad de números primos
+
+#3. Descubrir el patrón
+# Se reutiliza una función dentro de otra.
+# La función es_primo() resuelve un problema específico y contar_primos() la utiliza para recorrer un intervalo y contar los valores que cumplen la condición.
+
+#4. Escribir código
+#En la linea 768 ya tengo una funcion que busca numeros primos, simplemento voy a hacer la que los cuenta
+def contar_primos(a, b):
+
+    contador = 0
+
+    for i in range(a, b + 1):
+
+        if es_primo(i):
+            contador += 1
+
+    return contador
+
+
+print(contar_primos(1, 20))
+
+#5. Prueba de escritorio
+    
+#EJERCICIO 30: Escribir una función suma_digitos(n) que retorne la suma de los dígitos de un número.
+#Escribe es_narcisista(n): retorna True si el número es igual a la suma de sus dígitos elevados al número de dígitos. Ej.: 153 = 1³+5³+3³.
+#1. Entender el problema
+#Entrada: Se ingresa un número entero.
+#Proceso: Se reutiliza la función digitos() para obtener la cantidad de dígitos del número. Luego, mediante un ciclo while, se recorre el número dígito por dígito, elevando cada uno a la cantidad de dígitos y acumulando la suma. Finalmente se compara la suma obtenida con el número original.
+#Salida: Se muestra True si el número es narcisista y False si no lo es.
+
+#2. Bosquejo a mano
+#Es necesario reutilizar la función digitos() para conocer la cantidad de dígitos del número.
+#Luego se utiliza un ciclo while para recorrer cada dígito del número.
+#En cada iteración se obtiene el último dígito, se eleva al número de dígitos y se acumula en una variable suma.
+#Al finalizar el recorrido se compara la suma con el número original.
+
+#3. Prueba de escritorio
+#Ejemplo: n = 153
+#
+#Cantidad de dígitos = 3
+#
+#Iteración 1:
+#digito = 3
+#suma = 3³ = 27
+#numero = 15
+#
+#Iteración 2:
+#digito = 5
+#suma = 27 + 5³ = 152
+#numero = 1
+#
+#Iteración 3:
+#digito = 1
+#suma = 152 + 1³ = 153
+#numero = 0
+#
+#Comparación final:
+#153 == 153 → True
+
+#4. Escribir código
+#Se llama la funcion de mas arriba llamada digitos(), linea 833
+
+def es_narcisista(n):
+
+    cantidad = digitos(n)
+    numero = abs(n)
+    suma = 0
+
+    while numero != 0:
+
+        digito = numero % 10
+        suma += digito ** cantidad
+        numero = numero // 10
+
+    return suma == abs(n)
+
+
+print(es_narcisista(153))
+
+#5. Prueba de escritorio
+
+
+    
 
             
 
