@@ -1178,14 +1178,423 @@ print(es_narcisista(153))
 
 #5. Prueba de escritorio
 
+#EJERCICIO 31: Rediseñar el menú de saludar/despedir del módulo 3, pero esta vez con cada opción como función separada.
+#Añade una función calcular() que pida dos números y muestre suma, resta, multiplicación y división. Nueva opción del menú.
 
-    
+#1. Entender el problema
+#Entrada: El usuario selecciona una opción del menú. Si elige la opción "Calcular", ingresa dos números.
+#Proceso: Se crean funciones independientes para cada opción del menú (saludar, despedir, calcular y mostrar_menu). El programa permanece en un ciclo while hasta que el usuario seleccione la opción de salir. La función calcular() realiza las cuatro operaciones básicas y verifica que el segundo número sea diferente de cero antes de dividir.
+#Salida: Se muestra el saludo, la despedida, los resultados de las operaciones matemáticas o un mensaje de despedida al salir.
 
-            
+#2. Bosquejo a mano
+# Crear una función saludar()
+# Crear una función despedir()
+# Crear una función calcular()
+#     Pedir dos números
+#     Mostrar suma
+#     Mostrar resta
+#     Mostrar multiplicación
+#     Si el segundo número es diferente de cero
+#         Mostrar división
+#     Caso contrario
+#         Mostrar mensaje de error
+# Crear una función mostrar_menu()
+# Crear un ciclo while para mostrar el menú continuamente
+# Leer la opción elegida
+# Según la opción, llamar a la función correspondiente
+# Si el usuario elige salir
+#     Romper el ciclo con break
+
+#3. Descubrir el patrón
+# Se divide el programa en varias funciones, donde cada una realiza una tarea específica.
+# El programa principal solo controla el menú y llama a la función correspondiente según la opción elegida por el usuario.
+# Se utiliza un ciclo while True junto con break para mantener el menú activo hasta que el usuario decida salir.
+
+#4. Escribir código
+
+def saludar():
+    nombre = input("Nombre: ")
+    print(f"¡Hola, {nombre}!")
+
+def despedir():
+    nombre = input("Nombre: ")
+    print(f"¡Adiós, {nombre}!")
+
+def calcular():
+    num1 = float(input("Ingrese el primer número: "))
+    num2 = float(input("Ingrese el segundo número: "))
+
+    print(f"Suma: {num1 + num2}")
+    print(f"Resta: {num1 - num2}")
+    print(f"Multiplicación: {num1 * num2}")
+
+    if num2 != 0:
+        print(f"División: {num1 / num2}")
+    else:
+        print("No se puede dividir para cero.")
+
+def mostrar_menu():
+    print("\n--- MENÚ ---")
+    print("1. Saludar")
+    print("2. Despedir")
+    print("3. Calcular")
+    print("4. Salir")
+
+while True:
+    mostrar_menu()
+
+    opcion = input("Opción: ")
+
+    if opcion == "1":
+        saludar()
+
+    elif opcion == "2":
+        despedir()
+
+    elif opcion == "3":
+        calcular()
+
+    elif opcion == "4":
+        print("Adiós")
+        break
+
+    else:
+        print("Opción inválida")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 32: Función area_rectangulo(base, altura) que retorne el área.
+
+#1. Entender el problema
+#Entrada: Se ingresan la base y la altura de un rectángulo.
+#Proceso: Se crea una función area_rectangulo(base, altura) que recibe ambos valores, calcula el área multiplicando la base por la altura y retorna el resultado.
+#Salida: Se muestra el área del rectángulo.
+
+#2. Bosquejo a mano
+# Crear la función area_rectangulo(base, altura)
+# Multiplicar la base por la altura
+# Retornar el área
+# Pedir la base y la altura al usuario
+# Llamar a la función
+# Mostrar el resultado
+
+#3. Descubrir el patrón
+# Se utiliza una función que recibe parámetros, realiza un cálculo y retorna el resultado.
+# El programa principal únicamente obtiene los datos, llama a la función y muestra el valor retornado.
+
+#4. Escribir código
+
+def area_rectangulo(base, altura):
+    return base * altura
+
+base = float(input("Ingrese la base: "))
+altura = float(input("Ingrese la altura: "))
+
+resultado = area_rectangulo(base, altura)
+
+print(f"El área del rectángulo es: {resultado}")
+
+def area_rectangulo_validacion(base, altura):
+
+    if base <= 0 or altura <= 0:
+        return None
+
+    return base * altura
 
 
+base = float(input("Ingrese la base: "))
+altura = float(input("Ingrese la altura: "))
+
+resultado = area_rectangulo_validacion(base, altura)
+
+if resultado is None:
+    print("La base y la altura deben ser mayores que cero.")
+else:
+    print(f"El área del rectángulo es: {resultado}")
+
+print(f"El área del rectángulo es: {resultado}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 33: Función maximo(a, b, c) que retorne el mayor de tres números.
+
+#1. Entender el problema
+#Entrada: Se ingresan tres números.
+#Proceso: Se crea una función maximo(a, b, c) que compara los tres números para determinar cuál es el mayor y lo retorna.
+#Salida: Se muestra el número mayor.
+
+#2. Bosquejo a mano
+# Crear la función maximo(a, b, c)
+# Comparar el primer número con el segundo y el tercero
+# Si el primero es el mayor, retornarlo
+# En caso contrario, comparar el segundo con el tercero
+# Si el segundo es el mayor, retornarlo
+# De lo contrario, retornar el tercero
+# Pedir los tres números al usuario
+# Llamar a la función
+# Mostrar el resultado
+
+#3. Descubrir el patrón
+# Se utiliza una función con parámetros que compara varios valores y retorna uno de ellos.
+# El programa principal únicamente obtiene los datos, llama a la función y muestra el valor retornado.
+
+#4. Escribir código
+
+def maximo(a, b, c):
+
+    if a >= b and a >= c:
+        return a
+
+    elif b >= a and b >= c:
+        return b
+
+    else:
+        return c
 
 
+num1 = float(input("Ingrese el primer número: "))
+num2 = float(input("Ingrese el segundo número: "))
+num3 = float(input("Ingrese el tercer número: "))
+
+resultado = maximo(num1, num2, num3)
+
+print(f"El número mayor es: {resultado}")
+
+def maximo_iguales(a, b, c):
+
+    if a == b == c:
+        return "Los tres números son iguales"
+
+    if a >= b and a >= c:
+        return a
+
+    elif b >= a and b >= c:
+        return b
+
+    return c
+
+#5. Prueba de escritorio
+
+#EJERCICIO 34: Escribir una función es_bisiesto(anio) que retorne True si un año es bisiesto y False en caso contrario.
+
+#1. Entender el problema
+#Entrada: Se ingresa un año.
+#Proceso: Se crea una función es_bisiesto(anio) que verifica si el año cumple las reglas de un año bisiesto: debe ser divisible entre 4 y no entre 100, o ser divisible entre 400.
+#Salida: Se muestra True si el año es bisiesto y False si no lo es.
+
+#2. Bosquejo a mano
+# Crear la función es_bisiesto(anio)
+# Verificar si el año es divisible entre 4 y no entre 100
+# O verificar si el año es divisible entre 400
+# Si cumple alguna de las condiciones
+#     Retornar True
+# En caso contrario
+#     Retornar False
+# Pedir el año al usuario
+# Llamar a la función
+# Mostrar el resultado
+
+#3. Descubrir el patrón
+# Se utiliza una función que evalúa una condición lógica compuesta usando operadores and y or.
+# La función retorna un valor booleano (True o False) según el resultado de la condición.
+
+#4. Escribir código
+
+def es_bisiesto(anio):
+
+    if (anio % 4 == 0 and anio % 100 != 0) or (anio % 400 == 0):
+        return True
+
+    return False
 
 
+anio = int(input("Ingrese un año: "))
+
+print(es_bisiesto(anio))
+
+def bisiesto(anio):
+
+    if anio <= 0:
+        return None
+
+    return (anio % 4 == 0 and anio % 100 != 0) or (anio % 400 == 0)
+
+
+anio = int(input("Ingrese un año: "))
+
+resultado = bisiesto(anio)
+
+if resultado is None:
+    print("Ingrese un año válido.")
+else:
+    print(resultado)
+#5. Prueba de escritorio
+
+#EJERCICIO 35: Escribir una función factorial(n) y luego una función
+#combinatoria(n, k) = n! / (k! · (n-k)!).
+
+#1. Entender el problema
+#Entrada: Se ingresan dos números enteros n y k.
+#Proceso: Se crea una función factorial(n) para calcular el factorial de un número.
+#Luego se crea una función combinatoria(n, k) que reutiliza la función factorial()
+#para calcular la cantidad de combinaciones posibles.
+#Salida: Se muestra el resultado de la combinatoria.
+
+#2. Bosquejo a mano
+# Crear la función factorial(n)
+# Inicializar una variable resultado en 1
+# Recorrer los números desde 1 hasta n
+# Multiplicar el resultado por cada número
+# Retornar el factorial
+#
+# Crear la función combinatoria(n, k)
+# Utilizar la función factorial() para calcular:
+#     n!
+#     k!
+#     (n-k)!
+# Aplicar la fórmula de la combinatoria
+# Retornar el resultado
+#
+# Pedir n y k
+# Llamar a la función combinatoria()
+# Mostrar el resultado
+
+#3. Descubrir el patrón
+# Se reutiliza una función dentro de otra.
+# La función factorial() resuelve un problema específico y combinatoria()
+# la utiliza tres veces para aplicar la fórmula matemática.
+# También se reutiliza el concepto de acumulador visto anteriormente.
+
+#4. Escribir código
+
+def factorial(n):
+
+    resultado = 1
+
+    for i in range(1, n + 1):
+        resultado *= i
+
+    return resultado
+
+
+def combinatoria(n, k):
+
+    # CAMBIO: Se valida que k no sea mayor que n ni negativo.
+    # Si ocurre, la combinatoria no existe y se retorna None.
+
+    if k < 0 or k > n:
+        return None
+
+    return factorial(n) / (factorial(k) * factorial(n - k))
+
+
+n = int(input("Ingrese n: "))
+k = int(input("Ingrese k: "))
+
+resultado = combinatoria(n, k)
+
+if resultado is None:
+    print("Valores inválidos. Debe cumplirse 0 ≤ k ≤ n.")
+else:
+    print(f"La combinatoria es: {resultado}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 36: Programa que use funciones separadas para cada operación
+#(sumar, restar, multiplicar, dividir) y un menú que llame a la correcta.
+
+#1. Entender el problema
+#Entrada: El usuario selecciona una opción del menú e ingresa dos números.
+#Proceso: Se crean funciones independientes para sumar, restar, multiplicar y dividir.
+#Según la opción elegida, el programa llama a la función correspondiente.
+#Salida: Se muestra el resultado de la operación seleccionada.
+
+#2. Bosquejo a mano
+# Crear la función sumar(a, b)
+# Crear la función restar(a, b)
+# Crear la función multiplicar(a, b)
+# Crear la función dividir(a, b)
+# Crear una función mostrar_menu()
+# Mostrar el menú
+# Leer la opción elegida
+# Pedir los dos números
+# Llamar a la función correspondiente
+# Mostrar el resultado
+# Repetir hasta que el usuario decida salir
+
+#3. Descubrir el patrón
+# Se divide el problema en varias funciones, donde cada una realiza una operación específica.
+# El programa principal únicamente controla el menú y llama a la función adecuada.
+# Se reutiliza el uso de parámetros, valores de retorno y un ciclo while con break.
+
+#4. Escribir código
+
+def sumar(a, b):
+    return a + b
+
+
+def restar(a, b):
+    return a - b
+
+
+def multiplicar(a, b):
+    return a * b
+
+
+def dividir(a, b):
+
+    # CAMBIO: Se valida que el divisor no sea cero antes de realizar la división.
+
+    if b == 0:
+        return None
+
+    return a / b
+
+
+def mostrar_menu():
+    print("\n--- MENÚ ---")
+    print("1. Sumar")
+    print("2. Restar")
+    print("3. Multiplicar")
+    print("4. Dividir")
+    print("5. Salir")
+
+
+while True:
+
+    mostrar_menu()
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "5":
+        print("Programa finalizado.")
+        break
+
+    if opcion in ("1", "2", "3", "4"):
+
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
+
+        if opcion == "1":
+            print(f"Resultado: {sumar(num1, num2)}")
+
+        elif opcion == "2":
+            print(f"Resultado: {restar(num1, num2)}")
+
+        elif opcion == "3":
+            print(f"Resultado: {multiplicar(num1, num2)}")
+
+        elif opcion == "4":
+
+            resultado = dividir(num1, num2)
+
+            if resultado is None:
+                print("No es posible dividir para cero.")
+            else:
+                print(f"Resultado: {resultado}")
+
+    else:
+        print("Opción inválida.")
+
+#5. Prueba de escritorio
 
