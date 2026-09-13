@@ -2,6 +2,14 @@
 #DOCENTE: ING. DANIEL VERA 
 #ESTUDIANTE: DERICK VINCES RONQUILLO
 
+#INDICE:
+#Linea 8 a 258 JS VS PYTHON
+#Linea 268 a 574 VARIABLES Y OPERADORES 
+#Linea 576 a 812 CONTROL DE FLUJO
+#Linea 815 a 1605 FUNCIONES
+#Linea 1608 a 1904 COLECCIONES BASICAS
+#Linea 1906 a 2463 CLASES Y OBJETOS 
+
 #EJERCICIO 1: Leer el nombre del usuario, su edad; saludarlo por su nombre y mostrar su edad.
 
 #1. Entender el problema 
@@ -1598,3 +1606,858 @@ while True:
 
 #5. Prueba de escritorio
 
+#EJERCICIO 37: Pide una frase al usuario y cuenta cuántas vocales (a, e, i, o, u) tiene. Ignora mayúsculas/minúsculas.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa una frase.
+#Proceso: Se recorre cada carácter de la frase, convirtiéndola a minúsculas para ignorar mayúsculas. Si el carácter es una vocal, se aumenta un contador.
+#CAMBIO: También se consideran las vocales con tilde (á, é, í, ó, ú).
+#Salida: Se muestra la cantidad de vocales encontradas.
+
+#2. Bosquejo a mano
+# Pedir una frase al usuario
+# Convertir la frase a minúsculas
+# Inicializar un contador en 0
+# Recorrer cada carácter de la frase
+# Si el carácter es una vocal
+#     Aumentar el contador
+# Mostrar la cantidad de vocales
+
+#3. Descubrir el patrón
+# Se recorre una cadena carácter por carácter utilizando un ciclo.
+# Se utiliza un contador que aumenta cuando se cumple una condición.
+
+#4. Escribir código
+
+def contar_vocales(frase):
+
+    contador = 0
+
+    for letra in frase.lower():
+
+        if letra in "aeiouáéíóú":
+            contador += 1
+
+    return contador
+
+
+frase = input("Ingrese una frase: ")
+
+print(f"La frase tiene {contar_vocales(frase)} vocales.")
+
+def contar_vocales_bandera(frase):
+
+    contador = 0
+
+    for letra in frase.lower():
+
+        es_vocal = False
+
+        if letra in "aeiou":
+            es_vocal = True
+
+        if es_vocal:
+            contador += 1
+
+    return contador
+
+
+frase = input("Ingrese una frase: ")
+
+print(f"La frase tiene {contar_vocales(frase)} vocales.")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 38: Dada una lista fija de notas [7, 8.5, 6, 9, 10, 5.5], calcula el promedio, la nota máxima y la mínima. Imprime los tres valores con 2 decimales.
+
+#1. Entender el problema
+#Entrada: Se tiene una lista fija con varias notas.
+#Proceso: Se recorre la lista para calcular la suma de las notas y obtener el promedio. También se buscan la nota mayor y la menor.
+#CAMBIO: Se crea una función que recibe la lista de notas y retorna los tres resultados juntos.
+#Salida: Se muestran el promedio, la nota máxima y la nota mínima con dos decimales.
+
+#2. Bosquejo a mano
+# Crear una lista con las notas
+# Crear una función para procesar las notas
+# Calcular la suma de todas las notas
+# Dividir la suma para la cantidad de notas
+# Obtener la nota máxima
+# Obtener la nota mínima
+# Retornar los resultados
+# Mostrar los valores con 2 decimales
+
+#3. Descubrir el patrón
+# Se utilizan funciones integradas de Python como sum(), max() y min().
+# Se reutiliza una función que recibe datos y retorna varios resultados mediante una tupla.
+
+#4. Escribir código
+
+def analizar_notas(notas):
+
+    promedio = sum(notas) / len(notas)
+    maxima = max(notas)
+    minima = min(notas)
+
+    return promedio, maxima, minima
+
+
+notas = [7, 8.5, 6, 9, 10, 5.5]
+
+promedio, maxima, minima = analizar_notas(notas)
+
+print(f"Promedio: {promedio:.2f}")
+print(f"Nota máxima: {maxima:.2f}")
+print(f"Nota mínima: {minima:.2f}")
+
+def analizar_notas(notas):
+
+    suma = 0
+    maxima = notas[0]
+    minima = notas[0]
+
+    for nota in notas:
+
+        suma += nota
+
+        if nota > maxima:
+            maxima = nota
+
+        if nota < minima:
+            minima = nota
+
+    promedio = suma / len(notas)
+
+    return promedio, maxima, minima
+
+
+notas = [7, 8.5, 6, 9, 10, 5.5]
+
+promedio, maxima, minima = analizar_notas(notas)
+
+print(f"Promedio: {promedio:.2f}")
+print(f"Nota máxima: {maxima:.2f}")
+print(f"Nota mínima: {minima:.2f}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 39: Dada la lista ["a", "b", "a", "c", "b", "d"], retorna una nueva lista sin duplicados respetando el orden de la primera aparición. (Con set se pierde el orden — hay que combinar set + list.)
+
+#1. Entender el problema
+#Entrada: Se tiene una lista con elementos repetidos.
+#Proceso: Se recorre la lista original, utilizando un conjunto (set) para identificar elementos ya vistos. Si un elemento no está en el set, se agrega a una nueva lista conservando el orden.
+#CAMBIO: Se crea una función que recibe cualquier lista y retorna la lista sin duplicados.
+#Salida: Se muestra una nueva lista sin elementos repetidos y manteniendo el orden original.
+
+#2. Bosquejo a mano
+# Crear una función eliminar_duplicados(lista)
+# Crear una lista vacía para guardar resultados
+# Crear un set vacío para controlar elementos repetidos
+# Recorrer la lista original
+# Verificar si el elemento no está en el set
+# Agregar el elemento a la lista nueva
+# Agregar el elemento al set
+# Retornar la nueva lista
+# Mostrar el resultado
+
+#3. Descubrir el patrón
+# Se combinan dos estructuras:
+# - Lista: conserva el orden de aparición.
+# - Set: permite comprobar rápidamente si un elemento ya existe.
+# La lista almacena los valores finales y el set controla los duplicados.
+
+#4. Escribir código
+
+def eliminar_duplicados(lista):
+
+    resultado = []
+    vistos = set()
+
+    for elemento in lista:
+
+        if elemento not in vistos:
+            resultado.append(elemento)
+            vistos.add(elemento)
+
+    return resultado
+
+
+lista = ["a", "b", "a", "c", "b", "d"]
+
+nueva_lista = eliminar_duplicados(lista)
+
+print(nueva_lista)
+
+def eliminar_duplicados2(lista):
+
+    resultado = []
+    vistos = {}
+
+    for elemento in lista:
+
+        if elemento not in vistos:
+            resultado.append(elemento)
+            vistos[elemento] = True
+
+    return resultado
+
+
+lista = ["a", "b", "a", "c", "b", "d"]
+
+nueva_lista = eliminar_duplicados(lista)
+
+print(nueva_lista)
+
+#5. Prueba de escritorio
+
+#EJERCICIO 40: Dado un texto, retorna un diccionario con la frecuencia de cada palabra (ignora mayúsculas). Al final, imprime la palabra que más se repite.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa un texto.
+#Proceso: Se convierte el texto a minúsculas para ignorar diferencias entre mayúsculas y minúsculas. Luego se separa en palabras y se utiliza un diccionario para contar cuántas veces aparece cada palabra.
+#CAMBIO: Se utiliza una función separada para obtener la palabra más repetida recorriendo el diccionario generado.
+#Salida: Se muestra el diccionario con la frecuencia de cada palabra y la palabra que más se repite.
+
+#2. Bosquejo a mano
+# Pedir un texto al usuario
+# Convertir el texto a minúsculas
+# Separar el texto en palabras
+# Crear un diccionario vacío
+# Recorrer cada palabra
+# Si la palabra existe en el diccionario:
+#     Aumentar su contador
+# Si no existe:
+#     Crear la palabra con valor 1
+# Crear una función para buscar la palabra con mayor frecuencia
+# Mostrar el diccionario y la palabra más repetida
+
+#3. Descubrir el patrón
+# Se utiliza un diccionario porque permite relacionar una palabra con la cantidad de veces que aparece.
+# Cada palabra funciona como una clave y su frecuencia como un valor.
+# Se reutiliza la información del diccionario para encontrar el valor más alto.
+
+#4. Escribir código
+
+def contar_palabras(texto):
+
+    palabras = texto.lower().split()
+
+    frecuencia = {}
+
+    for palabra in palabras:
+
+        if palabra in frecuencia:
+            frecuencia[palabra] += 1
+        else:
+            frecuencia[palabra] = 1
+
+    return frecuencia
+
+
+def palabra_mas_repetida(frecuencia):
+
+    mayor = 0
+    palabra = ""
+
+    for clave, valor in frecuencia.items():
+
+        if valor > mayor:
+            mayor = valor
+            palabra = clave
+
+    return palabra
+
+
+texto = input("Ingrese un texto: ")
+
+resultado = contar_palabras(texto)
+
+print(resultado)
+
+print(f"La palabra que más se repite es: {palabra_mas_repetida(resultado)}")
+
+def contar_palabras(texto):
+
+    frecuencia = {}
+
+    for palabra in texto.lower().split():
+
+        frecuencia[palabra] = frecuencia.get(palabra, 0) + 1
+
+    return frecuencia
+
+
+def palabra_mas_repetida(frecuencia):
+
+    palabra = max(frecuencia, key=frecuencia.get)
+
+    return palabra
+
+
+texto = input("Ingrese un texto: ")
+
+resultado = contar_palabras(texto)
+
+print(resultado)
+
+print(f"La palabra que más se repite es: {palabra_mas_repetida(resultado)}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 41: Crear la clase Pasajero con nombre, cédula y edad. Crear tres instancias y mostrarlas.
+#Añade un método cumplir_anios() que sume 1 a la edad.
+
+#1. Entender el problema
+#Entrada: Los datos de tres pasajeros (nombre, cédula y edad).
+#Proceso: Se crea una clase llamada Pasajero con un constructor que almacena el nombre, la cédula y la edad. Luego se crean tres objetos de la clase y finalmente se muestran sus datos.
+#Salida: Se imprimen en pantalla los datos de los tres pasajeros.
+
+#2. Bosquejo a mano
+# Crear la clase Pasajero
+# Crear el constructor con nombre, cédula y edad
+# Crear una función para mostrar los datos
+# Crear tres objetos de la clase Pasajero
+# Mostrar la información de cada pasajero
+
+#3. Descubrir el patrón
+# Una clase sirve como plantilla para crear varios objetos con los mismos atributos.
+# Cada pasajero tendrá su propio nombre, cédula y edad, pero todos se crean usando la misma clase.
+
+#4. Escribir código
+
+class Pasajero:
+
+    def __init__(self, nombre, cedula, edad):
+        self.nombre = nombre
+        self.cedula = cedula
+        self.edad = edad
+
+    def cumplir_anios(self):
+        self.edad += 1
+
+    def mostrar(self):
+        print(f"Nombre: {self.nombre}")
+        print(f"Cédula: {self.cedula}")
+        print(f"Edad: {self.edad}")
+
+
+pasajero1 = Pasajero("Ana", "1234567890", 20)
+pasajero2 = Pasajero("Luis", "0987654321", 25)
+pasajero3 = Pasajero("María", "1122334455", 30)
+
+pasajero1.cumplir_anios()
+
+pasajero1.mostrar()
+pasajero2.mostrar()
+pasajero3.mostrar()
+
+#5. Prueba de escritorio
+
+#EJERCICIO 42: Crear `CuentaBancaria` con métodos `depositar`, `retirar`, `saldo` y `__str__`.
+#El saldo empieza en 0. No se puede retirar más de lo que hay.
+#CAMBIO: Añadir `historial`, una lista donde cada operación guarda un string
+#tipo `'+100'` o `'-30'`. Agregar el método `ver_historial()`.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa valores para depositar o retirar dinero de una cuenta bancaria.
+#Proceso: Se crea una clase CuentaBancaria con un saldo inicial de 0. El método depositar aumenta el saldo, retirar disminuye el saldo solo si hay suficiente dinero, saldo devuelve el saldo actual y __str__ muestra la información de la cuenta.
+#CAMBIO: Se agrega una lista llamada historial donde se registra cada depósito y retiro realizado. También se crea el método ver_historial() para mostrar todas las operaciones almacenadas.
+#Salida: Se muestra el saldo actualizado, la información de la cuenta y el historial de operaciones realizadas.
+
+#2. Bosquejo a mano
+# Crear la clase CuentaBancaria
+# Inicializar el saldo en 0
+# CAMBIO: Crear una lista vacía llamada historial
+# Crear el método depositar
+#     Sumar el dinero al saldo
+#     CAMBIO: Guardar la operación en historial con '+cantidad'
+# Crear el método retirar
+#     Verificar si hay suficiente saldo
+#     Si hay saldo:
+#         Restar el dinero
+#         CAMBIO: Guardar la operación en historial con '-cantidad'
+#     Si no:
+#         Mostrar mensaje de fondos insuficientes
+# Crear el método saldo
+# Crear el método __str__
+# CAMBIO: Crear el método ver_historial
+# Crear una cuenta
+# Realizar depósitos y retiros
+# Mostrar la cuenta y el historial
+
+#3. Descubrir el patrón
+# La clase representa una cuenta bancaria.
+# El saldo cambia según las operaciones realizadas.
+# Cada método tiene una función específica.
+# CAMBIO: Se utiliza una lista para almacenar todas las operaciones en el orden en que fueron realizadas.
+
+#4. Escribir código
+
+class CuentaBancaria:
+
+    def __init__(self):
+
+        self._saldo = 0
+
+        # CAMBIO
+        self.historial = []
+
+    def depositar(self, cantidad):
+
+        self._saldo += cantidad
+
+        # CAMBIO
+        self.historial.append(f"+{cantidad}")
+
+    def retirar(self, cantidad):
+
+        if cantidad <= self._saldo:
+
+            self._saldo -= cantidad
+
+            # CAMBIO
+            self.historial.append(f"-{cantidad}")
+
+        else:
+
+            print("Fondos insuficientes.")
+
+    def saldo(self):
+
+        return self._saldo
+
+    def __str__(self):
+
+        return f"Saldo actual: ${self._saldo}"
+
+    # CAMBIO
+    def ver_historial(self):
+
+        return self.historial
+
+
+cuenta = CuentaBancaria()
+
+cuenta.depositar(100)
+
+cuenta.depositar(50)
+
+cuenta.retirar(30)
+
+cuenta.retirar(200)
+
+print(cuenta)
+
+print("Historial:", cuenta.ver_historial())
+
+#5. Prueba de escritorio
+
+#EJERCICIO 43: Crear la clase Producto con nombre, precio y stock.
+#Métodos: vender(cantidad), reabastecer(cantidad), valor_inventario() (precio × stock).
+#Ampliar con un método de clase total_inventario(productos) que sume el valor de una lista de productos.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa el nombre, precio y stock de varios productos, además de las cantidades para vender o reabastecer.
+#Proceso: Se crea la clase Producto con atributos nombre, precio y stock. Se implementan métodos para vender productos si existe suficiente stock, reabastecer el inventario y calcular el valor del inventario de cada producto.
+#CAMBIO: Se añade un método de clase llamado total_inventario(productos) que recibe una lista de productos y suma el valor del inventario de todos ellos.
+#Salida: Se muestra la información de cada producto y el valor total del inventario.
+
+#2. Bosquejo a mano
+# Crear la clase Producto
+# Crear el constructor con nombre, precio y stock
+# Crear el método vender(cantidad)
+# Verificar si hay suficiente stock
+# Si hay:
+#     Reducir el stock
+# Si no:
+#     Mostrar mensaje
+# Crear el método reabastecer(cantidad)
+# Aumentar el stock
+# Crear el método valor_inventario()
+# Retornar precio * stock
+# CAMBIO:
+# Crear el método de clase total_inventario(productos)
+# Recorrer la lista de productos
+# Sumar el valor del inventario de cada uno
+# Retornar el total
+# Mostrar los resultados
+
+#3. Descubrir el patrón
+# Cada objeto representa un producto diferente.
+# Los métodos modifican o consultan los datos de cada producto.
+# CAMBIO:
+# El método de clase trabaja con una lista completa de objetos para calcular
+# el valor total del inventario sin depender de un solo producto.
+
+#4. Escribir código
+
+class Producto:
+
+    def __init__(self, nombre, precio, stock):
+
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def vender(self, cantidad):
+
+        if cantidad <= self.stock:
+
+            self.stock -= cantidad
+            print("Venta realizada")
+
+        else:
+
+            print("No hay suficiente stock")
+
+    def reabastecer(self, cantidad):
+
+        self.stock += cantidad
+
+    def valor_inventario(self):
+
+        return self.precio * self.stock
+
+    # CAMBIO
+    @classmethod
+    def total_inventario(cls, productos):
+
+        total = 0
+
+        for producto in productos:
+
+            total += producto.valor_inventario()
+
+        return total
+
+    def __str__(self):
+
+        return f"{self.nombre} - Precio: ${self.precio} - Stock: {self.stock}"
+
+
+producto1 = Producto("Mouse", 20, 10)
+producto2 = Producto("Teclado", 35, 5)
+producto3 = Producto("Monitor", 180, 3)
+
+producto1.vender(2)
+producto2.reabastecer(4)
+
+print(producto1)
+print("Valor inventario:", producto1.valor_inventario())
+
+print(producto2)
+print("Valor inventario:", producto2.valor_inventario())
+
+print(producto3)
+print("Valor inventario:", producto3.valor_inventario())
+
+productos = [producto1, producto2, producto3]
+
+print("Valor total del inventario:", Producto.total_inventario(productos))
+
+#5. Prueba de escritorio
+
+#EJERCICIO 44: Clase Rectangulo con base y altura. Métodos area(), perimetro() y __str__.
+#Métodos: vender(cantidad), reabastecer(cantidad), valor_inventario() (precio × stock).
+#Ampliar con un método de clase total_inventario(productos) que sume el valor de una lista de productos.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa el nombre, precio y stock de varios productos, además de las cantidades para vender o reabastecer.
+#Proceso: Se crea la clase Producto con atributos nombre, precio y stock. Se implementan métodos para vender productos si existe suficiente stock, reabastecer el inventario y calcular el valor del inventario de cada producto.
+#CAMBIO: Se añade un método de clase llamado total_inventario(productos) que recibe una lista de productos y suma el valor del inventario de todos ellos.
+#Salida: Se muestra la información de cada producto y el valor total del inventario.
+
+#2. Bosquejo a mano
+# Crear la clase Producto
+# Crear el constructor con nombre, precio y stock
+# Crear el método vender(cantidad)
+# Verificar si hay suficiente stock
+# Si hay:
+#     Reducir el stock
+# Si no:
+#     Mostrar mensaje
+# Crear el método reabastecer(cantidad)
+# Aumentar el stock
+# Crear el método valor_inventario()
+# Retornar precio * stock
+# CAMBIO:
+# Crear el método de clase total_inventario(productos)
+# Recorrer la lista de productos
+# Sumar el valor del inventario de cada uno
+# Retornar el total
+# Mostrar los resultados
+
+#3. Descubrir el patrón
+# Cada objeto representa un producto diferente.
+# Los métodos modifican o consultan los datos de cada producto.
+# CAMBIO:
+# El método de clase trabaja con una lista completa de objetos para calcular
+# el valor total del inventario sin depender de un solo producto.
+
+#4. Escribir código
+
+class Producto:
+
+    def __init__(self, nombre, precio, stock):
+
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def vender(self, cantidad):
+
+        if cantidad <= self.stock:
+
+            self.stock -= cantidad
+            print("Venta realizada")
+
+        else:
+
+            print("No hay suficiente stock")
+
+    def reabastecer(self, cantidad):
+
+        self.stock += cantidad
+
+    def valor_inventario(self):
+
+        return self.precio * self.stock
+
+    # CAMBIO
+    @classmethod
+    def total_inventario(cls, productos):
+
+        total = 0
+
+        for producto in productos:
+
+            total += producto.valor_inventario()
+
+        return total
+
+    def __str__(self):
+
+        return f"{self.nombre} - Precio: ${self.precio} - Stock: {self.stock}"
+
+
+producto1 = Producto("Mouse", 20, 10)
+producto2 = Producto("Teclado", 35, 5)
+producto3 = Producto("Monitor", 180, 3)
+
+producto1.vender(2)
+producto2.reabastecer(4)
+
+print(producto1)
+print("Valor inventario:", producto1.valor_inventario())
+
+print(producto2)
+print("Valor inventario:", producto2.valor_inventario())
+
+print(producto3)
+print("Valor inventario:", producto3.valor_inventario())
+
+productos = [producto1, producto2, producto3]
+
+print("Valor total del inventario:", Producto.total_inventario(productos))
+
+#5. Prueba de escritorio
+
+#EJERCICIO 45: Crear la clase Circulo con radio y métodos area() (π·r²) y circunferencia() (2·π·r). Usa math.pi.
+#CAMBIO: Se añadió el método diametro() que devuelve el diámetro del círculo.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa el radio de un círculo.
+#Proceso: Se crea un objeto de la clase Circulo con el radio ingresado. Luego se calcula el área, la circunferencia y el diámetro utilizando los métodos correspondientes.
+#CAMBIO: Se incorpora un método adicional llamado diametro() para obtener el doble del radio.
+#Salida: Se muestran el área, la circunferencia y el diámetro del círculo.
+
+#2. Bosquejo a mano
+# Importar la librería math
+# Crear la clase Circulo
+# Crear el constructor con el atributo radio
+# Crear el método area()
+# Crear el método circunferencia()
+# CAMBIO: Crear el método diametro()
+# Pedir el radio al usuario
+# Crear un objeto Circulo
+# Mostrar el área
+# Mostrar la circunferencia
+# Mostrar el diámetro
+
+#3. Descubrir el patrón
+# Se utiliza una clase para representar un círculo.
+# Cada método realiza un cálculo diferente usando el mismo atributo radio.
+# CAMBIO: Se reutiliza el atributo radio para calcular el diámetro.
+
+#4. Escribir código
+
+import math
+
+class Circulo:
+
+    def __init__(self, radio):
+
+        self.radio = radio
+
+    def area(self):
+
+        return math.pi * self.radio ** 2
+
+    def circunferencia(self):
+
+        return 2 * math.pi * self.radio
+
+    # CAMBIO
+    def diametro(self):
+
+        return self.radio * 2
+
+
+radio = float(input("Ingrese el radio: "))
+
+circulo = Circulo(radio)
+
+print(f"Área: {circulo.area()}")
+
+print(f"Circunferencia: {circulo.circunferencia()}")
+
+print(f"Diámetro: {circulo.diametro()}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 46: Clase Estudiante con nombre y una lista de notas.
+#Métodos: agregar_nota(n), promedio(), aprobado() (True si promedio ≥ 7).
+#CAMBIO: Se añade el método cantidad_notas() para mostrar cuántas notas tiene el estudiante.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa el nombre del estudiante y sus notas.
+#Proceso: Se crea un objeto Estudiante, se agregan las notas a una lista, se calcula el promedio, se verifica si está aprobado y se cuenta la cantidad de notas registradas.
+#CAMBIO: Se incorpora un método que devuelve la cantidad de notas almacenadas.
+#Salida: Se muestra la información del estudiante, el promedio, si está aprobado y la cantidad de notas.
+
+#2. Bosquejo a mano
+# Crear la clase Estudiante
+# Crear el constructor con nombre y lista de notas vacía
+# Crear el método agregar_nota()
+# Crear el método promedio()
+# Crear el método aprobado()
+# CAMBIO: Crear el método cantidad_notas()
+# Crear un objeto Estudiante
+# Agregar varias notas
+# Mostrar el promedio
+# Mostrar si aprobó
+# Mostrar la cantidad de notas
+
+#3. Descubrir el patrón
+# La información del estudiante se guarda en un objeto.
+# Las notas se almacenan en una lista.
+# El promedio se obtiene sumando las notas y dividiendo para la cantidad de notas.
+# CAMBIO: La cantidad de notas se obtiene utilizando la función len() sobre la lista.
+
+#4. Escribir código
+
+class Estudiante:
+
+    def __init__(self, nombre):
+
+        self.nombre = nombre
+        self.notas = []
+
+    def agregar_nota(self, n):
+
+        self.notas.append(n)
+
+    def promedio(self):
+
+        return sum(self.notas) / len(self.notas)
+
+    def aprobado(self):
+
+        return self.promedio() >= 7
+
+    # CAMBIO
+    def cantidad_notas(self):
+
+        return len(self.notas)
+
+
+estudiante = Estudiante("Derick")
+
+estudiante.agregar_nota(8)
+estudiante.agregar_nota(9)
+estudiante.agregar_nota(7)
+
+print(f"Nombre: {estudiante.nombre}")
+print(f"Promedio: {estudiante.promedio()}")
+print(f"Aprobado: {estudiante.aprobado()}")
+print(f"Cantidad de notas: {estudiante.cantidad_notas()}")
+
+#5. Prueba de escritorio
+
+#EJERCICIO 47: Clase Vehiculo con marca, modelo y km recorridos (inicialmente 0).
+#Método recorrer(km) que suma al odómetro.
+#Método necesita_mantenimiento() que retorna True cada 10 000 km.
+#CAMBIO: Se agrega el método reiniciar_mantenimiento() que vuelve el contador de kilómetros a 0 después de realizar el mantenimiento.
+
+#1. Entender el problema
+#Entrada: El usuario ingresa la marca, el modelo y la cantidad de kilómetros a recorrer.
+#Proceso: Se crea un objeto Vehiculo con el odómetro en 0. Luego se recorren kilómetros, se verifica si necesita mantenimiento y, si se desea, se reinicia el contador con el nuevo método.
+#CAMBIO: Se agrega un método que permite reiniciar el odómetro después de realizar el mantenimiento.
+#Salida: Se muestran los datos del vehículo, los kilómetros recorridos y si necesita mantenimiento.
+
+#2. Bosquejo a mano
+# Crear la clase Vehiculo
+# Crear el constructor con marca, modelo y km inicial en 0
+# Crear el método recorrer(km)
+# Crear el método necesita_mantenimiento()
+# CAMBIO: Crear el método reiniciar_mantenimiento()
+# Crear el método __str__()
+# Crear un objeto
+# Recorrer kilómetros
+# Mostrar la información
+# Verificar si necesita mantenimiento
+# Reiniciar el contador y volver a mostrar la información
+
+#3. Descubrir el patrón
+# Los atributos almacenan el estado del vehículo.
+# Los métodos modifican o consultan esos atributos.
+# El mantenimiento depende de la cantidad de kilómetros recorridos.
+# CAMBIO: El reinicio del contador reutiliza el atributo km sin crear uno nuevo.
+
+#4. Escribir código
+
+class Vehiculo:
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+        self.km = 0
+
+    def recorrer(self, km):
+        self.km += km
+
+    def necesita_mantenimiento(self):
+        return self.km >= 10000
+
+    # CAMBIO
+    def reiniciar_mantenimiento(self):
+        self.km = 0
+
+    def __str__(self):
+        return f"Marca: {self.marca}, Modelo: {self.modelo}, Km: {self.km}"
+
+
+vehiculo = Vehiculo("Toyota", "Corolla")
+
+vehiculo.recorrer(12000)
+
+print(vehiculo)
+
+print("¿Necesita mantenimiento?", vehiculo.necesita_mantenimiento())
+
+# CAMBIO
+vehiculo.reiniciar_mantenimiento()
+
+print("Después del mantenimiento:")
+print(vehiculo)
+
+#5. Prueba de escritorio
