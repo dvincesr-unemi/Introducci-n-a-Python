@@ -975,5 +975,407 @@ print(gestor.edad_promedio())
 
 #20.75
 
+#EJERCICIO 8: Asignador de equipos
+
+#Clase Equipos que: (1) tenga método crear_equipo(nombre_equipo) que inicie un equipo como una lista vacía en un diccionario
+
+#(2) tenga método agregar_jugador(equipo, jugador) que añada el jugador al equipo
+
+#(3) tenga método equipo_mayor_integrantes() que retorne el nombre del equipo con más jugadores.
+
+
+#1. Entender el problema
+#Entrada: El usuario ingresa el nombre de uno o varios equipos y luego agrega jugadores a cada equipo.
+#Proceso: Se crea una clase que almacena equipos en un diccionario.
+#Cada clave del diccionario es el nombre de un equipo y su valor es una lista de jugadores.
+#Se puede agregar jugadores y determinar cuál equipo tiene más integrantes.
+#Salida: Se muestran los equipos registrados y el nombre del equipo con mayor cantidad de jugadores.
+
+
+#2. Bosquejo a mano
+#Crear la clase Equipos
+#Crear un constructor con un diccionario vacío
+#
+#Crear método crear_equipo(nombre_equipo)
+#Crear una clave en el diccionario
+#Asignarle una lista vacía
+#
+#Crear método agregar_jugador(equipo, jugador)
+#Buscar el equipo en el diccionario
+#Agregar el jugador a la lista correspondiente
+#
+#Crear método equipo_mayor_integrantes()
+#Recorrer todos los equipos
+#Comparar la cantidad de jugadores
+#Guardar el equipo con mayor cantidad
+#Retornar su nombre
+
+
+#3. Descubrir el patrón
+#Se utiliza un diccionario donde la clave es el nombre del equipo.
+#Cada valor del diccionario es una lista de jugadores.
+#Se utiliza append() para agregar jugadores a la lista.
+#Se utiliza len() para conocer la cantidad de integrantes de cada equipo.
+#Se recorre el diccionario con items() para obtener la clave y el valor.
+
+
+#4. Escribir código
+
+class Equipos:
+
+    def __init__(self):
+
+        self.equipos = {}
+
+    def crear_equipo(self, equipo):
+
+        self.equipos[equipo] = []
+
+    def agregar_jugador(self, equipo, jugador):
+
+        self.equipos[equipo].append(jugador)
+
+    def equipo_mayor_integrantes(self):
+
+        mayor = ""
+        cantidad = 0
+
+        for equipo, jugadores in self.equipos.items():
+
+            if len(jugadores) > cantidad:
+
+                cantidad = len(jugadores)
+
+                mayor = equipo
+
+        return mayor
+
+
+#Parámetros de prueba
+
+liga = Equipos()
+
+liga.crear_equipo("Barcelona")
+liga.crear_equipo("Emelec")
+liga.crear_equipo("Liga")
+
+liga.agregar_jugador("Barcelona", "Derick")
+liga.agregar_jugador("Barcelona", "Luis")
+
+liga.agregar_jugador("Emelec", "Ana")
+
+liga.agregar_jugador("Liga", "Carlos")
+liga.agregar_jugador("Liga", "Pedro")
+liga.agregar_jugador("Liga", "Juan")
+
+print(liga.equipos)
+
+print(liga.equipo_mayor_integrantes())
+
+
+#5. Prueba de escritorio
+
+#Objeto creado:
+#liga = Equipos()
+
+#Diccionario inicial:
+#{}
+
+#Se crea:
+#"Barcelona"
+
+#Diccionario:
+#{
+#    "Barcelona": []
+#}
+
+#Se crea:
+#"Emelec"
+
+#Diccionario:
+#{
+#    "Barcelona": [],
+#    "Emelec": []
+#}
+
+#Se crea:
+#"Liga"
+
+#Diccionario:
+#{
+#    "Barcelona": [],
+#    "Emelec": [],
+#    "Liga": []
+#}
+
+#Se agregan jugadores
+
+#Barcelona:
+#["Derick", "Luis"]
+
+#Emelec:
+#["Ana"]
+
+#Liga:
+#["Carlos", "Pedro", "Juan"]
+
+#Diccionario final:
+
+#{
+#    "Barcelona": ["Derick", "Luis"],
+#    "Emelec": ["Ana"],
+#    "Liga": ["Carlos", "Pedro", "Juan"]
+#}
+
+#Método equipo_mayor_integrantes()
+
+#Barcelona -> 2 jugadores
+
+#Emelec -> 1 jugador
+
+#Liga -> 3 jugadores
+
+#El equipo con mayor cantidad de integrantes es:
+
+#"Liga"
+
+#Salida final:
+
+#{
+#    'Barcelona': ['Derick', 'Luis'],
+#    'Emelec': ['Ana'],
+#    'Liga': ['Carlos', 'Pedro', 'Juan']
+#}
+
+#Liga
+
+#Ejercicio 9: Validador de caracteres 
+#Clase AnalizadorString que: (1) tenga método solo_vocales(letra) que retorne True si es vocal 
+#(2) tenga método contar_por_tipo(texto) que retorne un diccionario {'vocales': cant, 'consonantes': cant, 'digitos': cant} reutilizando métodos; 
+#(3) tenga atributo que guarde el texto más largo analizado. 
+
+
+#1. Entender el problema
+
+#Entrada:
+#El usuario ingresa un texto que contiene letras, vocales, consonantes y números.
+
+#Proceso:
+#Crear una clase que analice caracteres.
+#Se utiliza un método para comprobar si un carácter es vocal.
+#Se recorre el texto completo para contar vocales, consonantes y dígitos.
+#Se guarda el texto con mayor longitud analizado.
+
+#Salida:
+#Retornar un diccionario con la cantidad de vocales, consonantes y dígitos.
+#Mostrar cuál fue el texto más largo analizado.
+
+
+#2. Bosquejo a mano
+
+#Crear clase AnalizadorString
+
+#Crear constructor:
+#Crear atributo texto_mas_largo vacío.
+
+#Crear método solo_vocales(letra):
+#Crear una cadena con vocales.
+#Comprobar si la letra pertenece a esa cadena.
+#Retornar True o False.
+
+#Crear método contar_por_tipo(texto):
+#Crear diccionario con contadores en cero.
+#Recorrer cada letra del texto.
+#Si es vocal aumentar contador de vocales.
+#Si es número aumentar contador de dígitos.
+#Si es letra aumentar contador de consonantes.
+#Comparar la longitud del texto actual con el texto más largo guardado.
+#Retornar diccionario.
+
+
+#3. Descubrir el patrón
+
+#Se utiliza un ciclo for para recorrer cadenas.
+#Cada carácter es analizado individualmente.
+#Se reutiliza un método creado anteriormente mediante self.
+#Se utilizan métodos propios de Python:
+#.isdigit() para comprobar números.
+#.isalpha() para comprobar letras.
+#Se usa len() para comparar tamaños de textos.
+
+
+#4. Escribir código
+
+class AnalizadorString:
+
+    def __init__(self):
+
+        self.texto_mas_largo = ""
+
+
+    def solo_vocales(self, letra):
+
+        vocales = "aeiouAEIOU"
+
+        return letra in vocales
+
+
+    def contar_por_tipo(self, texto):
+
+        contador = {
+            "vocales": 0,
+            "consonantes": 0,
+            "digitos": 0
+        }
+
+        for letra in texto:
+
+            if self.solo_vocales(letra):
+
+                contador["vocales"] += 1
+
+            elif letra.isdigit():
+
+                contador["digitos"] += 1
+
+            elif letra.isalpha():
+
+                contador["consonantes"] += 1
+
+
+        if len(texto) > len(self.texto_mas_largo):
+
+            self.texto_mas_largo = texto
+
+
+        return contador
+
+
+
+#Parámetros de prueba
+
+analizador = AnalizadorString()
+
+
+texto1 = "Hola123"
+
+texto2 = "Programacion2026"
+
+texto3 = "Python"
+
+
+print(analizador.contar_por_tipo(texto1))
+
+print(analizador.contar_por_tipo(texto2))
+
+print(analizador.contar_por_tipo(texto3))
+
+
+print(analizador.texto_mas_largo)
+
+
+
+#5. Prueba de escritorio
+
+
+#Objeto creado:
+
+#analizador = AnalizadorString()
+
+
+#Atributo inicial:
+
+#texto_mas_largo = ""
+
+
+#Primer texto:
+
+#texto1 = "Hola123"
+
+
+#Recorrido:
+
+#H -> consonante
+#o -> vocal
+#l -> consonante
+#a -> vocal
+#1 -> dígito
+#2 -> dígito
+#3 -> dígito
+
+
+#Resultado:
+
+#{
+# "vocales": 2,
+# "consonantes": 2,
+# "digitos": 3
+#}
+
+
+#Como "Hola123" tiene más longitud que "":
+#texto_mas_largo = "Hola123"
+
+
+
+#Segundo texto:
+
+#texto2 = "Programacion2026"
+
+
+#Se cuentan:
+
+#vocales = 6
+#consonantes = 6
+#digitos = 4
+
+
+#Como es más largo que "Hola123":
+
+#texto_mas_largo = "Programacion2026"
+
+
+
+#Tercer texto:
+
+#texto3 = "Python"
+
+
+#Se cuentan:
+
+#vocales = 1
+#consonantes = 5
+#digitos = 0
+
+
+#No reemplaza el texto más largo porque es menor.
+
+
+#Salida final:
+
+#{
+# 'vocales': 2,
+# 'consonantes': 2,
+# 'digitos': 3
+#}
+
+#{
+# 'vocales': 6,
+# 'consonantes': 6,
+# 'digitos': 4
+#}
+
+#{
+# 'vocales': 1,
+# 'consonantes': 5,
+# 'digitos': 0
+#}
+
+#Programacion2026
+
+
+
+
+
 
             

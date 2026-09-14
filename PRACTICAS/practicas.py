@@ -1134,6 +1134,592 @@ class GestorPersonas:
             suma += persona["edad"]
         return suma / len(self.edades)
 
+#CAMBIO 1: Método buscar_persona()
+#Busca una persona por su nombre y retorna sus datos.
+
+def buscar_persona(self, nombre):
+
+    for persona in self.edades:
+
+        if persona["nombre"] == nombre:
+
+            return persona
+
+    return None
+
+
+#CAMBIO 2: Método eliminar_persona()
+#Elimina una persona por su nombre.
+
+def eliminar_persona(self, nombre):
+
+    for persona in self.edades:
+
+        if persona["nombre"] == nombre:
+
+            self.edades.remove(persona)
+
+            return True
+
+    return False
+
+
+#CAMBIO 3: Método actualizar_edad()
+#Modifica la edad de una persona.
+
+def actualizar_edad(self, nombre, nueva_edad):
+
+    for persona in self.edades:
+
+        if persona["nombre"] == nombre:
+
+            persona["edad"] = nueva_edad
+
+            return True
+
+    return False
+
+
+#CAMBIO 4: Método contar_personas()
+#Retorna la cantidad de personas registradas.
+
+def contar_personas(self):
+
+    return len(self.edades)
+
+
+#CAMBIO 5: Método persona_mayor()
+#Retorna la persona con mayor edad.
+
+def persona_mayor(self):
+
+    return max(self.edades, key=lambda persona: persona["edad"])
+
+
+#CAMBIO 6: Método persona_menor()
+#Retorna la persona con menor edad.
+
+def persona_menor(self):
+
+    return min(self.edades, key=lambda persona: persona["edad"])
+
+
+#CAMBIO 7: Método ordenar_por_edad()
+#Ordena las personas de menor a mayor edad.
+
+def ordenar_por_edad(self):
+
+    return sorted(self.edades, key=lambda persona: persona["edad"])
+
+
+#CAMBIO 8: Método ordenar_por_nombre()
+#Ordena las personas alfabéticamente.
+
+def ordenar_por_nombre(self):
+
+    return sorted(self.edades, key=lambda persona: persona["nombre"])
+
+
+#CAMBIO 9: Método mayores_de_edad()
+#Retorna únicamente las personas de 18 años o más.
+
+def mayores_de_edad(self):
+
+    resultado = []
+
+    for persona in self.edades:
+
+        if persona["edad"] >= 18:
+
+            resultado.append(persona)
+
+    return resultado
+
+
+#CAMBIO 10: Método menores_de_edad()
+#Retorna únicamente las personas menores de 18 años.
+
+def menores_de_edad(self):
+
+    resultado = []
+
+    for persona in self.edades:
+
+        if persona["edad"] < 18:
+
+            resultado.append(persona)
+
+    return resultado
+
+
+#CAMBIO 11: Método existe_persona()
+#Verifica si una persona ya está registrada.
+
+def existe_persona(self, nombre):
+
+    for persona in self.edades:
+
+        if persona["nombre"] == nombre:
+
+            return True
+
+    return False
+
+
+#CAMBIO 12: Método limpiar_personas()
+#Elimina todas las personas registradas.
+
+def limpiar_personas(self):
+
+    self.edades.clear()
+
+#EJERCICIO 8: Asignador de equipos
+#Clase Equipos que: (1) tenga método crear_equipo(nombre_equipo) que inicie un equipo como una lista vacía en un diccionario
+#(2) tenga método agregar_jugador(equipo, jugador) que añada el jugador al equipo
+#(3) tenga método equipo_mayor_integrantes() que retorne el nombre del equipo con más jugadores.
+
+class Equipos:
+
+    def __init__(self):
+
+        self.equipos = {}
+
+    def crear_equipo(self, equipo):
+
+        self.equipos[equipo] = []
+
+    def agregar_jugador(self, equipo, jugador):
+
+        self.equipos[equipo].append(jugador)
+
+    def equipo_mayor_integrantes(self):
+
+        mayor = ""
+        cantidad = 0
+
+        for equipo, jugadores in self.equipos.items():
+
+            if len(jugadores) > cantidad:
+
+                cantidad = len(jugadores)
+
+                mayor = equipo
+
+        return mayor
+
+#CAMBIO 1: Método eliminar_jugador(equipo, jugador)
+#Elimina un jugador específico de un equipo.
+
+def eliminar_jugador(self, equipo, jugador):
+
+    if jugador in self.equipos[equipo]:
+
+        self.equipos[equipo].remove(jugador)
+
+        return True
+
+    return False
+
+
+#CAMBIO 2: Método cantidad_jugadores(equipo)
+#Retorna la cantidad de jugadores que tiene un equipo.
+
+def cantidad_jugadores(self, equipo):
+
+    return len(self.equipos[equipo])
+
+
+#CAMBIO 3: Método listar_jugadores(equipo)
+#Retorna la lista de jugadores de un equipo.
+
+def listar_jugadores(self, equipo):
+
+    return self.equipos[equipo]
+
+
+#CAMBIO 4: Método buscar_jugador(jugador)
+#Busca en qué equipo se encuentra un jugador.
+
+def buscar_jugador(self, jugador):
+
+    for equipo, jugadores in self.equipos.items():
+
+        if jugador in jugadores:
+
+            return equipo
+
+    return None
+
+
+#CAMBIO 5: Método eliminar_equipo(nombre_equipo)
+#Elimina un equipo completo del diccionario.
+
+def eliminar_equipo(self, equipo):
+
+    if equipo in self.equipos:
+
+        del self.equipos[equipo]
+
+        return True
+
+    return False
+
+
+#CAMBIO 6: Método cantidad_equipos()
+#Retorna cuántos equipos existen.
+
+def cantidad_equipos(self):
+
+    return len(self.equipos)
+
+
+#CAMBIO 7: Método equipos_con_mas_jugadores(cantidad)
+#Retorna equipos que tienen una cantidad mínima de jugadores.
+
+def equipos_con_mas_jugadores(self, cantidad):
+
+    resultado = []
+
+    for equipo, jugadores in self.equipos.items():
+
+        if len(jugadores) >= cantidad:
+
+            resultado.append(equipo)
+
+    return resultado
+
+
+#CAMBIO 8: Método ordenar_equipos()
+#Retorna los equipos ordenados por cantidad de jugadores.
+
+def ordenar_equipos(self):
+
+    return sorted(
+        self.equipos.items(),
+        key=lambda equipo: len(equipo[1]),
+        reverse=True
+    )
+
+
+#CAMBIO 9: Método transferir_jugador(jugador, equipo_actual, equipo_nuevo)
+#Mueve un jugador de un equipo a otro.
+
+def transferir_jugador(self, jugador, equipo_actual, equipo_nuevo):
+
+    if jugador in self.equipos[equipo_actual]:
+
+        self.equipos[equipo_actual].remove(jugador)
+
+        self.equipos[equipo_nuevo].append(jugador)
+
+        return True
+
+    return False
+
+
+#CAMBIO 10: Método equipo_menor_integrantes()
+#Retorna el equipo con menos jugadores.
+
+def equipo_menor_integrantes(self):
+
+    menor = ""
+    cantidad = float("inf")
+
+    for equipo, jugadores in self.equipos.items():
+
+        if len(jugadores) < cantidad:
+
+            cantidad = len(jugadores)
+
+            menor = equipo
+
+    return menor
+
+#Ejercicio 9: Validador de caracteres
+#Clase AnalizadorString que: (1) tenga método solo_vocales(letra) que retorne True si es vocal
+#(2) tenga método contar_por_tipo(texto) que retorne un diccionario {'vocales': cant, 'consonantes': cant, 'digitos': cant} reutilizando métodos;
+#(3) tenga atributo que guarde el texto más largo analizado.
+
+class AnalizadorString:
+    def __init__(self):
+        self.texto_mas_largo = ""
+
+    def solo_vocales(self, letra):
+        vocales = "aeiouAEIOU"
+        return letra in vocales
+    
+    def contar_por_tipo(self, texto):
+        contador = {
+            "vocales": 0,
+            "consonantes": 0,
+            "digitos": 0
+              }
+        
+        for letra in texto:
+            if self.solo_vocales(letra):
+                contador["vocales"] += 1
+            elif letra.isdigit():
+                contador["digitos"] += 1
+            elif letra.isalpha():
+                contador["consonantes"] += 1
+
+        if len(texto) > len(self.texto_mas_largo):
+            self.texto_mas_largo = texto
+        return contador
+
+    #CAMBIO 1: Método es_digito(numero)
+#Comprueba manualmente si un carácter es un número.
+
+def es_digito(self, letra):
+
+    digitos = "0123456789"
+
+    return letra in digitos
+
+
+#CAMBIO 2: Método es_letra(letra)
+#Comprueba manualmente si un carácter pertenece al alfabeto.
+
+def es_letra(self, letra):
+
+    letras = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    return letra in letras
+
+
+#CAMBIO 3: Método es_consonante(letra)
+#Determina si una letra es consonante reutilizando métodos.
+
+def es_consonante(self, letra):
+
+    if self.es_letra(letra) and not self.solo_vocales(letra):
+
+        return True
+
+    return False
+
+
+#CAMBIO 4: Reemplazar isdigit() e isalpha()
+#En contar_por_tipo() cambiar:
+
+elif letra.isdigit():
+
+#por:
+
+elif self.es_digito(letra):
+
+
+#Y cambiar:
+
+elif letra.isalpha():
+
+#por:
+
+elif self.es_consonante(letra):
+
+
+
+#CAMBIO 5: Método contar_mayusculas()
+#Cuenta cuántas letras mayúsculas tiene el texto.
+
+def contar_mayusculas(self, texto):
+
+    cantidad = 0
+
+    for letra in texto:
+
+        if letra in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+
+            cantidad += 1
+
+    return cantidad
+
+
+#CAMBIO 6: Método contar_minusculas()
+#Cuenta cuántas letras minúsculas tiene el texto.
+
+def contar_minusculas(self, texto):
+
+    cantidad = 0
+
+    for letra in texto:
+
+        if letra in "abcdefghijklmnopqrstuvwxyz":
+
+            cantidad += 1
+
+    return cantidad
+
+
+#CAMBIO 7: Método eliminar_espacios()
+#Retorna el texto sin espacios.
+
+def eliminar_espacios(self, texto):
+
+    nuevo_texto = ""
+
+    for letra in texto:
+
+        if letra != " ":
+
+            nuevo_texto += letra
+
+    return nuevo_texto
+
+
+#CAMBIO 8: Método invertir_texto()
+#Invierte el texto manualmente sin usar reverse().
+
+def invertir_texto(self, texto):
+
+    invertido = ""
+
+    for i in range(len(texto)-1, -1, -1):
+
+        invertido += texto[i]
+
+    return invertido
+
+#CAMBIO 1: Método cantidad_total_caracteres()
+#Retorna cuántos caracteres tiene el texto.
+
+def cantidad_total_caracteres(self, texto):
+
+    return len(texto)
+
+
+
+#CAMBIO 2: Método eliminar_espacios()
+#Retorna una nueva cadena sin espacios.
+
+def eliminar_espacios(self, texto):
+
+    resultado = ""
+
+    for letra in texto:
+
+        if letra != " ":
+
+            resultado += letra
+
+    return resultado
+
+
+
+#CAMBIO 3: Método invertir_texto()
+#Invierte una cadena usando ciclos.
+
+def invertir_texto(self, texto):
+
+    invertido = ""
+
+    for letra in texto:
+
+        invertido = letra + invertido
+
+    return invertido
+
+
+
+#CAMBIO 4: Método contar_caracter()
+#Cuenta cuántas veces aparece un carácter.
+
+def contar_caracter(self, texto, caracter):
+
+    contador = 0
+
+    for letra in texto:
+
+        if letra == caracter:
+
+            contador += 1
+
+    return contador
+
+
+
+#CAMBIO 5: Método frecuencia_caracteres()
+#Guarda la frecuencia de cada carácter en un diccionario.
+
+def frecuencia_caracteres(self, texto):
+
+    frecuencia = {}
+
+    for letra in texto:
+
+        if letra in frecuencia:
+
+            frecuencia[letra] += 1
+
+        else:
+
+            frecuencia[letra] = 1
+
+    return frecuencia
+
+
+
+#CAMBIO 6: Método guardar_textos()
+#Guarda varios textos analizados.
+
+def __init__(self):
+
+    self.texto_mas_largo = ""
+
+    self.textos = []
+
+
+
+def guardar_texto(self, texto):
+
+    self.textos.append(texto)
+
+
+
+#CAMBIO 7: Método texto_mas_repetido()
+#Busca el texto que más veces aparece.
+
+def texto_mas_repetido(self):
+
+    frecuencia = {}
+
+    for texto in self.textos:
+
+        if texto in frecuencia:
+
+            frecuencia[texto] += 1
+
+        else:
+
+            frecuencia[texto] = 1
+
+    return max(frecuencia, key=frecuencia.get)
+
+
+
+#CAMBIO 8: Método separar_caracteres()
+#Separa letras y números en listas.
+
+def separar_caracteres(self, texto):
+
+    letras = []
+
+    numeros = []
+
+    for caracter in texto:
+
+        if caracter in "0123456789":
+
+            numeros.append(caracter)
+
+        else:
+
+            letras.append(caracter)
+
+    return {
+        "letras": letras,
+        "numeros": numeros
+    }
 
 # LISTAS (list)
 
