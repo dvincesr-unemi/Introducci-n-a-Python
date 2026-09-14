@@ -1373,9 +1373,1246 @@ print(analizador.texto_mas_largo)
 
 #Programacion2026
 
+#EJERCICIO 10: Gestor de tareas con prioridad
+#Clase Tareas que: (1) tenga método agregar_tarea(descripcion, prioridad) que guarde en una lista de tuplas (descripción, prioridad)
+#(2) tenga método tareas_prioritarias() que retorne solo las de prioridad alta
+#(3) tenga método eliminar_completada(descripcion) que borre la tarea de la lista.
+
+
+#1. Entender el problema
+
+#Entrada:
+#El usuario ingresa una descripción y una prioridad (Alta, Media o Baja).
+
+#Proceso:
+#Crear una clase que almacene tareas en una lista de tuplas.
+#Agregar tareas.
+#Buscar las tareas con prioridad alta.
+#Eliminar una tarea mediante su descripción.
+
+#Salida:
+#Mostrar las tareas prioritarias.
+#Eliminar una tarea si existe.
+
+
+#2. Bosquejo a mano
+
+#Crear clase Tareas.
+
+#Crear constructor:
+#Crear una lista vacía para almacenar las tuplas.
+
+#Crear método agregar_tarea():
+#Crear una tupla (descripcion, prioridad).
+#Agregar la tupla a la lista.
+
+#Crear método tareas_prioritarias():
+#Crear una lista vacía.
+#Recorrer todas las tareas.
+#Si la prioridad es "Alta", guardar la descripción.
+#Si no existen tareas altas, retornar un mensaje.
+#Retornar la lista.
+
+#Crear método eliminar_completada():
+#Recorrer todas las tuplas.
+#Comparar la descripción.
+#Si coincide, eliminar la tupla.
+#Retornar True.
+#Si no existe, retornar False.
+
+
+#3. Descubrir el patrón
+
+#Se utiliza una lista para almacenar tuplas.
+#Cada tupla contiene:
+#(descripcion, prioridad)
+
+#Se recorre la lista con:
+
+#for descripcion, prioridad in self.lista_tuplas
+
+#Se utiliza append() para agregar tareas.
+#Se utiliza remove() para eliminar tareas.
+#Se utiliza lower() para comparar textos sin importar mayúsculas.
+
+
+#4. Escribir código
+
+class Tareas:
+
+    def __init__(self):
+
+        self.lista_tuplas = []
+
+
+    def agregar_tarea(self, descripcion, prioridad):
+
+        tarea = (descripcion, prioridad)
+
+        self.lista_tuplas.append(tarea)
+
+
+    def tareas_prioritarias(self):
+
+        prioritarias = []
+
+        for descripcion, prioridad in self.lista_tuplas:
+
+            if prioridad.lower() == "alta":
+
+                prioritarias.append(descripcion)
+
+        if len(prioritarias) == 0:
+
+            return "No hay actividades con prioridad alta registradas"
+
+        return prioritarias
+
+
+    def eliminar_completada(self, descripcion):
+
+        for desc, prioridad in self.lista_tuplas:
+
+            if desc == descripcion:
+
+                self.lista_tuplas.remove((desc, prioridad))
+
+                return True
+
+        return False
+
+
+#Parámetros de prueba
+
+tareas = Tareas()
+
+tareas.agregar_tarea("Estudiar Python", "Alta")
+tareas.agregar_tarea("Comprar pan", "Baja")
+tareas.agregar_tarea("Hacer deberes", "Media")
+tareas.agregar_tarea("Preparar examen", "Alta")
+
+print(tareas.lista_tuplas)
+
+print(tareas.tareas_prioritarias())
+
+print(tareas.eliminar_completada("Comprar pan"))
+
+print(tareas.lista_tuplas)
+
+print(tareas.eliminar_completada("Ir al cine"))
+
+
+#5. Prueba de escritorio
+
+#Objeto creado:
+
+#tareas = Tareas()
+
+#Lista inicial:
+
+#[]
+
+
+#Agregar tareas:
+
+#("Estudiar Python", "Alta")
+#("Comprar pan", "Baja")
+#("Hacer deberes", "Media")
+#("Preparar examen", "Alta")
+
+#La lista queda:
+
+#[
+# ("Estudiar Python", "Alta"),
+# ("Comprar pan", "Baja"),
+# ("Hacer deberes", "Media"),
+# ("Preparar examen", "Alta")
+#]
+
+
+#Método tareas_prioritarias()
+
+#Recorrido:
+
+#("Estudiar Python","Alta") -> Se agrega.
+#("Comprar pan","Baja") -> No se agrega.
+#("Hacer deberes","Media") -> No se agrega.
+#("Preparar examen","Alta") -> Se agrega.
+
+#Resultado:
+
+#["Estudiar Python", "Preparar examen"]
+
+
+#Método eliminar_completada("Comprar pan")
+
+#Recorrido:
+
+#("Estudiar Python","Alta") -> No coincide.
+#("Comprar pan","Baja") -> Coincide.
+
+#Se elimina la tupla.
+
+#Retorna:
+
+#True
+
+
+#La lista queda:
+
+#[
+# ("Estudiar Python", "Alta"),
+# ("Hacer deberes", "Media"),
+# ("Preparar examen", "Alta")
+#]
+
+
+#Método eliminar_completada("Ir al cine")
+
+#No encuentra la tarea.
+
+#Retorna:
+
+#False
+
+#EJERCICIO 11: Contador de frecuencia
+#Clase ContadorFrecuencia que: (1) tenga método agregar_elemento(elemento) que guarde en un diccionario contando repeticiones
+#(2) tenga método elemento_mas_frecuente() que retorne el elemento con mayor frecuencia
+#(3) tenga método frecuencia_elemento(elemento) que retorne cuántas veces aparece.
+
+
+#1. Entender el problema
+
+#Entrada:
+#El usuario ingresa varios elementos.
+
+#Proceso:
+#Guardar los elementos en un diccionario contando cuántas veces aparece cada uno.
+#Encontrar el elemento con mayor frecuencia.
+#Consultar cuántas veces aparece un elemento específico.
+
+#Salida:
+#Mostrar el diccionario de frecuencias.
+#Mostrar el elemento más frecuente.
+#Mostrar la frecuencia de un elemento.
+
+
+#2. Bosquejo a mano
+
+#Crear clase ContadorFrecuencia.
+
+#Crear constructor:
+#Crear un diccionario vacío.
+
+#Crear método agregar_elemento():
+#Verificar si el elemento ya existe.
+#Si existe, aumentar su contador.
+#Si no existe, agregarlo con valor 1.
+
+#Crear método elemento_mas_frecuente():
+#Buscar la clave con el mayor valor del diccionario.
+
+#Crear método frecuencia_elemento():
+#Si el elemento existe, retornar su frecuencia.
+#Si no existe, retornar 0.
+
+
+#3. Descubrir el patrón
+
+#Se utiliza un diccionario.
+
+#Clave -> Elemento.
+#Valor -> Cantidad de veces que aparece.
+
+#Si la clave existe:
+#Se incrementa su contador.
+
+#Si no existe:
+#Se crea con valor 1.
+
+#Para encontrar el elemento más frecuente se utiliza:
+
+#max(diccionario, key=diccionario.get)
+
+
+#4. Escribir código
+
+class ContadorFrecuencia:
+
+    def __init__(self):
+
+        self.frecuencias = {}
+
+    def agregar_elemento(self, elemento):
+
+        if elemento in self.frecuencias:
+
+            self.frecuencias[elemento] += 1
+
+        else:
+
+            self.frecuencias[elemento] = 1
+
+    def elemento_mas_frecuente(self):
+
+        return max(self.frecuencias, key=self.frecuencias.get)
+
+    def frecuencia_elemento(self, elemento):
+
+        if elemento in self.frecuencias:
+
+            return self.frecuencias[elemento]
+
+        return 0
+
+
+#Parámetros de prueba
+
+contador = ContadorFrecuencia()
+
+contador.agregar_elemento("manzana")
+contador.agregar_elemento("pera")
+contador.agregar_elemento("manzana")
+contador.agregar_elemento("uva")
+contador.agregar_elemento("manzana")
+contador.agregar_elemento("pera")
+
+print(contador.frecuencias)
+
+print(contador.elemento_mas_frecuente())
+
+print(contador.frecuencia_elemento("manzana"))
+
+print(contador.frecuencia_elemento("pera"))
+
+print(contador.frecuencia_elemento("naranja"))
+
+
+#5. Prueba de escritorio
+
+#Objeto creado:
+
+#contador = ContadorFrecuencia()
+
+#Diccionario inicial:
+
+#{}
+
+
+#Agregar "manzana"
+
+#{
+#   "manzana": 1
+#}
+
+
+#Agregar "pera"
+
+#{
+#   "manzana": 1,
+#   "pera": 1
+#}
+
+
+#Agregar "manzana"
+
+#{
+#   "manzana": 2,
+#   "pera": 1
+#}
+
+
+#Agregar "uva"
+
+#{
+#   "manzana": 2,
+#   "pera": 1,
+#   "uva": 1
+#}
+
+
+#Agregar "manzana"
+
+#{
+#   "manzana": 3,
+#   "pera": 1,
+#   "uva": 1
+#}
+
+
+#Agregar "pera"
+
+#{
+#   "manzana": 3,
+#   "pera": 2,
+#   "uva": 1
+#}
+
+
+#Método elemento_mas_frecuente()
+
+#Compara los valores del diccionario.
+
+#manzana -> 3
+#pera -> 2
+#uva -> 1
+
+#Retorna:
+
+#"manzana"
+
+
+#Método frecuencia_elemento("manzana")
+
+#Retorna:
+
+#3
+
+
+#Método frecuencia_elemento("pera")
+
+#Retorna:
+
+#2
+
+
+#Método frecuencia_elemento("naranja")
+
+#Como no existe en el diccionario:
+
+#Retorna:
+
+#0
+
+#EJERCICIO 12: Selector de rango con tuplas
+#Clase SelectorRango que: (1) tenga método crear_rango(inicio, fin) que retorne una tupla con números en ese rango
+#(2) tenga método elementos_en_multiples_rangos(*rangos) que reciba múltiples tuplas (inicio,fin) y retorne una lista combinada sin duplicados usando un conjunto.
+
+
+#1. Entender el problema
+
+#Entrada:
+#Dos números para crear un rango.
+#Varias tuplas que contienen inicio y fin de diferentes rangos.
+
+#Proceso:
+#Crear una tupla con números dentro del rango indicado.
+#Recorrer varios rangos.
+#Unir todos los números en un conjunto para eliminar repetidos.
+
+#Salida:
+#Retornar una tupla con un rango.
+#Retornar una lista con todos los elementos sin duplicados.
+
+
+#2. Bosquejo a mano
+
+#Crear clase SelectorRango.
+
+#Método crear_rango():
+#Recibir inicio y fin.
+#Usar range().
+#Convertir el resultado en una tupla.
+
+#Método elementos_en_multiples_rangos():
+#Crear un conjunto vacío.
+#Recorrer cada tupla recibida.
+#Separar inicio y fin.
+#Crear números del rango.
+#Agregar números al conjunto.
+#Convertir conjunto en lista y retornar.
+
+
+#3. Descubrir el patrón
+
+#Se utiliza una tupla porque los rangos recibidos tienen una estructura fija:
+
+#(inicio, fin)
+
+#Se utiliza *rangos porque se reciben varias tuplas.
+
+#Ejemplo:
+
+#(1,5), (4,8), (10,12)
+
+#Se usa set porque no permite elementos repetidos.
+
+#Ejemplo:
+
+#{1,2,3,4,5,6,7,8}
+
+
+#4. Escribir código
+
+class SelectorRango:
+
+    def crear_rango(self, inicio, fin):
+
+        return tuple(range(inicio, fin + 1))
+
+
+    def elementos_en_multiples_rangos(self, *rangos):
+
+        conjunto = set()
+
+        for inicio, fin in rangos:
+
+            for numero in range(inicio, fin + 1):
+
+                conjunto.add(numero)
+
+        return list(conjunto)
 
 
 
+#Parámetros de prueba
+
+selector = SelectorRango()
 
 
-            
+print(selector.crear_rango(1, 5))
+
+
+resultado = selector.elementos_en_multiples_rangos(
+    (1, 5),
+    (4, 8),
+    (10, 12)
+)
+
+
+print(resultado)
+
+
+
+#5. Prueba de escritorio
+
+#Objeto creado:
+
+#selector = SelectorRango()
+
+
+#Método crear_rango(1,5)
+
+#Inicio:
+#1
+
+#Fin:
+#5
+
+
+#range(1,6) genera:
+
+#1,2,3,4,5
+
+
+#Resultado:
+
+#(1,2,3,4,5)
+
+
+
+#Método elementos_en_multiples_rangos()
+
+#Datos recibidos:
+
+#(1,5)
+#(4,8)
+#(10,12)
+
+
+#Primer recorrido:
+
+#inicio = 1
+#fin = 5
+
+#Agrega:
+
+#1,2,3,4,5
+
+
+#Segundo recorrido:
+
+#inicio = 4
+#fin = 8
+
+#Agrega:
+
+#4,5,6,7,8
+
+
+#El set elimina repetidos:
+
+#1,2,3,4,5,6,7,8
+
+
+#Tercer recorrido:
+
+#inicio = 10
+#fin = 12
+
+#Agrega:
+
+#10,11,12
+
+
+#Conjunto final:
+
+#{1,2,3,4,5,6,7,8,10,11,12}
+
+
+#Retorna lista:
+
+#[1,2,3,4,5,6,7,8,10,11,12]
+
+#EJERCICIO 14: Combinador de listas
+#Clase CombinadorListas que: (1) tenga método intercalar(lista1, lista2) que retorne una lista alternando elementos de ambas
+#(2) tenga método intercalar_multiples(*listas) que reutilice para varias listas.
+
+
+#1. Entender el problema
+
+#Entrada:
+#Dos listas para combinar.
+#Varias listas para intercalar.
+
+#Proceso:
+#Tomar un elemento de la primera lista.
+#Tomar un elemento de la segunda lista.
+#Repetir hasta terminar una lista.
+#Agregar los elementos restantes si una lista es más larga.
+
+#Salida:
+#Retornar una lista con elementos alternados.
+
+
+#2. Bosquejo a mano
+
+#Crear clase CombinadorListas.
+
+#Método intercalar():
+#Crear lista vacía resultado.
+#Obtener la menor longitud de las listas.
+#Recorrer los índices.
+#Agregar un elemento de cada lista.
+#Agregar sobrantes.
+
+#Método intercalar_multiples():
+#Crear resultado vacío.
+#Recorrer las listas recibidas.
+#Llamar al método intercalar usando self.
+#Retornar resultado.
+
+
+#3. Descubrir el patrón
+
+#Se utiliza len() para conocer tamaños.
+
+#Se utiliza min() porque solo se puede intercalar hasta donde existan
+#elementos en ambas listas.
+
+#Se utiliza extend() para agregar elementos sobrantes.
+
+#Se utiliza *listas porque se reciben cantidades variables de listas.
+
+
+#4. Escribir código
+
+
+class CombinadorListas:
+
+    def intercalar(self, lista1, lista2):
+
+        resultado = []
+
+        longitud = min(len(lista1), len(lista2))
+
+        for i in range(longitud):
+
+            resultado.append(lista1[i])
+
+            resultado.append(lista2[i])
+
+
+        if len(lista1) > longitud:
+
+            resultado.extend(lista1[longitud:])
+
+
+        if len(lista2) > longitud:
+
+            resultado.extend(lista2[longitud:])
+
+
+        return resultado
+
+
+    def intercalar_multiples(self, *listas):
+
+        resultado = []
+
+        for lista in listas:
+
+            resultado = self.intercalar(resultado, lista)
+
+        return resultado
+
+
+
+#Parámetros de prueba
+
+
+combinador = CombinadorListas()
+
+
+lista1 = [1, 2, 3]
+
+lista2 = ["A", "B", "C"]
+
+
+print(combinador.intercalar(lista1, lista2))
+
+
+resultado = combinador.intercalar_multiples(
+    [1, 2],
+    [3, 4],
+    [5, 6]
+)
+
+
+print(resultado)
+
+
+
+#5. Prueba de escritorio
+
+
+#Objeto creado:
+
+#combinador = CombinadorListas()
+
+
+#Prueba 1:
+
+#lista1 = [1,2,3]
+#lista2 = ["A","B","C"]
+
+
+#longitud:
+
+#min(3,3) = 3
+
+
+#Iteraciones:
+
+#i=0:
+#Agrega 1 y "A"
+
+#resultado:
+#[1,"A"]
+
+
+#i=1:
+#Agrega 2 y "B"
+
+#resultado:
+#[1,"A",2,"B"]
+
+
+#i=2:
+#Agrega 3 y "C"
+
+#resultado:
+#[1,"A",2,"B",3,"C"]
+
+
+#Retorna:
+
+#[1,"A",2,"B",3,"C"]
+
+
+
+#Prueba 2:
+
+#intercalar_multiples(
+#[1,2],
+#[3,4],
+#[5,6]
+#)
+
+
+#Primera llamada:
+
+#intercalar([], [1,2])
+
+#resultado:
+
+#[1,2]
+
+
+#Segunda llamada:
+
+#intercalar([1,2],[3,4])
+
+#resultado:
+
+#[1,3,2,4]
+
+
+#Tercera llamada:
+
+#intercalar([1,3,2,4],[5,6])
+
+#resultado final:
+
+#[1,5,3,6,2,4]
+
+#EJERCICIO 14: Mapeo de estudiantes a notas
+
+#Clase RegistroNotas que:
+#(1) tenga método registrar(estudiante, nota) que guarde en un diccionario
+#(2) tenga método estudiantes_aprobados(nota_minima) que retorne lista de estudiantes
+#(3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
+
+
+
+#1. Entender el problema
+
+#Entrada:
+#Nombre del estudiante.
+#Nota del estudiante.
+#Nota mínima para aprobar.
+
+#Proceso:
+#Guardar estudiantes y notas en un diccionario.
+#Recorrer el diccionario para encontrar estudiantes aprobados.
+#Comparar notas para encontrar la mayor calificación.
+
+#Salida:
+#Lista de estudiantes aprobados.
+#Nombre y nota del mejor estudiante.
+
+
+
+#2. Bosquejo a mano
+
+#Crear clase RegistroNotas.
+
+#Crear atributo notas como diccionario vacío.
+
+#Método registrar():
+#Recibir estudiante y nota.
+#Guardar estudiante como clave y nota como valor.
+
+#Método estudiantes_aprobados():
+#Crear lista vacía.
+#Recorrer diccionario.
+#Comparar nota con nota mínima.
+#Agregar estudiante si cumple.
+
+#Método mejor_estudiante():
+#Crear variable para guardar mayor nota.
+#Recorrer diccionario.
+#Comparar notas.
+#Guardar estudiante con mayor nota.
+
+
+
+#3. Descubrir el patrón
+
+#Se utiliza diccionario porque existe una relación:
+
+#Estudiante -> Nota
+
+#Ejemplo:
+
+#{
+#"Juan": 80,
+#"Maria": 95
+#}
+
+
+#Se utiliza items() porque necesitamos la clave y el valor:
+
+#clave = estudiante
+#valor = nota
+
+
+#4. Escribir código
+
+
+class RegistroNotas:
+
+    def __init__(self):
+
+        self.notas = {}
+
+
+    def registrar(self, estudiante, nota):
+
+        self.notas[estudiante] = nota
+
+
+
+    def estudiantes_aprobados(self, nota_minima):
+
+        aprobados = []
+
+        for estudiante, nota in self.notas.items():
+
+            if nota >= nota_minima:
+
+                aprobados.append(estudiante)
+
+        return aprobados
+
+
+
+    def mejor_estudiante(self):
+
+        if len(self.notas) == 0:
+
+            return None
+
+
+        mayor = 0
+
+        estudiante_mayor = None
+
+
+        for estudiante, nota in self.notas.items():
+
+            if nota > mayor:
+
+                mayor = nota
+
+                estudiante_mayor = estudiante
+
+
+        return estudiante_mayor, mayor
+
+
+
+#Parámetros de prueba
+
+
+registro = RegistroNotas()
+
+
+registro.registrar("Carlos", 85)
+
+registro.registrar("Ana", 95)
+
+registro.registrar("Luis", 70)
+
+registro.registrar("Maria", 90)
+
+
+
+print(registro.notas)
+
+
+print(registro.estudiantes_aprobados(80))
+
+
+print(registro.mejor_estudiante())
+
+
+
+#5. Prueba de escritorio
+
+
+#Después de registrar:
+
+#self.notas queda:
+
+#{
+#"Carlos":85,
+#"Ana":95,
+#"Luis":70,
+#"Maria":90
+#}
+
+
+
+#Método estudiantes_aprobados(80)
+
+
+#Carlos:
+#85 >= 80
+#Se agrega.
+
+
+#Ana:
+#95 >= 80
+#Se agrega.
+
+
+#Luis:
+#70 >= 80
+#No se agrega.
+
+
+#Maria:
+#90 >= 80
+#Se agrega.
+
+
+#Resultado:
+
+#["Carlos","Ana","Maria"]
+
+
+
+#Método mejor_estudiante()
+
+
+#mayor = 0
+
+
+#Carlos:
+#85 > 0
+#mayor = 85
+
+
+#Ana:
+#95 > 85
+#mayor = 95
+
+
+#Luis:
+#70 > 95
+#No cambia.
+
+
+#Maria:
+#90 > 95
+#No cambia.
+
+
+#Resultado:
+
+#("Ana",95)
+
+#EJERCICIO 15: Divisores de un número
+
+#Clase DivisorFinder que:
+#(1) tenga método encontrar_divisores(numero) que retorne una tupla con todos los divisores
+#(2) tenga método es_perfecto(numero) que retorne True si la suma de sus divisores (excepto él mismo) es igual a él
+#(3) tenga método encontrar_multiples_divisores(*numeros) que retorne un diccionario {número: tupla_divisores}
+
+
+
+#1. Entender el problema
+
+#Entrada:
+#Un número entero.
+#Varios números enteros.
+
+#Proceso:
+#Encontrar números que dividen exactamente al número original.
+#Guardar los divisores en una tupla.
+#Sumar los divisores excepto el mismo número.
+#Comparar la suma con el número original.
+
+#Salida:
+#Tupla de divisores.
+#True o False si es perfecto.
+#Diccionario con números y sus divisores.
+
+
+
+#2. Bosquejo a mano
+
+#Crear clase DivisorFinder.
+
+#Método encontrar_divisores():
+
+#Crear lista vacía.
+#Recorrer desde 1 hasta el número.
+#Comprobar si el residuo es 0.
+#Guardar divisor.
+#Convertir lista a tupla.
+
+
+#Método es_perfecto():
+
+#Llamar encontrar_divisores().
+#Recorrer divisores.
+#Excluir el mismo número.
+#Sumar divisores.
+#Comparar resultado.
+
+
+#Método encontrar_multiples_divisores():
+
+#Crear diccionario vacío.
+#Recorrer números recibidos con *numeros.
+#Guardar número como clave.
+#Guardar sus divisores como valor.
+
+
+
+#3. Descubrir el patrón
+
+#Se utiliza:
+
+#numero % i == 0
+
+#porque indica que i divide exactamente al número.
+
+
+#Se usa una tupla porque el resultado de divisores no debería modificarse.
+
+
+#Se usa un diccionario porque relaciona:
+
+#Número -> divisores
+
+
+
+#4. Código
+
+
+class DivisorFinder:
+
+    def encontrar_divisores(self, numero):
+
+        divisores = []
+
+        for i in range(1, numero + 1):
+
+            if numero % i == 0:
+
+                divisores.append(i)
+
+        return tuple(divisores)
+
+
+
+    def es_perfecto(self, numero):
+
+        divisores = self.encontrar_divisores(numero)
+
+        suma = 0
+
+
+        for divisor in divisores:
+
+            if divisor != numero:
+
+                suma += divisor
+
+
+        return suma == numero
+
+
+
+    def encontrar_multiples_divisores(self, *numeros):
+
+        resultado = {}
+
+
+        for numero in numeros:
+
+            resultado[numero] = self.encontrar_divisores(numero)
+
+
+        return resultado
+
+
+
+#Parámetros de prueba
+
+
+buscador = DivisorFinder()
+
+
+print(buscador.encontrar_divisores(12))
+
+
+print(buscador.es_perfecto(6))
+
+
+print(buscador.es_perfecto(20))
+
+
+print(
+    buscador.encontrar_multiples_divisores(
+        6,
+        10,
+        12,
+        28
+    )
+)
+
+
+
+#5. Prueba de escritorio
+
+
+#Prueba 1:
+
+#numero = 12
+
+
+#Recorrido:
+
+#i=1 -> 12 % 1 == 0 -> guarda 1
+#i=2 -> guarda 2
+#i=3 -> guarda 3
+#i=4 -> guarda 4
+#i=5 -> no guarda
+#i=6 -> guarda 6
+#...
+#i=12 -> guarda 12
+
+
+#Resultado:
+
+#(1,2,3,4,6,12)
+
+
+
+#Prueba 2:
+
+#numero = 6
+
+
+#Divisores:
+
+#(1,2,3,6)
+
+
+#Se excluye 6:
+
+#1+2+3 = 6
+
+
+#Resultado:
+
+#True
+
+
+
+#Prueba 3:
+
+#numero = 20
+
+
+#Divisores:
+
+#(1,2,4,5,10,20)
+
+
+#Sin el mismo número:
+
+#1+2+4+5+10 = 22
+
+
+#22 != 20
+
+
+#Resultado:
+
+#False
+

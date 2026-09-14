@@ -1499,23 +1499,24 @@ def es_consonante(self, letra):
     return False
 
 
+
 #CAMBIO 4: Reemplazar isdigit() e isalpha()
 #En contar_por_tipo() cambiar:
 
-elif letra.isdigit():
+#elif letra.isdigit():
 
 #por:
 
-elif self.es_digito(letra):
+#elif self.es_digito(letra):
 
 
 #Y cambiar:
 
-elif letra.isalpha():
+##elif letra.isalpha():
 
 #por:
 
-elif self.es_consonante(letra):
+#elif self.es_consonante(letra):
 
 
 
@@ -1720,6 +1721,1789 @@ def separar_caracteres(self, texto):
         "letras": letras,
         "numeros": numeros
     }
+#EJERCICIO 10: Gestor de tareas con prioridad
+#Clase Tareas que: (1) tenga método agregar_tarea(descripcion, prioridad) que guarde en una lista de tuplas (descripción, prioridad)
+#(2) tenga método tareas_prioritarias() que retorne solo las de prioridad alta
+#(3) tenga método eliminar_completada(descripcion) que borre la tarea de la lista.
+class Tareas:
+
+    def __init__(self):
+
+        self.lista_tuplas = []
+
+
+    def agregar_tarea(self, descripcion, prioridad):
+
+        tarea = (descripcion, prioridad)
+
+        self.lista_tuplas.append(tarea)
+
+
+    def tareas_prioritarias(self):
+
+        prioritarias = []
+
+        for descripcion, prioridad in self.lista_tuplas:
+
+            if prioridad.lower() == "alta":
+
+                prioritarias.append(descripcion)
+
+        if len(prioritarias) == 0:
+
+            return "No hay actividades con prioridad alta registradas"
+
+        return prioritarias
+
+
+    def eliminar_completada(self, descripcion):
+
+        for desc, prioridad in self.lista_tuplas:
+
+            if desc == descripcion:
+
+                self.lista_tuplas.remove((desc, prioridad))
+
+                return True
+
+        return False
+
+#CAMBIO 1: Método cantidad_tareas()
+#Retorna la cantidad total de tareas registradas.
+
+def cantidad_tareas(self):
+
+    return len(self.lista_tuplas)
+
+
+
+#CAMBIO 2: Método mostrar_tareas()
+#Retorna todas las tareas registradas.
+
+def mostrar_tareas(self):
+
+    return self.lista_tuplas
+
+
+
+#CAMBIO 3: Método buscar_tarea()
+#Busca una tarea por su descripción.
+
+def buscar_tarea(self, descripcion):
+
+    for desc, prioridad in self.lista_tuplas:
+
+        if desc == descripcion:
+
+            return (desc, prioridad)
+
+    return None
+
+
+
+#CAMBIO 4: Método cambiar_prioridad()
+#Cambia la prioridad de una tarea existente.
+
+def cambiar_prioridad(self, descripcion, nueva_prioridad):
+
+    for i in range(len(self.lista_tuplas)):
+
+        desc, prioridad = self.lista_tuplas[i]
+
+        if desc == descripcion:
+
+            self.lista_tuplas[i] = (desc, nueva_prioridad)
+
+            return True
+
+    return False
+
+
+
+#CAMBIO 5: Método eliminar_todas()
+#Elimina todas las tareas registradas.
+
+def eliminar_todas(self):
+
+    self.lista_tuplas.clear()
+
+
+
+#CAMBIO 6: Método tareas_por_prioridad()
+#Retorna todas las tareas de una prioridad indicada.
+
+def tareas_por_prioridad(self, prioridad_busqueda):
+
+    lista = []
+
+    for descripcion, prioridad in self.lista_tuplas:
+
+        if prioridad.lower() == prioridad_busqueda.lower():
+
+            lista.append(descripcion)
+
+    return lista
+
+
+
+#CAMBIO 7: Método existe_tarea()
+#Comprueba si una tarea ya está registrada.
+
+def existe_tarea(self, descripcion):
+
+    for desc, prioridad in self.lista_tuplas:
+
+        if desc == descripcion:
+
+            return True
+
+    return False
+
+
+
+#CAMBIO 8: Método cantidad_por_prioridad()
+#Cuenta cuántas tareas hay de prioridad Alta, Media y Baja.
+
+def cantidad_por_prioridad(self):
+
+    contador = {
+        "Alta": 0,
+        "Media": 0,
+        "Baja": 0
+    }
+
+    for descripcion, prioridad in self.lista_tuplas:
+
+        contador[prioridad.capitalize()] += 1
+
+    return contador
+
+
+
+#CAMBIO 9: Método primera_tarea()
+#Retorna la primera tarea registrada.
+
+def primera_tarea(self):
+
+    if len(self.lista_tuplas) == 0:
+
+        return None
+
+    return self.lista_tuplas[0]
+
+
+
+#CAMBIO 10: Método ultima_tarea()
+#Retorna la última tarea registrada.
+
+def ultima_tarea(self):
+
+    if len(self.lista_tuplas) == 0:
+
+        return None
+
+    return self.lista_tuplas[-1]
+
+
+
+#CAMBIO 11: Método ordenar_por_prioridad()
+#Ordena las tareas alfabéticamente por prioridad.
+
+def ordenar_por_prioridad(self):
+
+    return sorted(self.lista_tuplas, key=lambda tarea: tarea[1])
+
+
+
+#CAMBIO 12: Método descripcion_mas_larga()
+#Retorna la descripción con mayor cantidad de caracteres.
+
+def descripcion_mas_larga(self):
+
+    if len(self.lista_tuplas) == 0:
+
+        return None
+
+    mayor = self.lista_tuplas[0][0]
+
+    for descripcion, prioridad in self.lista_tuplas:
+
+        if len(descripcion) > len(mayor):
+
+            mayor = descripcion
+
+    return mayor
+
+
+
+#CAMBIO 13: Método eliminar_por_prioridad()
+#Elimina todas las tareas de una prioridad indicada.
+
+def eliminar_por_prioridad(self, prioridad_busqueda):
+
+    nuevas = []
+
+    for descripcion, prioridad in self.lista_tuplas:
+
+        if prioridad.lower() != prioridad_busqueda.lower():
+
+            nuevas.append((descripcion, prioridad))
+
+    self.lista_tuplas = nuevas
+
+
+
+#CAMBIO 14: Método cantidad_prioritarias()
+#Retorna cuántas tareas tienen prioridad alta.
+
+def cantidad_prioritarias(self):
+
+    contador = 0
+
+    for descripcion, prioridad in self.lista_tuplas:
+
+        if prioridad.lower() == "alta":
+
+            contador += 1
+
+    return contador
+
+
+
+#CAMBIO 15: Método actualizar_descripcion()
+#Modifica la descripción de una tarea.
+
+def actualizar_descripcion(self, descripcion, nueva_descripcion):
+
+    for i in range(len(self.lista_tuplas)):
+
+        desc, prioridad = self.lista_tuplas[i]
+
+        if desc == descripcion:
+
+            self.lista_tuplas[i] = (nueva_descripcion, prioridad)
+
+            return True
+
+    return False
+
+#EJERCICIO 11: Contador de frecuencia
+#Clase ContadorFrecuencia que: (1) tenga método agregar_elemento(elemento) que guarde en un diccionario contando repeticiones
+#(2) tenga método elemento_mas_frecuente() que retorne el elemento con mayor frecuencia
+#(3) tenga método frecuencia_elemento(elemento) que retorne cuántas veces aparece.
+
+class ContadoeFrecuencia:
+    def __init__(self):
+        self.frecuencias = {}
+
+    def agregar_elemento(self, elemento):
+        if elemento in self.frecuencias:
+            self.frecuencias[elemento] += 1
+        else:
+            self.frecuencias[elemento] = 1
+
+    def elemento_mas_frecuente(self):
+        return max(self.frecuencias, key=self.frecuencias.get)
+
+    def frecuencia_elemento(self, elemento):
+        if elemento in self.frecuencias:
+            return self.frecuencias[elemento]
+        return 0
+
+#CAMBIO 1: Método elemento_mas_frecuente()
+#Versión manual sin utilizar max().
+
+def elemento_mas_frecuente(self):
+
+    mayor = 0
+
+    elemento = None
+
+    for clave, valor in self.frecuencias.items():
+
+        if valor > mayor:
+
+            mayor = valor
+
+            elemento = clave
+
+    return elemento
+
+
+
+#CAMBIO 2: Método frecuencia_elemento()
+#Versión manual sin utilizar get().
+
+def frecuencia_elemento(self, elemento):
+
+    if elemento in self.frecuencias:
+
+        return self.frecuencias[elemento]
+
+    return 0
+
+
+
+#CAMBIO 3: Método cantidad_elementos()
+#Retorna cuántos elementos diferentes existen.
+
+def cantidad_elementos(self):
+
+    return len(self.frecuencias)
+
+
+
+#CAMBIO 4: Método mostrar_frecuencias()
+#Retorna el diccionario completo.
+
+def mostrar_frecuencias(self):
+
+    return self.frecuencias
+
+
+
+#CAMBIO 5: Método eliminar_elemento()
+#Elimina un elemento del diccionario.
+
+def eliminar_elemento(self, elemento):
+
+    if elemento in self.frecuencias:
+
+        del self.frecuencias[elemento]
+
+        return True
+
+    return False
+
+
+
+#CAMBIO 6: Método reiniciar()
+#Vacía completamente el diccionario.
+
+def reiniciar(self):
+
+    self.frecuencias.clear()
+
+
+
+#CAMBIO 7: Método existe_elemento()
+#Comprueba si un elemento está registrado.
+
+def existe_elemento(self, elemento):
+
+    return elemento in self.frecuencias
+
+
+
+#CAMBIO 8: Método elementos_repetidos()
+#Retorna una lista de los elementos cuya frecuencia sea mayor que 1.
+
+def elementos_repetidos(self):
+
+    repetidos = []
+
+    for elemento, frecuencia in self.frecuencias.items():
+
+        if frecuencia > 1:
+
+            repetidos.append(elemento)
+
+    return repetidos
+
+
+
+#CAMBIO 9: Método elementos_unicos()
+#Retorna una lista de los elementos que aparecen una sola vez.
+
+def elementos_unicos(self):
+
+    unicos = []
+
+    for elemento, frecuencia in self.frecuencias.items():
+
+        if frecuencia == 1:
+
+            unicos.append(elemento)
+
+    return unicos
+
+
+
+#CAMBIO 10: Método suma_frecuencias()
+#Retorna la suma de todas las frecuencias.
+
+def suma_frecuencias(self):
+
+    return sum(self.frecuencias.values())
+
+
+
+#CAMBIO 11: Método menor_frecuencia()
+#Retorna el elemento con menor frecuencia usando min().
+
+def menor_frecuencia(self):
+
+    return min(self.frecuencias, key=self.frecuencias.get)
+
+
+
+#CAMBIO 12: Método menor_frecuencia()
+#Versión manual sin utilizar min().
+
+def menor_frecuencia(self):
+
+    menor = None
+
+    elemento = None
+
+    for clave, valor in self.frecuencias.items():
+
+        if menor is None or valor < menor:
+
+            menor = valor
+
+            elemento = clave
+
+    return elemento
+
+
+
+#CAMBIO 13: Método ordenar_frecuencias()
+#Ordena de mayor a menor frecuencia.
+
+def ordenar_frecuencias(self):
+
+    return sorted(self.frecuencias.items(), key=lambda dato: dato[1], reverse=True)
+
+
+
+#CAMBIO 14: Método promedio_frecuencias()
+#Retorna el promedio de las frecuencias.
+
+def promedio_frecuencias(self):
+
+    if len(self.frecuencias) == 0:
+
+        return 0
+
+    return sum(self.frecuencias.values()) / len(self.frecuencias)
+
+
+
+#CAMBIO 15: Método elemento_menos_frecuente()
+#Retorna el elemento con menor frecuencia utilizando lógica manual.
+
+def elemento_menos_frecuente(self):
+
+    menor = None
+
+    elemento = None
+
+    for clave, valor in self.frecuencias.items():
+
+        if menor is None or valor < menor:
+
+            menor = valor
+
+            elemento = clave
+
+    return elemento
+
+#EJERCICIO 12: Selector de rango con tuplas
+#Clase SelectorRango que: (1) tenga método crear_rango(inicio, fin) que retorne una tupla con números en ese rango
+#(2) tenga método elementos_en_multiples_rangos(*rangos) que reciba múltiples tuplas (inicio,fin) y retorne una lista combinada sin duplicados usando un conjunto.
+
+
+class SelectorRango:
+
+    def crear_rango(self, inicio, fin):
+
+        return tuple(range(inicio, fin + 1))
+
+
+    def elementos_en_multiples_rangos(self, *rangos):
+
+        conjunto = set()
+
+        for inicio, fin in rangos:
+
+            for numero in range(inicio, fin + 1):
+
+                conjunto.add(numero)
+
+        return list(conjunto)
+
+#CAMBIO 1: Método crear_rango()
+#Versión manual sin utilizar range().
+
+def crear_rango(self, inicio, fin):
+
+    numeros = []
+
+    while inicio <= fin:
+
+        numeros.append(inicio)
+
+        inicio += 1
+
+    return tuple(numeros)
+
+
+
+#CAMBIO 2: Método elementos_en_multiples_rangos()
+#Versión manual sin utilizar set() directamente para eliminar duplicados.
+
+def elementos_en_multiples_rangos(self, *rangos):
+
+    lista = []
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            if numero not in lista:
+
+                lista.append(numero)
+
+    return lista
+
+
+
+#CAMBIO 3: Método buscar_elemento()
+#Indica si un número pertenece a alguno de los rangos.
+
+def buscar_elemento(self, numero_buscar, *rangos):
+
+    for inicio, fin in rangos:
+
+        if numero_buscar >= inicio and numero_buscar <= fin:
+
+            return True
+
+    return False
+
+
+
+#CAMBIO 4: Método cantidad_elementos()
+#Retorna la cantidad de números sin repetir.
+
+def cantidad_elementos(self, *rangos):
+
+    conjunto = set()
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            conjunto.add(numero)
+
+    return len(conjunto)
+
+
+
+#CAMBIO 5: Método rango_mayor()
+#Retorna la tupla con el rango más grande.
+
+def rango_mayor(self, *rangos):
+
+    mayor = 0
+
+    rango_mayor = None
+
+    for inicio, fin in rangos:
+
+        cantidad = fin - inicio + 1
+
+        if cantidad > mayor:
+
+            mayor = cantidad
+
+            rango_mayor = (inicio, fin)
+
+    return rango_mayor
+
+
+
+#CAMBIO 6: Método rango_menor()
+#Retorna la tupla con menos elementos.
+
+def rango_menor(self, *rangos):
+
+    menor = None
+
+    resultado = None
+
+    for inicio, fin in rangos:
+
+        cantidad = fin - inicio + 1
+
+        if menor is None or cantidad < menor:
+
+            menor = cantidad
+
+            resultado = (inicio, fin)
+
+    return resultado
+
+
+
+#CAMBIO 7: Método suma_elementos()
+#Suma todos los números de los rangos sin repetir.
+
+def suma_elementos(self, *rangos):
+
+    conjunto = set()
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            conjunto.add(numero)
+
+    suma = 0
+
+    for numero in conjunto:
+
+        suma += numero
+
+    return suma
+
+
+
+#CAMBIO 8: Método elementos_pares()
+#Retorna únicamente los números pares.
+
+def elementos_pares(self, *rangos):
+
+    pares = []
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            if numero % 2 == 0 and numero not in pares:
+
+                pares.append(numero)
+
+    return pares
+
+
+
+#CAMBIO 9: Método elementos_impares()
+#Retorna únicamente los números impares.
+
+def elementos_impares(self, *rangos):
+
+    impares = []
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            if numero % 2 != 0 and numero not in impares:
+
+                impares.append(numero)
+
+    return impares
+
+
+
+#CAMBIO 10: Método ordenar_elementos()
+#Retorna los elementos ordenados.
+
+def ordenar_elementos(self, *rangos):
+
+    elementos = self.elementos_en_multiples_rangos(*rangos)
+
+    return sorted(elementos)
+
+
+
+#CAMBIO 11: Método invertir_resultado()
+#Retorna los elementos en orden inverso.
+
+def invertir_resultado(self, *rangos):
+
+    elementos = self.elementos_en_multiples_rangos(*rangos)
+
+    elementos.reverse()
+
+    return elementos
+
+
+
+#CAMBIO 12: Método rango_contiene()
+#Comprueba si un rango contiene un número.
+
+def rango_contiene(self, inicio, fin, numero):
+
+    if numero >= inicio and numero <= fin:
+
+        return True
+
+    return False
+
+
+
+#CAMBIO 13: Método unir_rangos_manual()
+#Une rangos sin utilizar set().
+
+def unir_rangos_manual(self, *rangos):
+
+    lista = []
+
+    for inicio, fin in rangos:
+
+        for numero in range(inicio, fin + 1):
+
+            if numero not in lista:
+
+                lista.append(numero)
+
+    return lista
+
+
+
+#CAMBIO 14: Método promedio_elementos()
+#Retorna el promedio de los elementos.
+
+def promedio_elementos(self, *rangos):
+
+    elementos = self.elementos_en_multiples_rangos(*rangos)
+
+    if len(elementos) == 0:
+
+        return 0
+
+    suma = 0
+
+    for numero in elementos:
+
+        suma += numero
+
+    return suma / len(elementos)
+
+
+
+#CAMBIO 15: Método mayor_elemento()
+#Retorna el número más grande usando lógica manual.
+
+def mayor_elemento(self, *rangos):
+
+    elementos = self.elementos_en_multiples_rangos(*rangos)
+
+    mayor = elementos[0]
+
+    for numero in elementos:
+
+        if numero > mayor:
+
+            mayor = numero
+
+    return mayor
+
+#EJERCICIO 14: Combinador de listas
+#Clase CombinadorListas que: (1) tenga método intercalar(lista1, lista2) que retorne una lista alternando elementos de ambas
+#(2) tenga método intercalar_multiples(*listas) que reutilice para varias listas.
+
+class CombinadorListas:
+
+    def intercalar(self, lista1, lista2):
+
+        resultado = []
+
+        longitud = min(len(lista1), len(lista2))
+
+        for i in range(longitud):
+
+            resultado.append(lista1[i])
+
+            resultado.append(lista2[i])
+
+        # Si una lista tiene más elementos que la otra
+
+        if len(lista1) > longitud:
+
+            resultado.extend(lista1[longitud:])
+
+
+        if len(lista2) > longitud:
+
+            resultado.extend(lista2[longitud:])
+
+
+        return resultado
+
+
+    def intercalar_multiples(self, *listas):
+
+        resultado = []
+
+        for lista in listas:
+
+            resultado = self.intercalar(resultado, lista)
+
+        return resultado
+
+# POSIBLES CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO 14: Combinador de listas
+
+
+# CAMBIO 1: Intercalar de forma manual sin usar min()
+
+def intercalar(self, lista1, lista2):
+
+    resultado = []
+
+    i = 0
+
+    while i < len(lista1) and i < len(lista2):
+
+        resultado.append(lista1[i])
+
+        resultado.append(lista2[i])
+
+        i += 1
+
+
+    while i < len(lista1):
+
+        resultado.append(lista1[i])
+
+        i += 1
+
+
+    while i < len(lista2):
+
+        resultado.append(lista2[i])
+
+        i += 1
+
+
+    return resultado
+
+
+
+# CAMBIO 2: Intercalar múltiples listas con lógica más manual
+# (sin reutilizar intercalar)
+
+def intercalar_multiples(self, *listas):
+
+    resultado = []
+
+    mayor = 0
+
+    for lista in listas:
+
+        if len(lista) > mayor:
+
+            mayor = len(lista)
+
+
+    for i in range(mayor):
+
+        for lista in listas:
+
+            if i < len(lista):
+
+                resultado.append(lista[i])
+
+
+    return resultado
+
+
+
+# CAMBIO 3: Método unir_listas()
+# Une varias listas sin alternar.
+
+def unir_listas(self, *listas):
+
+    resultado = []
+
+    for lista in listas:
+
+        resultado.extend(lista)
+
+    return resultado
+
+
+
+# CAMBIO 4: Método eliminar_repetidos()
+# Retorna una lista sin elementos repetidos.
+
+def eliminar_repetidos(self, lista):
+
+    resultado = []
+
+    for elemento in lista:
+
+        if elemento not in resultado:
+
+            resultado.append(elemento)
+
+    return resultado
+
+
+
+# CAMBIO 5: Método elementos_comunes()
+# Encuentra elementos que aparecen en ambas listas.
+
+def elementos_comunes(self, lista1, lista2):
+
+    comunes = []
+
+    for elemento in lista1:
+
+        if elemento in lista2:
+
+            comunes.append(elemento)
+
+    return comunes
+
+
+
+# CAMBIO 6: Método diferencia_listas()
+# Elementos que están en la primera lista pero no en la segunda.
+
+def diferencia_listas(self, lista1, lista2):
+
+    diferencia = []
+
+    for elemento in lista1:
+
+        if elemento not in lista2:
+
+            diferencia.append(elemento)
+
+    return diferencia
+
+
+
+# CAMBIO 7: Método invertir_lista()
+# Invierte una lista manualmente.
+
+def invertir_lista(self, lista):
+
+    invertida = []
+
+    for i in range(len(lista)-1, -1, -1):
+
+        invertida.append(lista[i])
+
+    return invertida
+
+
+
+# CAMBIO 8: Método contar_elementos()
+# Cuenta cuántos elementos tiene una lista.
+
+def contar_elementos(self, lista):
+
+    contador = 0
+
+    for elemento in lista:
+
+        contador += 1
+
+    return contador
+
+
+
+# CAMBIO 9: Método buscar_elemento()
+# Verifica si un elemento existe.
+
+def buscar_elemento(self, lista, elemento):
+
+    for dato in lista:
+
+        if dato == elemento:
+
+            return True
+
+    return False
+
+
+
+# CAMBIO 10: Método posicion_elemento()
+# Retorna la posición de un elemento.
+
+def posicion_elemento(self, lista, elemento):
+
+    for i in range(len(lista)):
+
+        if lista[i] == elemento:
+
+            return i
+
+    return -1
+
+
+
+# CAMBIO 11: Método lista_mayor()
+# Retorna la lista con más elementos.
+
+def lista_mayor(self, *listas):
+
+    mayor = listas[0]
+
+    for lista in listas:
+
+        if len(lista) > len(mayor):
+
+            mayor = lista
+
+    return mayor
+
+
+
+# CAMBIO 12: Método lista_menor()
+# Retorna la lista con menos elementos.
+
+def lista_menor(self, *listas):
+
+    menor = listas[0]
+
+    for lista in listas:
+
+        if len(lista) < len(menor):
+
+            menor = lista
+
+    return menor
+
+
+
+# CAMBIO 13: Método ordenar_lista()
+# Ordena una lista.
+
+def ordenar_lista(self, lista):
+
+    return sorted(lista)
+
+
+
+# CAMBIO 14: Método separar_pares_impares()
+# Divide una lista numérica.
+
+def separar_pares_impares(self, lista):
+
+    pares = []
+
+    impares = []
+
+    for numero in lista:
+
+        if numero % 2 == 0:
+
+            pares.append(numero)
+
+        else:
+
+            impares.append(numero)
+
+    return pares, impares
+
+
+
+# CAMBIO 15: Método intercalar_tres_listas()
+# Ejemplo específico para tres listas.
+
+def intercalar_tres_listas(self, lista1, lista2, lista3):
+
+    resultado = []
+
+    mayor = max(len(lista1), len(lista2), len(lista3))
+
+
+    for i in range(mayor):
+
+        if i < len(lista1):
+
+            resultado.append(lista1[i])
+
+        if i < len(lista2):
+
+            resultado.append(lista2[i])
+
+        if i < len(lista3):
+
+            resultado.append(lista3[i])
+
+
+    return resultado
+
+#EJERCICIO 14: Mapeo de estudiantes a notas
+
+#Clase RegistroNotas que:
+#(1) tenga método registrar(estudiante, nota) que guarde en un diccionario
+#(2) tenga método estudiantes_aprobados(nota_minima) que retorne lista de estudiantes
+#(3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
+
+
+class RegistroNotas:
+
+    def __init__(self):
+
+        self.notas = {}
+
+
+    def registrar(self, estudiante, nota):
+
+        self.notas[estudiante] = nota
+
+
+
+    def estudiantes_aprobados(self, nota_minima):
+
+        aprobados = []
+
+        for estudiante, nota in self.notas.items():
+
+            if nota >= nota_minima:
+
+                aprobados.append(estudiante)
+
+        return aprobados
+
+
+
+    def mejor_estudiante(self):
+
+        if len(self.notas) == 0:
+
+            return None
+
+        mayor = 0
+
+        estudiante_mayor = None
+
+
+        for estudiante, nota in self.notas.items():
+
+            if nota > mayor:
+
+                mayor = nota
+
+                estudiante_mayor = estudiante
+
+
+        return estudiante_mayor, mayor
+
+# POSIBLES CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO: Mapeo de estudiantes a notas
+
+
+# CAMBIO 1: Registrar varias notas
+# Permite ingresar varios estudiantes al mismo tiempo.
+
+def registrar_multiples(self, **estudiantes):
+
+    for nombre, nota in estudiantes.items():
+
+        self.notas[nombre] = nota
+
+
+
+# Ejemplo:
+# registro.registrar_multiples(
+#     Juan=80,
+#     Maria=95,
+#     Pedro=70
+# )
+
+
+
+# CAMBIO 2: Buscar nota de un estudiante
+
+def buscar_nota(self, estudiante):
+
+    if estudiante in self.notas:
+
+        return self.notas[estudiante]
+
+    return "Estudiante no registrado"
+
+
+
+# CAMBIO 3: Modificar nota existente
+
+def modificar_nota(self, estudiante, nueva_nota):
+
+    if estudiante in self.notas:
+
+        self.notas[estudiante] = nueva_nota
+
+        return True
+
+    return False
+
+
+
+# CAMBIO 4: Eliminar estudiante
+
+def eliminar_estudiante(self, estudiante):
+
+    if estudiante in self.notas:
+
+        del self.notas[estudiante]
+
+        return True
+
+    return False
+
+
+
+# CAMBIO 5: Promedio general de notas
+
+def promedio_notas(self):
+
+    if len(self.notas) == 0:
+
+        return 0
+
+
+    suma = 0
+
+    for nota in self.notas.values():
+
+        suma += nota
+
+
+    return suma / len(self.notas)
+
+
+
+# CAMBIO 6: Contar aprobados
+
+def cantidad_aprobados(self, nota_minima):
+
+    contador = 0
+
+    for nota in self.notas.values():
+
+        if nota >= nota_minima:
+
+            contador += 1
+
+    return contador
+
+
+
+# CAMBIO 7: Contar reprobados
+
+def cantidad_reprobados(self, nota_minima):
+
+    contador = 0
+
+    for nota in self.notas.values():
+
+        if nota < nota_minima:
+
+            contador += 1
+
+    return contador
+
+
+
+# CAMBIO 8: Retornar estudiante con menor nota
+
+def peor_estudiante(self):
+
+    if len(self.notas) == 0:
+
+        return None
+
+
+    menor = None
+
+    estudiante_menor = None
+
+
+    for estudiante, nota in self.notas.items():
+
+        if menor is None or nota < menor:
+
+            menor = nota
+
+            estudiante_menor = estudiante
+
+
+    return estudiante_menor, menor
+
+
+
+# CAMBIO 9: Lista ordenada de estudiantes por nota
+
+def ordenar_por_nota(self):
+
+    return sorted(
+        self.notas.items(),
+        key=lambda estudiante: estudiante[1],
+        reverse=True
+    )
+
+
+
+# CAMBIO 10: Separar aprobados y reprobados
+
+def clasificar_estudiantes(self, nota_minima):
+
+    aprobados = []
+
+    reprobados = []
+
+
+    for estudiante, nota in self.notas.items():
+
+        if nota >= nota_minima:
+
+            aprobados.append(estudiante)
+
+        else:
+
+            reprobados.append(estudiante)
+
+
+    return aprobados, reprobados
+
+
+
+# CAMBIO 11: Nota más repetida
+
+def nota_mas_comun(self):
+
+    frecuencia = {}
+
+
+    for nota in self.notas.values():
+
+        if nota in frecuencia:
+
+            frecuencia[nota] += 1
+
+        else:
+
+            frecuencia[nota] = 1
+
+
+    mayor = 0
+
+    nota_repetida = None
+
+
+    for nota, cantidad in frecuencia.items():
+
+        if cantidad > mayor:
+
+            mayor = cantidad
+
+            nota_repetida = nota
+
+
+    return nota_repetida
+
+
+
+# CAMBIO 12: Buscar estudiantes con una nota exacta
+
+def estudiantes_con_nota(self, nota_buscar):
+
+    estudiantes = []
+
+
+    for estudiante, nota in self.notas.items():
+
+        if nota == nota_buscar:
+
+            estudiantes.append(estudiante)
+
+
+    return estudiantes
+
+
+
+# CAMBIO 13: Aumentar puntos a todos los estudiantes
+
+def subir_nota(self, puntos):
+
+    for estudiante in self.notas:
+
+        self.notas[estudiante] += puntos
+
+
+
+# CAMBIO 14: Mostrar todos los estudiantes
+
+def mostrar_estudiantes(self):
+
+    lista = []
+
+
+    for estudiante, nota in self.notas.items():
+
+        lista.append(
+            (estudiante, nota)
+        )
+
+
+    return lista
+
+
+
+# CAMBIO 15: Mejor estudiante usando max()
+
+def mejor_estudiante_max(self):
+
+    if len(self.notas) == 0:
+
+        return None
+
+
+    estudiante = max(
+        self.notas,
+        key=self.notas.get
+    )
+
+
+    return estudiante, self.notas[estudiante]
+
+#EJERCICIO 15: Divisores de un número
+
+#Clase DivisorFinder que:
+#(1) tenga método encontrar_divisores(numero) que retorne una tupla con todos los divisores
+#(2) tenga método es_perfecto(numero) que retorne True si la suma de sus divisores (excepto él mismo) es igual a él
+#(3) tenga método encontrar_multiples_divisores(*numeros) que retorne un diccionario {número: tupla_divisores}.
+
+
+
+class DivisorFinder:
+
+    def encontrar_divisores(self, numero):
+
+        divisores = []
+
+        for i in range(1, numero + 1):
+
+            if numero % i == 0:
+
+                divisores.append(i)
+
+        return tuple(divisores)
+
+
+
+    def es_perfecto(self, numero):
+
+        divisores = self.encontrar_divisores(numero)
+
+        suma = 0
+
+        for divisor in divisores:
+
+            if divisor != numero:
+
+                suma += divisor
+
+
+        return suma == numero
+
+
+
+    def encontrar_multiples_divisores(self, *numeros):
+
+        resultado = {}
+
+
+        for numero in numeros:
+
+            resultado[numero] = self.encontrar_divisores(numero)
+
+
+        return resultado
+
+# POSIBLES CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO 15: Divisores de un número
+
+
+# CAMBIO 1: Encontrar divisores sin incluir el mismo número
+# Retorna solamente divisores propios.
+
+def encontrar_divisores_propios(self, numero):
+
+    divisores = []
+
+    for i in range(1, numero):
+
+        if numero % i == 0:
+
+            divisores.append(i)
+
+    return tuple(divisores)
+
+
+
+# CAMBIO 2: Encontrar divisores usando lógica más eficiente
+# Solo recorre hasta la mitad del número.
+
+def encontrar_divisores_optimizado(self, numero):
+
+    divisores = []
+
+    for i in range(1, numero // 2 + 1):
+
+        if numero % i == 0:
+
+            divisores.append(i)
+
+
+    divisores.append(numero)
+
+    return tuple(divisores)
+
+
+
+# CAMBIO 3: Contar cantidad de divisores
+
+def cantidad_divisores(self, numero):
+
+    divisores = self.encontrar_divisores(numero)
+
+    return len(divisores)
+
+
+
+# CAMBIO 4: Encontrar el divisor más grande
+
+def mayor_divisor(self, numero):
+
+    divisores = self.encontrar_divisores(numero)
+
+    mayor = 0
+
+
+    for divisor in divisores:
+
+        if divisor > mayor:
+
+            mayor = divisor
+
+
+    return mayor
+
+
+
+# CAMBIO 5: Encontrar el menor divisor diferente de 1
+
+def menor_divisor(self, numero):
+
+    for i in range(2, numero + 1):
+
+        if numero % i == 0:
+
+            return i
+
+
+
+# CAMBIO 6: Verificar si un número es primo
+
+def es_primo(self, numero):
+
+    cantidad = 0
+
+
+    for i in range(1, numero + 1):
+
+        if numero % i == 0:
+
+            cantidad += 1
+
+
+    return cantidad == 2
+
+
+
+# CAMBIO 7: Encontrar números primos dentro de varios números
+
+def filtrar_primos(self, *numeros):
+
+    primos = []
+
+
+    for numero in numeros:
+
+        if self.es_primo(numero):
+
+            primos.append(numero)
+
+
+    return primos
+
+
+
+# CAMBIO 8: Sumar todos los divisores
+
+def suma_divisores(self, numero):
+
+    divisores = self.encontrar_divisores(numero)
+
+    suma = 0
+
+
+    for divisor in divisores:
+
+        suma += divisor
+
+
+    return suma
+
+
+
+# CAMBIO 9: Verificar si es abundante
+# La suma de divisores propios es mayor que el número.
+
+def es_abundante(self, numero):
+
+    divisores = self.encontrar_divisores(numero)
+
+    suma = 0
+
+
+    for divisor in divisores:
+
+        if divisor != numero:
+
+            suma += divisor
+
+
+    return suma > numero
+
+
+
+# CAMBIO 10: Verificar si es deficiente
+# La suma de divisores propios es menor que el número.
+
+def es_deficiente(self, numero):
+
+    divisores = self.encontrar_divisores(numero)
+
+    suma = 0
+
+
+    for divisor in divisores:
+
+        if divisor != numero:
+
+            suma += divisor
+
+
+    return suma < numero
+
+
+
+# CAMBIO 11: Buscar números perfectos dentro de varios números
+
+def perfectos_en_lista(self, *numeros):
+
+    perfectos = []
+
+
+    for numero in numeros:
+
+        if self.es_perfecto(numero):
+
+            perfectos.append(numero)
+
+
+    return perfectos
+
+
+
+# CAMBIO 12: Encontrar divisores comunes entre dos números
+
+def divisores_comunes(self, numero1, numero2):
+
+    comunes = []
+
+    divisores1 = self.encontrar_divisores(numero1)
+
+    divisores2 = self.encontrar_divisores(numero2)
+
+
+    for divisor in divisores1:
+
+        if divisor in divisores2:
+
+            comunes.append(divisor)
+
+
+    return tuple(comunes)
+
+
+
+# CAMBIO 13: Encontrar máximo común divisor (MCD) manual
+
+def mcd(self, numero1, numero2):
+
+    comunes = self.divisores_comunes(numero1, numero2)
+
+    mayor = 0
+
+
+    for divisor in comunes:
+
+        if divisor > mayor:
+
+            mayor = divisor
+
+
+    return mayor
+
+
+
+# CAMBIO 14: Factorización prima básica
+
+def factores_primos(self, numero):
+
+    factores = []
+
+
+    divisor = 2
+
+
+    while numero > 1:
+
+        if numero % divisor == 0:
+
+            factores.append(divisor)
+
+            numero = numero // divisor
+
+        else:
+
+            divisor += 1
+
+
+    return tuple(factores)
+
+
+
+# CAMBIO 15: Encontrar múltiplos de un número
+
+def encontrar_multiplos(self, numero, limite):
+
+    multiplos = []
+
+
+    for i in range(1, limite + 1):
+
+        if i % numero == 0:
+
+            multiplos.append(i)
+
+
+    return tuple(multiplos)
+
+  
 
 # LISTAS (list)
 
