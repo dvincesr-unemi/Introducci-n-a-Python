@@ -2616,3 +2616,1985 @@ print(
 
 #False
 
+#EJERCICIO 16: Codificador/Decodificador
+
+#Clase CodificadorCesar que:
+#(1) tenga método codificar_letra(letra, desplazamiento) que retorne la letra desplazada en el alfabeto (usar operador %)
+#(2) tenga método codificar_palabra(palabra, desplazamiento) que reutilice para toda la palabra
+#(3) tenga un diccionario como atributo para historial de codificaciones.
+
+
+
+#1. Entender el problema
+
+#Entrada:
+#Una letra.
+#Un número de desplazamiento.
+#Una palabra.
+
+#Proceso:
+#Buscar la posición de la letra dentro del alfabeto.
+#Sumar el desplazamiento.
+#Aplicar módulo (%) para regresar al inicio si supera la última letra.
+#Repetir el proceso para todas las letras de una palabra.
+
+#Salida:
+#Letra codificada.
+#Palabra codificada.
+#Diccionario con historial.
+
+
+
+#2. Bosquejo a mano
+
+#Crear clase CodificadorCesar.
+
+#Crear atributo historial como diccionario vacío.
+
+#Método codificar_letra():
+
+#Guardar alfabeto.
+#Comprobar si la letra existe.
+#Buscar posición.
+#Mover posición.
+#Retornar nueva letra.
+
+
+#Método codificar_palabra():
+
+#Crear variable resultado vacía.
+#Recorrer cada letra.
+#Llamar codificar_letra().
+#Concatenar letras.
+#Guardar palabra original y codificada en historial.
+
+
+
+#3. Descubrir el patrón
+
+#Ejemplo:
+
+#Letra = z
+#Desplazamiento = 3
+
+
+#Posición de z:
+
+#25
+
+
+#Operación:
+
+#(25 + 3) % 26
+
+#28 % 26 = 2
+
+
+#Posición 2 del alfabeto:
+
+#c
+
+
+#Resultado:
+
+#z + 3 = c
+
+
+
+#4. Código
+
+
+class CodificadorCesar:
+
+    def __init__(self):
+
+        self.historial = {}
+
+
+    def codificar_letra(self, letra, desplazamiento):
+
+        alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+
+        if letra.lower() in alfabeto:
+
+            posicion = alfabeto.index(letra.lower())
+
+            nueva_posicion = (posicion + desplazamiento) % len(alfabeto)
+
+            return alfabeto[nueva_posicion]
+
+
+        return letra
+
+
+
+    def codificar_palabra(self, palabra, desplazamiento):
+
+        resultado = ""
+
+
+        for letra in palabra:
+
+            resultado += self.codificar_letra(letra, desplazamiento)
+
+
+        self.historial[palabra] = resultado
+
+
+        return resultado
+
+
+
+#5. Parámetros de prueba
+
+
+cesar = CodificadorCesar()
+
+
+print(cesar.codificar_letra("a", 3))
+
+
+print(cesar.codificar_letra("z", 3))
+
+
+print(cesar.codificar_palabra("hola", 3))
+
+
+print(cesar.historial)
+
+
+
+#Resultado esperado:
+
+#d
+#c
+#krod
+
+#{
+#'hola': 'krod'
+#}
+
+#EJERCICIO 17: Grupo de edades
+
+#Clase AgrupadorEdades que:
+#(1) tenga método clasificar_edad(edad) que retorne la categoría ("niño", "adolescente", "adulto", "mayor")
+#(2) tenga método agrupar_por_categoria(*edades) que retorne un diccionario con {categoría: [edades]}
+#(3) tenga método edad_promedio_categoria(categoria).
+
+
+
+#1. Entender el problema
+
+#Entrada:
+#Edades individuales.
+#Varias edades.
+#Categoría para buscar promedio.
+
+#Proceso:
+#Comparar la edad con rangos establecidos.
+#Guardar cada edad dentro de su categoría.
+#Sumar edades de una categoría.
+#Dividir entre la cantidad de edades.
+
+#Salida:
+#Categoría de una edad.
+#Diccionario agrupado.
+#Promedio de una categoría.
+
+
+
+#2. Bosquejo a mano
+
+#Crear clase AgrupadorEdades.
+
+#Crear atributo grupos como diccionario vacío.
+
+
+#Método clasificar_edad():
+
+#Si edad <= 12:
+#niño
+
+#Si edad <= 17:
+#adolescente
+
+#Si edad < 60:
+#adulto
+
+#Caso contrario:
+#mayor
+
+
+
+#Método agrupar_por_categoria():
+
+#Crear diccionario con listas vacías.
+
+#Recorrer edades.
+
+#Clasificar cada edad.
+
+#Agregar edad a la lista correspondiente.
+
+
+
+#Método edad_promedio_categoria():
+
+#Buscar categoría.
+
+#Recorrer edades.
+
+#Sumar.
+
+#Dividir entre cantidad.
+
+
+
+#3. Descubrir el patrón
+
+#Se utiliza un diccionario porque relaciona:
+
+#Categoría -> lista de edades
+
+
+#Ejemplo:
+
+#{
+#"adulto": [25,40]
+#}
+
+
+#Se usa:
+
+#self.clasificar_edad()
+
+#para reutilizar el método anterior.
+
+
+
+#4. Código
+
+class AgrupadorEdades:
+
+    def __init__(self):
+
+        self.grupos = {}
+
+
+    def clasificar_edad(self, edad):
+
+        if edad <= 12:
+
+            return "niño"
+
+        elif edad <= 17:
+
+            return "adolescente"
+
+        elif edad < 60:
+
+            return "adulto"
+
+        else:
+
+            return "mayor"
+
+
+
+    def agrupar_por_categoria(self, *edades):
+
+        self.grupos = {
+
+            "niño": [],
+
+            "adolescente": [],
+
+            "adulto": [],
+
+            "mayor": []
+
+        }
+
+
+        for edad in edades:
+
+            categoria = self.clasificar_edad(edad)
+
+            self.grupos[categoria].append(edad)
+
+
+        return self.grupos
+
+
+
+    def edad_promedio_categoria(self, categoria):
+
+        if categoria not in self.grupos:
+
+            return 0
+
+
+        if len(self.grupos[categoria]) == 0:
+
+            return 0
+
+
+        suma = 0
+
+
+        for edad in self.grupos[categoria]:
+
+            suma += edad
+
+
+        return suma / len(self.grupos[categoria])
+
+agrupador = AgrupadorEdades()
+
+
+print(agrupador.clasificar_edad(8))
+
+
+print(
+    agrupador.agrupar_por_categoria(
+        5,
+        10,
+        15,
+        17,
+        25,
+        35,
+        60,
+        80
+    )
+)
+
+
+print(
+    agrupador.edad_promedio_categoria("adulto")
+)
+
+#5. Pruebas de escritorio
+# PRUEBA 1:
+# Método: clasificar_edad(edad)
+
+# Parámetro de prueba:
+# edad = 15
+
+
+# Llamada:
+# agrupador.clasificar_edad(15)
+
+
+# Proceso:
+
+# edad = 15
+
+# Primera condición:
+# if edad <= 12
+
+# 15 <= 12 → False
+
+
+# Segunda condición:
+# elif edad <= 17
+
+# 15 <= 17 → True
+
+
+# Retorna:
+
+# "adolescente"
+
+
+
+# ----------------------------------------------------
+
+
+# PRUEBA 2:
+# Método: agrupar_por_categoria(*edades)
+
+# Parámetros de prueba:
+
+# edades = (5, 15, 30, 70)
+
+
+# Llamada:
+
+# agrupador.agrupar_por_categoria(5, 15, 30, 70)
+
+
+
+# Inicio del diccionario:
+
+# {
+# "niño": [],
+# "adolescente": [],
+# "adulto": [],
+# "mayor": []
+# }
+
+
+
+# Primera vuelta del for:
+
+# edad = 5
+
+
+# Se llama:
+
+# clasificar_edad(5)
+
+
+# 5 <= 12 → True
+
+
+# Categoría:
+
+# "niño"
+
+
+# Agrega:
+
+# "niño": [5]
+
+
+
+# Segunda vuelta del for:
+
+# edad = 15
+
+
+# Se llama:
+
+# clasificar_edad(15)
+
+
+# 15 <= 12 → False
+
+# 15 <= 17 → True
+
+
+# Categoría:
+
+# "adolescente"
+
+
+# Agrega:
+
+# "adolescente": [15]
+
+
+
+# Tercera vuelta del for:
+
+# edad = 30
+
+
+# Se llama:
+
+# clasificar_edad(30)
+
+
+# 30 <= 12 → False
+
+# 30 <= 17 → False
+
+# 30 < 60 → True
+
+
+# Categoría:
+
+# "adulto"
+
+
+# Agrega:
+
+# "adulto": [30]
+
+
+
+# Cuarta vuelta del for:
+
+# edad = 70
+
+
+# Se llama:
+
+# clasificar_edad(70)
+
+
+# 70 <= 12 → False
+
+# 70 <= 17 → False
+
+# 70 < 60 → False
+
+
+# Entra en else:
+
+
+# Categoría:
+
+# "mayor"
+
+
+# Agrega:
+
+# "mayor": [70]
+
+
+
+# Resultado final:
+
+# {
+# "niño": [5],
+# "adolescente": [15],
+# "adulto": [30],
+# "mayor": [70]
+# }
+
+
+
+# ----------------------------------------------------
+
+
+# PRUEBA 3:
+# Método: edad_promedio_categoria(categoria)
+
+
+# Parámetro de prueba:
+
+# categoria = "adulto"
+
+
+# Estado del diccionario:
+
+# {
+# "niño": [5],
+# "adolescente": [15],
+# "adulto": [30],
+# "mayor": [70]
+# }
+
+
+
+# Busca:
+
+# self.grupos["adulto"]
+
+
+# Obtiene:
+
+# [30]
+
+
+# Inicializa:
+
+# suma = 0
+
+
+
+# Recorrido:
+
+# edad = 30
+
+
+# suma = suma + edad
+
+# suma = 0 + 30
+
+# suma = 30
+
+
+
+# Cantidad de elementos:
+
+# len([30]) = 1
+
+
+
+# Promedio:
+
+# 30 / 1 = 30
+
+
+
+# Resultado:
+
+# Retorna 30
+
+#EJERCICIO 18: Matriz de distancias
+
+#Clase CalculadorDistancia que:
+#(1) tenga método distancia_euclidiana(p1, p2) que reciba dos tuplas (x,y) y calcule la distancia
+#(2) tenga método punto_mas_cercano(referencia, *puntos) que retorne el punto más cercano a referencia
+#(3) tenga un atributo lista para guardar todas las distancias calculadas.
+
+
+
+#1. Entender el problema
+
+#Entrada:
+
+#Dos puntos representados como tuplas:
+
+#p1 = (x1, y1)
+
+#p2 = (x2, y2)
+
+
+#Un punto de referencia y varios puntos para comparar.
+
+
+
+#Proceso:
+
+#Separar las coordenadas de cada punto.
+
+#Aplicar la fórmula de distancia euclidiana:
+
+#√((x2-x1)^2 + (y2-y1)^2)
+
+
+#Guardar cada distancia calculada en una lista.
+
+
+#Comparar las distancias obtenidas para encontrar
+#el punto más cercano.
+
+
+
+#Salida:
+
+#Retornar la distancia entre dos puntos.
+
+#Retornar el punto con menor distancia.
+
+#Guardar historial de distancias calculadas.
+
+
+
+#2. Bosquejo a mano
+
+
+#Crear clase CalculadorDistancia.
+
+
+#Crear atributo:
+
+#self.distancias = []
+
+
+#Método distancia_euclidiana():
+
+#Recibir dos tuplas.
+
+#Separar coordenadas.
+
+#Calcular distancia.
+
+#Guardar distancia en la lista.
+
+#Retornar distancia.
+
+
+
+#Método punto_mas_cercano():
+
+#Recibir punto referencia y varias tuplas.
+
+#Tomar el primer punto como candidato.
+
+#Calcular su distancia.
+
+#Recorrer los demás puntos.
+
+#Comparar si la nueva distancia es menor.
+
+#Actualizar el punto más cercano.
+
+
+
+#3. Descubrir el patrón
+
+
+#Las tuplas representan coordenadas:
+
+#(x,y)
+
+
+#Se pueden separar directamente:
+
+#x, y = punto
+
+
+
+#Para encontrar el menor valor se utiliza una variable
+#que guarda la menor distancia encontrada.
+
+
+#Ejemplo:
+
+#menor_distancia = primera distancia
+
+
+#Luego se compara:
+
+#if distancia < menor_distancia:
+
+#    actualizar valor
+
+
+
+#Se utiliza *puntos porque el método puede recibir
+#una cantidad variable de puntos.
+
+
+
+#4. Escribir código
+
+
+
+class CalculadorDistancia:
+
+    def __init__(self):
+
+        self.distancias = []
+
+
+
+    def distancia_euclidiana(self, p1, p2):
+
+        x1, y1 = p1
+
+        x2, y2 = p2
+
+
+        distancia = ((x2 - x1)**2 + (y2 - y1)**2)**0.5
+
+
+        self.distancias.append(distancia)
+
+
+        return distancia
+
+
+
+    def punto_mas_cercano(self, referencia, *puntos):
+
+        if len(puntos) == 0:
+
+            return None
+
+
+        punto_cercano = puntos[0]
+
+
+        menor_distancia = self.distancia_euclidiana(
+            referencia,
+            punto_cercano
+        )
+
+
+        for punto in puntos[1:]:
+
+
+            distancia = self.distancia_euclidiana(
+                referencia,
+                punto
+            )
+
+
+            if distancia < menor_distancia:
+
+                menor_distancia = distancia
+
+                punto_cercano = punto
+
+
+        return punto_cercano
+
+
+
+
+#Parámetros de prueba
+
+
+
+calculador = CalculadorDistancia()
+
+
+
+#Prueba de distancia entre dos puntos
+
+print(
+    calculador.distancia_euclidiana(
+        (0,0),
+        (3,4)
+    )
+)
+
+
+
+#Prueba de punto más cercano
+
+
+print(
+    calculador.punto_mas_cercano(
+        (0,0),
+        (5,5),
+        (2,2),
+        (10,10)
+    )
+)
+
+
+
+#Mostrar historial de distancias
+
+
+print(calculador.distancias)
+
+
+
+
+#5. Prueba de escritorio
+
+
+
+#Objeto creado:
+
+#calculador = CalculadorDistancia()
+
+
+#Estado inicial:
+
+#distancias = []
+
+
+
+#Prueba 1:
+
+
+#Parámetros:
+
+#p1 = (0,0)
+
+#p2 = (3,4)
+
+
+
+#Separación de coordenadas:
+
+#x1 = 0
+
+#y1 = 0
+
+#x2 = 3
+
+#y2 = 4
+
+
+
+#Aplicación de fórmula:
+
+
+#distancia = ((3-0)^2 + (4-0)^2)^0.5
+
+
+#distancia = (9 + 16)^0.5
+
+
+#distancia = 25^0.5
+
+
+#distancia = 5
+
+
+
+#Guarda:
+
+#distancias = [5]
+
+
+#Retorna:
+
+#5.0
+
+
+
+
+
+#Prueba 2:
+
+
+
+#Parámetros:
+
+
+#referencia = (0,0)
+
+
+#puntos:
+
+#(5,5)
+
+#(2,2)
+
+#(10,10)
+
+
+
+#Primer punto:
+
+#punto_cercano = (5,5)
+
+
+
+#Calcula distancia:
+
+
+#√((5-0)^2 + (5-0)^2)
+
+
+#√50
+
+
+#7.07
+
+
+
+#Guarda:
+
+#menor_distancia = 7.07
+
+
+
+#Segundo punto:
+
+#punto = (2,2)
+
+
+
+#Calcula distancia:
+
+
+#√((2-0)^2 + (2-0)^2)
+
+
+#√8
+
+
+#2.82
+
+
+
+#Comparación:
+
+
+#2.82 < 7.07
+
+
+#Verdadero
+
+
+
+#Actualiza:
+
+
+#menor_distancia = 2.82
+
+#punto_cercano = (2,2)
+
+
+
+#Tercer punto:
+
+
+#punto = (10,10)
+
+
+
+#Calcula distancia:
+
+
+#√((10-0)^2 + (10-0)^2)
+
+
+#√200
+
+
+#14.14
+
+
+
+#Comparación:
+
+
+#14.14 < 2.82
+
+
+#Falso
+
+
+
+#No cambia el resultado.
+
+
+
+#Resultado final:
+
+
+#Punto más cercano:
+
+#(2,2)
+
+#EJERCICIO 19: Inventario de productos
+
+#Clase Inventario que:
+#(1) tenga método agregar_stock(producto, cantidad) que guarde en un diccionario
+#(2) tenga método restar_stock(producto, cantidad) que disminuya y retorne True si hay suficiente
+#(3) tenga método productos_bajo_stock(minimo) que retorne una lista de productos con cantidad < minimo.
+
+
+
+#1. Entender el problema
+
+
+#Entrada:
+
+#Nombre del producto.
+
+#Cantidad del producto.
+
+#Cantidad que se desea retirar.
+
+#Cantidad mínima para buscar productos con poco stock.
+
+
+
+#Proceso:
+
+#Guardar productos y cantidades dentro de un diccionario.
+
+#Cada producto será una clave del diccionario.
+
+#Cada cantidad será el valor asociado a esa clave.
+
+
+#Al agregar stock:
+
+#Si el producto existe, aumentar la cantidad.
+
+#Si no existe, crear un nuevo producto.
+
+
+#Al restar stock:
+
+#Verificar que el producto exista.
+
+#Verificar que la cantidad disponible sea suficiente.
+
+#Restar la cantidad solicitada.
+
+
+#Para buscar bajo stock:
+
+#Recorrer el diccionario.
+
+#Comparar las cantidades con el mínimo.
+
+
+
+#Salida:
+
+#Diccionario con productos y cantidades.
+
+#True si se pudo retirar stock.
+
+#False si no existe producto o no hay suficiente cantidad.
+
+#Lista con productos debajo del mínimo.
+
+
+
+#2. Bosquejo a mano
+
+
+#Crear clase Inventario.
+
+
+#Crear atributo:
+
+#self.stock = {}
+
+
+
+#Método agregar_stock(producto, cantidad):
+
+#Recibir producto y cantidad.
+
+#Verificar si el producto existe.
+
+#Si existe:
+
+#sumar cantidad existente.
+
+
+#Si no existe:
+
+#crear producto con esa cantidad.
+
+
+
+#Método restar_stock(producto, cantidad):
+
+#Buscar producto.
+
+#Comparar cantidad disponible con cantidad solicitada.
+
+#Si hay suficiente:
+
+#restar cantidad.
+
+#retornar True.
+
+
+#Si no hay suficiente:
+
+#retornar False.
+
+
+
+#Método productos_bajo_stock(minimo):
+
+#Crear lista vacía.
+
+#Recorrer productos.
+
+#Si cantidad < minimo:
+
+#agregar producto a la lista.
+
+
+
+#3. Descubrir el patrón
+
+
+#Se utiliza un diccionario porque existe una relación:
+
+#Producto -> Cantidad
+
+
+#Ejemplo:
+
+
+#{
+#"Mouse":10,
+#"Teclado":5
+#}
+
+
+
+#La clave representa el producto.
+
+#El valor representa la cantidad disponible.
+
+
+
+#Para recorrer claves y valores:
+
+#Se utiliza items().
+
+
+#Ejemplo:
+
+
+#for producto, cantidad in self.stock.items():
+
+
+
+#Para modificar un valor del diccionario:
+
+#self.stock[producto] += cantidad
+
+
+
+#Para verificar existencia:
+
+#if producto in self.stock:
+
+
+
+#4. Escribir código
+
+
+
+class Inventario:
+
+    def __init__(self):
+
+        self.stock = {}
+
+
+
+    def agregar_stock(self, producto, cantidad):
+
+        if producto in self.stock:
+
+            self.stock[producto] += cantidad
+
+        else:
+
+            self.stock[producto] = cantidad
+
+
+
+    def restar_stock(self, producto, cantidad):
+
+        if producto in self.stock:
+
+            if self.stock[producto] >= cantidad:
+
+                self.stock[producto] -= cantidad
+
+                return True
+
+
+        return False
+
+
+
+    def productos_bajo_stock(self, minimo):
+
+        productos = []
+
+
+        for producto, cantidad in self.stock.items():
+
+            if cantidad < minimo:
+
+                productos.append(producto)
+
+
+        return productos
+
+
+
+
+#Parámetros de prueba
+
+
+
+inventario = Inventario()
+
+
+
+#Agregar productos
+
+inventario.agregar_stock(
+    "Mouse",
+    10
+)
+
+
+inventario.agregar_stock(
+    "Teclado",
+    5
+)
+
+
+inventario.agregar_stock(
+    "Monitor",
+    2
+)
+
+
+
+#Mostrar inventario
+
+print(inventario.stock)
+
+
+
+#Restar stock
+
+print(
+    inventario.restar_stock(
+        "Mouse",
+        3
+    )
+)
+
+
+
+#Mostrar inventario actualizado
+
+print(inventario.stock)
+
+
+
+#Buscar productos con bajo stock
+
+print(
+    inventario.productos_bajo_stock(
+        5
+    )
+)
+
+
+
+
+#5. Prueba de escritorio
+
+
+
+#Objeto creado:
+
+
+#inventario = Inventario()
+
+
+
+#Estado inicial:
+
+
+#stock = {}
+
+#Prueba 1:
+
+
+#agregar_stock("Mouse",10)
+
+
+
+#Producto no existe.
+
+
+#Se crea:
+
+
+#stock = {
+
+#"Mouse":10
+
+#}
+
+#Prueba 2:
+
+
+#agregar_stock("Teclado",5)
+
+
+
+#Producto no existe.
+
+
+#Se crea:
+
+
+#stock = {
+
+#"Mouse":10,
+
+#"Teclado":5
+
+#}
+
+
+
+#Prueba 3:
+
+
+#agregar_stock("Mouse",3)
+
+
+
+#Producto existe.
+
+
+#Busca:
+
+
+#stock["Mouse"]
+
+
+#Valor actual:
+
+#10
+
+
+
+#Realiza:
+
+
+#10 + 3 = 13
+
+
+
+#Nuevo estado:
+
+
+#stock = {
+
+#"Mouse":13,
+
+#"Teclado":5
+
+#}
+
+
+#Prueba 4:
+
+
+#restar_stock("Mouse",4)
+
+
+
+#Verifica:
+
+
+#Producto existe.
+
+
+#Cantidad disponible:
+
+#13
+
+
+
+#Cantidad solicitada:
+
+#4
+
+
+
+#Comparación:
+
+
+#13 >= 4
+
+
+#Verdadero
+
+
+
+#Realiza:
+
+
+#13 - 4 = 9
+
+
+
+#Retorna:
+
+
+#True
+
+
+
+#Nuevo estado:
+
+
+#stock = {
+
+#"Mouse":9,
+
+#"Teclado":5
+
+#}
+
+
+
+#Prueba 5:
+
+
+#productos_bajo_stock(5)
+
+
+
+#Recorre:
+
+
+#Mouse:
+
+#9 < 5
+
+#Falso
+
+
+
+#Teclado:
+
+#5 < 5
+
+#Falso
+
+
+
+#Monitor:
+
+#2 < 5
+
+#Verdadero
+
+
+
+#Agrega:
+
+
+#"Monitor"
+
+
+
+#Resultado final:
+
+
+#["Monitor"]
+
+#EJERCICIO 20: Analizador de patrones en textos
+
+#Clase AnalizadorPatrones que:
+#(1) tenga método encontrar_palabras(texto, patron) que busque palabras que inicien con el patrón y retorne una lista
+#(2) tenga método agrupar_por_longitud(texto) que retorne un diccionario {longitud: [palabras]}
+#(3) tenga método palabras_unicas() usando un conjunto.
+
+
+
+#1. Entender el problema
+
+
+#Entrada:
+
+#Un texto con varias palabras.
+
+#Un patrón de búsqueda.
+
+
+
+#Proceso:
+
+#Separar el texto en palabras usando split().
+
+#Comparar el inicio de cada palabra con el patrón.
+
+#Guardar las palabras que coincidan.
+
+
+#Para agrupar por longitud:
+
+#Obtener la cantidad de caracteres de cada palabra.
+
+#Crear grupos según la longitud.
+
+
+
+#Para palabras únicas:
+
+#Usar un conjunto para eliminar palabras repetidas.
+
+
+
+#Salida:
+
+#Lista de palabras que empiezan con el patrón.
+
+#Diccionario agrupado por longitud.
+
+#Conjunto de palabras sin repetir.
+
+
+
+#2. Bosquejo a mano
+
+
+#Crear clase AnalizadorPatrones.
+
+
+#Crear atributo para guardar las palabras analizadas.
+
+
+#Método encontrar_palabras():
+
+#Recibir texto y patrón.
+
+#Separar texto en palabras.
+
+#Crear lista vacía.
+
+#Recorrer palabras.
+
+#Verificar si empiezan con el patrón.
+
+#Agregar coincidencias.
+
+#Retornar lista.
+
+
+
+#Método agrupar_por_longitud():
+
+#Separar texto.
+
+#Crear diccionario vacío.
+
+#Recorrer palabras.
+
+#Obtener longitud.
+
+#Guardar palabra dentro de su grupo.
+
+
+
+#Método palabras_unicas():
+
+#Convertir lista de palabras a conjunto.
+
+#Retornar conjunto.
+
+
+
+#3. Descubrir el patrón
+
+
+#Se utiliza split() para convertir un texto
+#en una lista de palabras.
+
+
+#Ejemplo:
+
+
+#texto = "hola mundo python"
+
+
+#split() genera:
+
+
+#["hola","mundo","python"]
+
+
+
+#Se utiliza startswith()
+#para verificar si una palabra comienza
+#con un patrón.
+
+
+#Ejemplo:
+
+
+#"python".startswith("py")
+
+
+#Resultado:
+
+#True
+
+
+
+#Se utiliza len()
+#para conocer la longitud de una palabra.
+
+
+
+#Se utiliza un conjunto porque no permite
+#elementos repetidos.
+
+
+
+#4. Escribir código
+
+
+
+class AnalizadorPatrones:
+
+    def __init__(self):
+
+        self.palabras = []
+
+
+
+    def encontrar_palabras(self, texto, patron):
+
+        palabras_encontradas = []
+
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            if palabra.startswith(patron):
+
+                palabras_encontradas.append(palabra)
+
+
+
+        self.palabras = palabras
+
+
+        return palabras_encontradas
+
+
+
+    def agrupar_por_longitud(self, texto):
+
+        agrupacion = {}
+
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            longitud = len(palabra)
+
+
+            if longitud not in agrupacion:
+
+                agrupacion[longitud] = []
+
+
+            agrupacion[longitud].append(palabra)
+
+
+
+        return agrupacion
+
+
+
+    def palabras_unicas(self):
+
+        return set(self.palabras)
+
+
+
+
+#Parámetros de prueba
+
+
+
+analizador = AnalizadorPatrones()
+
+
+
+texto = "python programación prueba casa carro python"
+
+
+
+print(
+    analizador.encontrar_palabras(
+        texto,
+        "pro"
+    )
+)
+
+
+
+print(
+    analizador.agrupar_por_longitud(
+        texto
+    )
+)
+
+
+
+print(
+    analizador.palabras_unicas()
+)
+
+
+
+
+#5. Prueba de escritorio
+
+
+
+#Objeto creado:
+
+
+#analizador = AnalizadorPatrones()
+
+
+
+#Estado inicial:
+
+
+#palabras = []
+
+
+
+#Prueba 1:
+
+
+#texto:
+
+#"python programación prueba casa carro python"
+
+
+#patron:
+
+#"pro"
+
+
+
+#split:
+
+
+#[
+#"python",
+#"programación",
+#"prueba",
+#"casa",
+#"carro",
+#"python"
+#]
+
+
+
+#Comparaciones:
+
+
+#python empieza con pro
+
+#False
+
+
+
+#programación empieza con pro
+
+#True
+
+
+
+#Agrega:
+
+#"programación"
+
+
+
+#prueba empieza con pro
+
+#True
+
+
+
+#Agrega:
+
+#"prueba"
+
+
+
+#Resultado:
+
+
+#[
+#"programación",
+#"prueba"
+#]
+
+
+
+
+#Prueba 2:
+
+
+#agrupar_por_longitud()
+
+
+
+#Palabras:
+
+
+#python = 6
+
+#programación = 12
+
+#prueba = 6
+
+#casa = 4
+
+#carro = 5
+
+#python = 6
+
+
+
+#Diccionario generado:
+
+
+#{
+
+#6:[
+#"python",
+#"prueba",
+#"python"
+#],
+
+#12:[
+#"programación"
+#],
+
+#4:[
+#"casa"
+#],
+
+#5:[
+#"carro"
+#]
+
+#}
+
+
+
+#Resultado:
+
+
+#Diccionario agrupado por longitud.
+
+
+
+#Prueba 3:
+
+
+#palabras_unicas()
+
+
+
+#Lista guardada:
+
+
+#[
+#"python",
+#"programación",
+#"prueba",
+#"casa",
+#"carro",
+#"python"
+#]
+
+
+
+#Convertir a conjunto elimina repetidos:
+
+
+#{
+
+#"python",
+
+#"programación",
+
+#"prueba",
+
+#"casa",
+
+#"carro"
+
+#}
+
+
+
+#Resultado:
+
+
+#Conjunto de palabras únicas.

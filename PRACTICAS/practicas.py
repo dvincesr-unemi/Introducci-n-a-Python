@@ -3503,7 +3503,2165 @@ def encontrar_multiplos(self, numero, limite):
 
     return tuple(multiplos)
 
-  
+#EJERCICIO 16: Codificador/Decodificador
+
+#Clase CodificadorCesar que:
+#(1) tenga método codificar_letra(letra, desplazamiento) que retorne la letra desplazada en el alfabeto (usar operador %)
+#(2) tenga método codificar_palabra(palabra, desplazamiento) que reutilice para toda la palabra
+#(3) tenga un diccionario como atributo para historial de codificaciones.
+
+
+class CodificadorCesar:
+
+    def __init__(self):
+
+        self.historial = {}
+
+
+
+    def codificar_letra(self, letra, desplazamiento):
+
+        alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+
+        if letra.lower() in alfabeto:
+
+            posicion = alfabeto.index(letra.lower())
+
+
+            nueva_posicion = (posicion + desplazamiento) % len(alfabeto)
+
+
+            return alfabeto[nueva_posicion]
+
+
+        return letra
+
+
+
+    def codificar_palabra(self, palabra, desplazamiento):
+
+        resultado = ""
+
+
+        for letra in palabra:
+
+            resultado += self.codificar_letra(letra, desplazamiento)
+
+
+        self.historial[palabra] = resultado
+
+
+        return resultado
+
+# POSIBLES CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO 16: Codificador/Decodificador César
+
+
+# CAMBIO 1: Codificar sin usar index()
+# Programación más manual buscando la posición con un contador.
+
+def codificar_letra_manual(self, letra, desplazamiento):
+
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+    posicion = 0
+
+
+    for caracter in alfabeto:
+
+        if caracter == letra.lower():
+
+            break
+
+        posicion += 1
+
+
+    nueva_posicion = (posicion + desplazamiento) % len(alfabeto)
+
+
+    return alfabeto[nueva_posicion]
+
+
+
+# CAMBIO 2: Codificar sin usar len()
+# Usando una variable fija porque el alfabeto tiene 26 letras.
+
+def codificar_letra_sin_len(self, letra, desplazamiento):
+
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+
+    posicion = alfabeto.index(letra.lower())
+
+
+    nueva_posicion = (posicion + desplazamiento) % 26
+
+
+    return alfabeto[nueva_posicion]
+
+
+
+# CAMBIO 3: Decodificar palabra
+# Revierte la codificación usando desplazamiento negativo.
+
+def decodificar_palabra(self, palabra, desplazamiento):
+
+    resultado = ""
+
+
+    for letra in palabra:
+
+        resultado += self.codificar_letra(
+            letra,
+            -desplazamiento
+        )
+
+
+    return resultado
+
+
+
+# CAMBIO 4: Guardar historial con más información
+
+def guardar_historial_completo(self, original, desplazamiento, resultado):
+
+    self.historial[original] = {
+
+        "desplazamiento": desplazamiento,
+
+        "resultado": resultado
+
+    }
+
+
+
+# Resultado:
+
+# {
+#   "hola":{
+#       "desplazamiento":3,
+#       "resultado":"krod"
+#   }
+# }
+
+
+
+# CAMBIO 5: Codificar frases completas
+# Mantiene espacios y símbolos.
+
+def codificar_texto(self, texto, desplazamiento):
+
+    resultado = ""
+
+
+    for letra in texto:
+
+        resultado += self.codificar_letra(
+            letra,
+            desplazamiento
+        )
+
+
+    return resultado
+
+
+
+# CAMBIO 6: Mantener mayúsculas
+# Devuelve la letra con el mismo formato original.
+
+def codificar_letra_mayusculas(self, letra, desplazamiento):
+
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+
+    mayuscula = letra.isupper()
+
+
+    letra = letra.lower()
+
+
+    posicion = alfabeto.index(letra)
+
+
+    nueva_posicion = (posicion + desplazamiento) % 26
+
+
+    nueva_letra = alfabeto[nueva_posicion]
+
+
+    if mayuscula:
+
+        return nueva_letra.upper()
+
+
+    return nueva_letra
+
+
+
+# CAMBIO 7: Contar codificaciones realizadas
+
+def cantidad_codificaciones(self):
+
+    return len(self.historial)
+
+
+
+# CAMBIO 8: Buscar una palabra en historial
+
+def buscar_historial(self, palabra):
+
+    if palabra in self.historial:
+
+        return self.historial[palabra]
+
+
+    return "No existe en historial"
+
+
+
+# CAMBIO 9: Eliminar una codificación del historial
+
+def eliminar_historial(self, palabra):
+
+    if palabra in self.historial:
+
+        del self.historial[palabra]
+
+        return True
+
+
+    return False
+
+
+
+# CAMBIO 10: Codificar varias palabras
+
+def codificar_multiples(self, palabras, desplazamiento):
+
+    resultado = {}
+
+
+    for palabra in palabras:
+
+        resultado[palabra] = self.codificar_palabra(
+            palabra,
+            desplazamiento
+        )
+
+
+    return resultado
+
+
+
+# CAMBIO 11: Cambiar alfabeto para incluir números
+# Ejemplo: letras + números.
+
+def codificar_con_numeros(self, texto, desplazamiento):
+
+    caracteres = "abcdefghijklmnopqrstuvwxyz0123456789"
+
+    resultado = ""
+
+
+    for letra in texto:
+
+        if letra in caracteres:
+
+            posicion = caracteres.index(letra)
+
+            nueva_posicion = (
+                posicion + desplazamiento
+            ) % len(caracteres)
+
+            resultado += caracteres[nueva_posicion]
+
+        else:
+
+            resultado += letra
+
+
+    return resultado
+
+
+
+# CAMBIO 12: Hacer desplazamiento negativo
+
+def retroceder_letra(self, letra, desplazamiento):
+
+    return self.codificar_letra(
+        letra,
+        -desplazamiento
+    )
+
+
+
+# CAMBIO 13: Validar desplazamiento
+
+def validar_desplazamiento(self, desplazamiento):
+
+    if desplazamiento >= 0:
+
+        return True
+
+    return False
+
+
+
+# CAMBIO 14: Codificar usando while
+# En lugar de for.
+
+def codificar_palabra_while(self, palabra, desplazamiento):
+
+    resultado = ""
+
+    i = 0
+
+
+    while i < len(palabra):
+
+        resultado += self.codificar_letra(
+            palabra[i],
+            desplazamiento
+        )
+
+        i += 1
+
+
+    return resultado
+
+
+
+# CAMBIO 15: Buscar frecuencia de letras codificadas
+
+def frecuencia_letras(self, palabra):
+
+    frecuencia = {}
+
+
+    for letra in palabra:
+
+        if letra in frecuencia:
+
+            frecuencia[letra] += 1
+
+        else:
+
+            frecuencia[letra] = 1
+
+
+    return frecuencia  
+
+#EJERCICIO 17: Grupo de edades
+
+#Clase AgrupadorEdades que:
+#(1) tenga método clasificar_edad(edad) que retorne la categoría ("niño", "adolescente", "adulto", "mayor")
+#(2) tenga método agrupar_por_categoria(*edades) que retorne un diccionario con {categoría: [edades]}
+#(3) tenga método edad_promedio_categoria(categoria).
+
+
+class AgrupadorEdades:
+
+    def __init__(self):
+
+        self.grupos = {}
+
+
+
+    def clasificar_edad(self, edad):
+
+        if edad <= 12:
+
+            return "niño"
+
+        elif edad <= 17:
+
+            return "adolescente"
+
+        elif edad < 60:
+
+            return "adulto"
+
+        else:
+
+            return "mayor"
+
+
+
+    def agrupar_por_categoria(self, *edades):
+
+        self.grupos = {
+
+            "niño": [],
+
+            "adolescente": [],
+
+            "adulto": [],
+
+            "mayor": []
+
+        }
+
+
+        for edad in edades:
+
+            categoria = self.clasificar_edad(edad)
+
+            self.grupos[categoria].append(edad)
+
+
+        return self.grupos
+
+
+
+    def edad_promedio_categoria(self, categoria):
+
+        if categoria not in self.grupos:
+
+            return 0
+
+
+        if len(self.grupos[categoria]) == 0:
+
+            return 0
+
+
+        suma = 0
+
+
+        for edad in self.grupos[categoria]:
+
+            suma += edad
+
+
+        return suma / len(self.grupos[categoria])
+
+# POSIBLES CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO 17: Grupo de edades
+
+
+# CAMBIO 1: Agregar más categorías
+
+# Ejemplo:
+# Bebé: 0 - 3 años
+# Niño: 4 - 12 años
+# Adolescente: 13 - 17 años
+# Adulto: 18 - 59 años
+# Mayor: 60 en adelante
+
+
+def clasificar_edad_ampliada(self, edad):
+
+    if edad <= 3:
+
+        return "bebé"
+
+    elif edad <= 12:
+
+        return "niño"
+
+    elif edad <= 17:
+
+        return "adolescente"
+
+    elif edad < 60:
+
+        return "adulto"
+
+    else:
+
+        return "mayor"
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 2: Contar cantidad de personas por categoría
+
+
+def cantidad_categoria(self, categoria):
+
+    if categoria in self.grupos:
+
+        return len(self.grupos[categoria])
+
+    return 0
+
+
+
+# Ejemplo:
+
+# adulto = [25,30,40]
+
+# retorna:
+
+# 3
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 3: Encontrar edad máxima de una categoría
+# Sin usar max()
+
+
+def mayor_edad_categoria(self, categoria):
+
+    if categoria not in self.grupos:
+
+        return None
+
+
+    mayor = 0
+
+
+    for edad in self.grupos[categoria]:
+
+        if edad > mayor:
+
+            mayor = edad
+
+
+    return mayor
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 4: Encontrar edad mínima de una categoría
+# Sin usar min()
+
+
+def menor_edad_categoria(self, categoria):
+
+    if categoria not in self.grupos:
+
+        return None
+
+
+    menor = self.grupos[categoria][0]
+
+
+    for edad in self.grupos[categoria]:
+
+        if edad < menor:
+
+            menor = edad
+
+
+    return menor
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 5: Promedio más manual
+# Sin usar len() directamente
+
+
+def promedio_manual(self, categoria):
+
+    suma = 0
+
+    contador = 0
+
+
+    for edad in self.grupos[categoria]:
+
+        suma += edad
+
+        contador += 1
+
+
+    if contador == 0:
+
+        return 0
+
+
+    return suma / contador
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 6: Buscar personas de una categoría
+
+
+def obtener_edades_categoria(self, categoria):
+
+    if categoria in self.grupos:
+
+        return self.grupos[categoria]
+
+
+    return []
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 7: Agrupar desde una lista
+# En lugar de recibir *edades
+
+
+def agrupar_lista(self, edades):
+
+    resultado = {}
+
+
+    for edad in edades:
+
+        categoria = self.clasificar_edad(edad)
+
+
+        if categoria not in resultado:
+
+            resultado[categoria] = []
+
+
+        resultado[categoria].append(edad)
+
+
+    return resultado
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 8: Encontrar categoría con más personas
+
+
+def categoria_mas_grande(self):
+
+    mayor = ""
+
+    cantidad = 0
+
+
+    for categoria, edades in self.grupos.items():
+
+        if len(edades) > cantidad:
+
+            cantidad = len(edades)
+
+            mayor = categoria
+
+
+    return mayor
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 9: Filtrar edades mayores a una edad dada
+
+
+def mayores_a(self, edad_minima):
+
+    resultado = []
+
+
+    for categoria, edades in self.grupos.items():
+
+        for edad in edades:
+
+            if edad >= edad_minima:
+
+                resultado.append(edad)
+
+
+    return resultado
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 10: Guardar historial de agrupaciones
+
+
+# En __init__ agregar:
+
+# self.historial = []
+
+
+
+def guardar_historial(self):
+
+    self.historial.append(self.grupos)
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 11: Mezclar con diccionario de personas
+
+
+# En vez de recibir solo edades:
+
+# [
+# {"nombre":"Ana","edad":15},
+# {"nombre":"Luis","edad":30}
+# ]
+
+
+def agrupar_personas(self, personas):
+
+    resultado = {
+
+        "niño": [],
+
+        "adolescente": [],
+
+        "adulto": [],
+
+        "mayor": []
+
+    }
+
+
+    for persona in personas:
+
+        categoria = self.clasificar_edad(persona["edad"])
+
+
+        resultado[categoria].append(
+            persona["nombre"]
+        )
+
+
+    return resultado
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 12: Verificar si una categoría existe
+
+
+def existe_categoria(self, categoria):
+
+    return categoria in self.grupos
+
+
+#EJERCICIO 18: Matriz de distancias
+
+#Clase CalculadorDistancia que:
+#(1) tenga método distancia_euclidiana(p1, p2) que reciba dos tuplas (x,y) y calcule la distancia
+#(2) tenga método punto_mas_cercano(referencia, *puntos) que retorne el punto más cercano a referencia
+#(3) tenga un atributo lista para guardar todas las distancias calculadas.
+
+
+class CalculadorDistancia:
+
+    def __init__(self):
+
+        self.distancias = []
+
+
+
+    def distancia_euclidiana(self, p1, p2):
+
+        x1, y1 = p1
+
+        x2, y2 = p2
+
+
+        distancia = ((x2 - x1)**2 + (y2 - y1)**2)**0.5
+
+
+        self.distancias.append(distancia)
+
+
+        return distancia
+
+
+
+    def punto_mas_cercano(self, referencia, *puntos):
+
+        if len(puntos) == 0:
+
+            return None
+
+
+        punto_cercano = puntos[0]
+
+
+        menor_distancia = self.distancia_euclidiana(
+            referencia,
+            punto_cercano
+        )
+
+
+        for punto in puntos[1:]:
+
+
+            distancia = self.distancia_euclidiana(
+                referencia,
+                punto
+            )
+
+
+            if distancia < menor_distancia:
+
+                menor_distancia = distancia
+
+                punto_cercano = punto
+
+
+        return punto_cercano
+
+# POSIBLES MEZCLAS, CAMBIOS O MÉTODOS AGREGADOS
+# EJERCICIO 18: Matriz de distancias
+
+
+
+# CAMBIO 1: Método punto_mas_lejano()
+
+# Similar a punto_mas_cercano(),
+# pero busca la distancia más grande.
+
+
+def punto_mas_lejano(self, referencia, *puntos):
+
+    if len(puntos) == 0:
+
+        return None
+
+
+    punto_lejano = puntos[0]
+
+
+    mayor_distancia = self.distancia_euclidiana(
+        referencia,
+        punto_lejano
+    )
+
+
+    for punto in puntos[1:]:
+
+        distancia = self.distancia_euclidiana(
+            referencia,
+            punto
+        )
+
+
+        if distancia > mayor_distancia:
+
+            mayor_distancia = distancia
+
+            punto_lejano = punto
+
+
+    return punto_lejano
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 2: Método distancia_manhattan()
+
+# Cambia la fórmula euclidiana por distancia Manhattan.
+
+
+# Fórmula:
+
+# |x2-x1| + |y2-y1|
+
+
+
+def distancia_manhattan(self, p1, p2):
+
+    x1, y1 = p1
+
+    x2, y2 = p2
+
+
+    distancia = abs(x2-x1) + abs(y2-y1)
+
+
+    self.distancias.append(distancia)
+
+
+    return distancia
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 3: Método obtener_menor_distancia()
+
+# Retorna la distancia más pequeña guardada.
+
+
+def obtener_menor_distancia(self):
+
+    if len(self.distancias) == 0:
+
+        return None
+
+
+    menor = self.distancias[0]
+
+
+    for distancia in self.distancias:
+
+        if distancia < menor:
+
+            menor = distancia
+
+
+    return menor
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 4: Método obtener_mayor_distancia()
+
+# Busca la distancia más grande manualmente.
+
+
+def obtener_mayor_distancia(self):
+
+    if len(self.distancias) == 0:
+
+        return None
+
+
+    mayor = self.distancias[0]
+
+
+    for distancia in self.distancias:
+
+        if distancia > mayor:
+
+            mayor = distancia
+
+
+    return mayor
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 5: Método promedio_distancias()
+
+# Calcula promedio de todas las distancias.
+
+
+def promedio_distancias(self):
+
+    if len(self.distancias) == 0:
+
+        return 0
+
+
+    suma = 0
+
+
+    for distancia in self.distancias:
+
+        suma += distancia
+
+
+    return suma / len(self.distancias)
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 6: Guardar puntos junto con sus distancias.
+
+
+# Cambiar atributo:
+
+# self.distancias = []
+
+
+# Por:
+
+
+# self.distancias = {}
+
+
+
+# Guardaría:
+
+# {
+# ((0,0),(3,4)):5,
+# ((1,1),(4,5)):5
+# }
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 7: Método historial_distancias()
+
+# Mostrar todas las distancias calculadas.
+
+
+def historial_distancias(self):
+
+    return self.distancias
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 8: Método cantidad_calculos()
+
+# Saber cuántas distancias fueron calculadas.
+
+
+def cantidad_calculos(self):
+
+    return len(self.distancias)
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 9: Método puntos_dentro_radio()
+
+# Buscar puntos que estén dentro de una distancia máxima.
+
+
+def puntos_dentro_radio(self, referencia, radio, *puntos):
+
+    resultado = []
+
+
+    for punto in puntos:
+
+        distancia = self.distancia_euclidiana(
+            referencia,
+            punto
+        )
+
+
+        if distancia <= radio:
+
+            resultado.append(punto)
+
+
+    return resultado
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 10: Método ordenar_puntos_por_distancia()
+
+# Retorna puntos ordenados desde el más cercano
+# hasta el más lejano.
+
+
+def ordenar_puntos_por_distancia(self, referencia, *puntos):
+
+    lista = []
+
+
+    for punto in puntos:
+
+        distancia = self.distancia_euclidiana(
+            referencia,
+            punto
+        )
+
+
+        lista.append(
+            (punto, distancia)
+        )
+
+
+    lista.sort(
+        key=lambda x: x[1]
+    )
+
+
+    return lista
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 11: Mezclar con lista de puntos.
+
+
+# En lugar de:
+
+# *puntos
+
+
+# Recibir:
+
+# puntos = [(1,2),(3,4),(5,6)]
+
+
+
+def punto_mas_cercano_lista(self, referencia, puntos):
+
+    cercano = None
+
+    menor = None
+
+
+    for punto in puntos:
+
+        distancia = self.distancia_euclidiana(
+            referencia,
+            punto
+        )
+
+
+        if menor is None or distancia < menor:
+
+            menor = distancia
+
+            cercano = punto
+
+
+    return cercano
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 12: Validar puntos incorrectos.
+
+
+def validar_punto(self, punto):
+
+    if len(punto) != 2:
+
+        return False
+
+
+    return True
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 13: Guardar coordenadas separadas.
+
+
+# Crear atributo:
+
+
+# self.puntos = []
+
+
+
+# Guardar:
+
+# [
+# {"x":2,"y":3},
+# {"x":5,"y":8}
+# ]
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 14: Método distancia_origen()
+
+# Calcula distancia de un punto respecto al origen (0,0).
+
+
+def distancia_origen(self, punto):
+
+    origen = (0,0)
+
+
+    return self.distancia_euclidiana(
+        origen,
+        punto
+    )
+
+
+
+# ----------------------------------------------------
+
+
+# CAMBIO 15: Método cantidad_puntos_cercanos()
+
+# Retorna cuántos puntos están cerca de una referencia.
+
+
+def cantidad_puntos_cercanos(self, referencia, limite, *puntos):
+
+    contador = 0
+
+
+    for punto in puntos:
+
+        distancia = self.distancia_euclidiana(
+            referencia,
+            punto
+        )
+
+
+        if distancia <= limite:
+
+            contador += 1
+
+
+    return contador
+
+#EJERCICIO 19: Inventario de productos
+#Clase Inventario que: (1) tenga método agregar_stock(producto, cantidad) que guarde en un diccionario
+#(2) tenga método restar_stock(producto, cantidad) que disminuya y retorne True si hay suficiente
+#(3) tenga método productos_bajo_stock(minimo) que retorne una lista de productos con cantidad < minimo.
+
+class Inventario:
+
+    def __init__(self):
+
+        self.stock = {}
+
+
+
+    def agregar_stock(self, producto, cantidad):
+
+        if producto in self.stock:
+
+            self.stock[producto] += cantidad
+
+        else:
+
+            self.stock[producto] = cantidad
+
+
+
+    def restar_stock(self, producto, cantidad):
+
+        if producto in self.stock:
+
+            if self.stock[producto] >= cantidad:
+
+                self.stock[producto] -= cantidad
+
+                return True
+
+
+        return False
+
+
+
+    def productos_bajo_stock(self, minimo):
+
+        productos = []
+
+
+        for producto, cantidad in self.stock.items():
+
+            if cantidad < minimo:
+
+                productos.append(producto)
+
+
+        return productos
+
+# POSIBLES CAMBIOS, MEZCLAS O MÉTODOS AGREGADOS
+# EJERCICIO 19: Inventario de productos
+
+
+
+# CAMBIO 1:
+# Método eliminar_producto(producto)
+
+# Permite borrar completamente un producto del inventario.
+
+
+
+def eliminar_producto(self, producto):
+
+    if producto in self.stock:
+
+        del self.stock[producto]
+
+        return True
+
+    return False
+
+
+
+# CAMBIO 2:
+# Método consultar_stock(producto)
+
+# Retorna la cantidad disponible de un producto.
+
+
+
+def consultar_stock(self, producto):
+
+    if producto in self.stock:
+
+        return self.stock[producto]
+
+    return 0
+
+
+
+# CAMBIO 3:
+# Método producto_mayor_stock()
+
+# Busca el producto con mayor cantidad.
+# Se realiza con lógica manual sin usar max().
+
+
+
+def producto_mayor_stock(self):
+
+    if len(self.stock) == 0:
+
+        return None
+
+
+    mayor = 0
+
+    producto_mayor = None
+
+
+    for producto, cantidad in self.stock.items():
+
+        if cantidad > mayor:
+
+            mayor = cantidad
+
+            producto_mayor = producto
+
+
+    return producto_mayor, mayor
+
+
+
+# CAMBIO 4:
+# Método productos_agotados()
+
+# Retorna productos cuya cantidad sea igual a cero.
+
+
+
+def productos_agotados(self):
+
+    agotados = []
+
+
+    for producto, cantidad in self.stock.items():
+
+        if cantidad == 0:
+
+            agotados.append(producto)
+
+
+    return agotados
+
+
+
+# CAMBIO 5:
+# Método total_stock()
+
+# Calcula la cantidad total de unidades almacenadas.
+
+
+
+def total_stock(self):
+
+    total = 0
+
+
+    for cantidad in self.stock.values():
+
+        total += cantidad
+
+
+    return total
+
+
+
+# CAMBIO 6:
+# Método actualizar_stock(producto, cantidad)
+
+# Cambia directamente la cantidad de un producto.
+
+
+
+def actualizar_stock(self, producto, cantidad):
+
+    if producto in self.stock:
+
+        self.stock[producto] = cantidad
+
+        return True
+
+
+    return False
+
+
+
+# CAMBIO 7:
+# Agregar historial de movimientos.
+
+# En __init__ agregar:
+
+# self.historial = []
+
+
+# Cada operación puede guardar:
+
+# ("Mouse", "Agregado", 10)
+
+# ("Mouse", "Retirado", 3)
+
+
+
+# CAMBIO 8:
+# Manejar productos con más información.
+
+# En lugar de guardar solo cantidad:
+
+# {
+# "Mouse": 10
+# }
+
+
+# Guardar:
+
+# {
+# "Mouse": {
+#     "cantidad": 10,
+#     "precio": 15
+# }
+# }
+
+
+
+# CAMBIO 9:
+# Usar lista de tuplas en lugar de diccionario.
+
+# Ejemplo:
+
+# [
+# ("Mouse",10),
+# ("Teclado",5)
+# ]
+
+
+# Luego recorrer:
+
+# for producto, cantidad in lista:
+
+
+
+# CAMBIO 10:
+# Buscar productos por rango de stock.
+
+# Ejemplo:
+
+# Productos entre 5 y 20 unidades.
+
+
+
+def productos_por_rango(self, minimo, maximo):
+
+    resultado = []
+
+
+    for producto, cantidad in self.stock.items():
+
+        if cantidad >= minimo and cantidad <= maximo:
+
+            resultado.append(producto)
+
+
+    return resultado
+
+
+
+# CAMBIO 11:
+# Método vender_producto()
+
+# Similar a restar_stock(),
+# pero pensado como una venta.
+
+
+
+def vender_producto(self, producto, cantidad):
+
+    if producto in self.stock:
+
+        if self.stock[producto] >= cantidad:
+
+            self.stock[producto] -= cantidad
+
+            return True
+
+
+    return False
+
+
+
+# CAMBIO 12:
+# Método agregar_stock_manual()
+
+# Versión más manual sin usar "in".
+
+# Se podría recorrer el diccionario
+# buscando si existe el producto.
+
+
+
+def agregar_stock_manual(self, producto, cantidad):
+
+    encontrado = False
+
+
+    for clave in self.stock:
+
+        if clave == producto:
+
+            self.stock[clave] += cantidad
+
+            encontrado = True
+
+
+    if encontrado == False:
+
+        self.stock[producto] = cantidad
+
+#EJERCICIO 20: Analizador de patrones en textos
+#Clase AnalizadorPatrones que: (1) tenga método encontrar_palabras(texto, patron) que busque palabras que inicien con el patrón y retorne una listA
+#(2) tenga método agrupar_por_longitud(texto) que retorne un diccionario {longitud: [palabras]}
+#(3) tenga método palabras_unicas() usando un conjunto.
+class AnalizadorPatrones:
+
+    def __init__(self):
+
+        self.palabras = []
+
+
+
+    def encontrar_palabras(self, texto, patron):
+
+        palabras_encontradas = []
+
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            if palabra.startswith(patron):
+
+                palabras_encontradas.append(palabra)
+
+
+
+        self.palabras = palabras
+
+
+        return palabras_encontradas
+
+
+
+    def agrupar_por_longitud(self, texto):
+
+        agrupacion = {}
+
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            longitud = len(palabra)
+
+
+            if longitud not in agrupacion:
+
+                agrupacion[longitud] = []
+
+
+            agrupacion[longitud].append(palabra)
+
+
+
+        return agrupacion
+
+
+
+    def palabras_unicas(self):
+
+        return set(self.palabras)
+
+
+# POSIBLES CAMBIOS, MEZCLAS O MÉTODOS AGREGADOS
+# EJERCICIO 20: Analizador de patrones en textos
+
+
+
+# CAMBIO 1:
+# Método encontrar_palabras_manual()
+
+# Reemplaza startswith() por lógica manual.
+# Compara los primeros caracteres de la palabra
+# con el patrón.
+
+
+
+def encontrar_palabras_manual(self, texto, patron):
+
+    resultado = []
+
+
+    palabras = texto.split()
+
+
+    for palabra in palabras:
+
+        coincide = True
+
+
+        if len(palabra) < len(patron):
+
+            coincide = False
+
+
+        else:
+
+            for i in range(len(patron)):
+
+                if palabra[i] != patron[i]:
+
+                    coincide = False
+
+
+        if coincide:
+
+            resultado.append(palabra)
+
+
+    return resultado
+
+
+
+# CAMBIO 2:
+# Método agrupar_por_longitud_manual()
+
+# Realiza la agrupación sin usar directamente
+# not in para crear claves.
+
+
+
+def agrupar_por_longitud_manual(self, texto):
+
+    resultado = {}
+
+
+    palabras = texto.split()
+
+
+    for palabra in palabras:
+
+        longitud = len(palabra)
+
+
+        encontrado = False
+
+
+        for clave in resultado:
+
+            if clave == longitud:
+
+                encontrado = True
+
+
+
+        if encontrado:
+
+            resultado[longitud].append(palabra)
+
+
+        else:
+
+            resultado[longitud] = [palabra]
+
+
+    return resultado
+
+
+
+# CAMBIO 3:
+# Método palabras_unicas_manual()
+
+# Busca palabras repetidas sin usar set().
+
+
+
+def palabras_unicas_manual(self):
+
+    unicas = []
+
+
+    for palabra in self.palabras:
+
+        repetida = False
+
+
+        for elemento in unicas:
+
+            if palabra == elemento:
+
+                repetida = True
+
+
+
+        if repetida == False:
+
+            unicas.append(palabra)
+
+
+    return unicas
+
+
+
+# CAMBIO 4:
+# Método contar_palabras()
+
+# Cuenta cuántas palabras tiene un texto.
+
+
+
+def contar_palabras(self, texto):
+
+    palabras = texto.split()
+
+
+    contador = 0
+
+
+    for palabra in palabras:
+
+        contador += 1
+
+
+    return contador
+
+
+
+# CAMBIO 5:
+# Método palabra_mas_larga()
+
+# Encuentra la palabra con mayor longitud
+# sin usar max().
+
+
+
+def palabra_mas_larga(self, texto):
+
+    palabras = texto.split()
+
+
+    if len(palabras) == 0:
+
+        return None
+
+
+    mayor = palabras[0]
+
+
+    for palabra in palabras:
+
+        if len(palabra) > len(mayor):
+
+            mayor = palabra
+
+
+    return mayor
+
+
+
+# CAMBIO 6:
+# Método palabra_mas_corta()
+
+# Encuentra la palabra más pequeña
+# sin usar min().
+
+
+
+def palabra_mas_corta(self, texto):
+
+    palabras = texto.split()
+
+
+    if len(palabras) == 0:
+
+        return None
+
+
+    menor = palabras[0]
+
+
+    for palabra in palabras:
+
+        if len(palabra) < len(menor):
+
+            menor = palabra
+
+
+    return menor
+
+
+
+# CAMBIO 7:
+# Guardar historial de textos analizados.
+
+
+# En __init__ agregar:
+
+
+# self.historial = []
+
+
+
+# En cada método agregar:
+
+
+# self.historial.append(texto)
+
+
+
+# Permite saber todos los textos procesados.
+
+
+
+# CAMBIO 8:
+# Método contar_repeticiones()
+
+# Cuenta cuántas veces aparece cada palabra
+# usando diccionario.
+
+
+
+def contar_repeticiones(self, texto):
+
+    frecuencia = {}
+
+
+    palabras = texto.split()
+
+
+    for palabra in palabras:
+
+        if palabra in frecuencia:
+
+            frecuencia[palabra] += 1
+
+
+        else:
+
+            frecuencia[palabra] = 1
+
+
+    return frecuencia
+
+
+
+# CAMBIO 9:
+# Método buscar_palabras_por_longitud()
+
+# Retorna palabras que tengan una longitud específica.
+
+
+
+def buscar_por_longitud(self, texto, longitud):
+
+    resultado = []
+
+
+    palabras = texto.split()
+
+
+    for palabra in palabras:
+
+        if len(palabra) == longitud:
+
+            resultado.append(palabra)
+
+
+    return resultado
+
+
+
+# CAMBIO 10:
+# Método convertir_mayusculas()
+
+# Convierte palabras manualmente usando upper().
+
+
+
+def convertir_mayusculas(self, texto):
+
+    palabras = texto.split()
+
+
+    resultado = []
+
+
+    for palabra in palabras:
+
+        resultado.append(
+            palabra.upper()
+        )
+
+
+    return resultado
+
+
+
+# CAMBIO 11:
+# Método encontrar_patron_sin_distincion()
+
+# Busca patrones sin diferenciar mayúsculas
+# y minúsculas usando lower().
+
+
+
+def encontrar_patron_sin_distincion(self, texto, patron):
+
+    resultado = []
+
+
+    palabras = texto.split()
+
+
+    patron = patron.lower()
+
+
+    for palabra in palabras:
+
+        if palabra.lower().startswith(patron):
+
+            resultado.append(palabra)
+
+
+    return resultado
+
+
+
+# CAMBIO 12:
+# Elimina palabras repetidas manteniendo el orden original sin usar set().
+# Sirve para ejercicios de palabras únicas y eliminación de duplicados.
+
+
+class AnalizadorPalabras:
+
+    def __init__(self):
+
+        self.palabras = []
+
+
+    def cargar_texto(self, texto):
+
+        self.palabras = texto.split()
+
+
+
+    def palabras_unicas(self):
+
+        resultado = []
+
+
+        for palabra in self.palabras:
+
+            if palabra not in resultado:
+
+                resultado.append(palabra)
+
+
+        return resultado
+
+
+
+# Parámetros de prueba
+
+
+analizador = AnalizadorPalabras()
+
+
+analizador.cargar_texto(
+    "python casa python carro casa libro"
+)
+
+
+print(analizador.palabras_unicas())
+
+
+
+# CAMBIO 13:
+# Guarda frecuencia y longitud de cada palabra usando un diccionario.
+# Sirve para mezclar contador de frecuencia con análisis de texto.
+
+
+class AnalizadorFrecuencia:
+
+    def __init__(self):
+
+        self.datos = {}
+
+
+
+    def analizar_texto(self, texto):
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            if palabra in self.datos:
+
+                self.datos[palabra]["cantidad"] += 1
+
+
+            else:
+
+                self.datos[palabra] = {
+
+                    "cantidad": 1,
+
+                    "longitud": len(palabra)
+
+                }
+
+
+        return self.datos
+
+
+
+# Parámetros de prueba
+
+
+analizador = AnalizadorFrecuencia()
+
+
+texto = "python casa python carro casa"
+
+
+print(analizador.analizar_texto(texto))
+
+
+
+# CAMBIO 14:
+# Filtra palabras según una longitud mínima.
+# Sirve para búsquedas y análisis de textos.
+
+
+class FiltroPalabras:
+
+    def eliminar_palabras_cortas(self, texto, minimo):
+
+        resultado = []
+
+
+        palabras = texto.split()
+
+
+        for palabra in palabras:
+
+            if len(palabra) >= minimo:
+
+                resultado.append(palabra)
+
+
+        return resultado
+
+
+
+# Parámetros de prueba
+
+
+filtro = FiltroPalabras()
+
+
+texto = "sol python casa computadora"
+
+
+print(
+    filtro.eliminar_palabras_cortas(texto, 5)
+)
+
+
+def eliminar_palabras_cortas(self, texto, minimo):
+
+    resultado = []
+
+
+    palabras = texto.split()
+
+
+    for palabra in palabras:
+
+        if len(palabra) >= minimo:
+
+            resultado.append(palabra)
+
+
+    return resultado
+
+
+
+# CAMBIO 15:
+# Método invertir_palabras()
+
+# Invierte el orden de las palabras.
+
+
+
+def invertir_palabras(self, texto):
+
+    palabras = texto.split()
+
+
+    resultado = []
+
+
+    for i in range(len(palabras)-1, -1, -1):
+
+        resultado.append(palabras[i])
+
+
+    return resultado
+
+
+
+
+
 
 # LISTAS (list)
 
