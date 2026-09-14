@@ -3006,11 +3006,6 @@ print(
 
 # "adolescente"
 
-
-
-# ----------------------------------------------------
-
-
 # PRUEBA 2:
 # Método: agrupar_por_categoria(*edades)
 
@@ -3154,9 +3149,6 @@ print(
 # "mayor": [70]
 # }
 
-
-
-# ----------------------------------------------------
 
 
 # PRUEBA 3:
@@ -3882,16 +3874,8 @@ class Inventario:
 
 
 
-
-#Parámetros de prueba
-
-
-
 inventario = Inventario()
 
-
-
-#Agregar productos
 
 inventario.agregar_stock(
     "Mouse",
@@ -3912,8 +3896,6 @@ inventario.agregar_stock(
 
 
 
-#Mostrar inventario
-
 print(inventario.stock)
 
 
@@ -3928,14 +3910,8 @@ print(
 )
 
 
-
-#Mostrar inventario actualizado
-
 print(inventario.stock)
 
-
-
-#Buscar productos con bajo stock
 
 print(
     inventario.productos_bajo_stock(
