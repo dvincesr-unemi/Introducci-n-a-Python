@@ -5658,9 +5658,2916 @@ def invertir_palabras(self, texto):
 
     return resultado
 
+# CLASE 1: Calculadora
+# Sirve para agrupar operaciones matemáticas como suma, promedio, conversiones y cálculos.
+# Relacionado con ejercicios: 2, 3, 4, 13 y 14.
+
+
+class Calculadora:
+
+    def promedio(self, n1, n2, n3):
+
+        return (n1 + n2 + n3) / 3
+
+
+    def convertir_celsius_fahrenheit(self, celsius):
+
+        return celsius * 1.8 + 32
+
+
+    def calcular_imc(self, peso, estatura):
+
+        return peso / (estatura ** 2)
 
 
 
+# CLASE 2: ConversorTiempo
+# Sirve para transformar segundos, minutos y horas usando división entera y residuo.
+# Relacionado con ejercicios: 5, 9 y 12.
+
+
+class ConversorTiempo:
+
+    def segundos_a_hora(self, segundos):
+
+        horas = segundos // 3600
+
+        resto = segundos % 3600
+
+        minutos = resto // 60
+
+        segundos_final = resto % 60
+
+        return horas, minutos, segundos_final
+
+
+
+    def minutos_a_horas(self, minutos):
+
+        horas = minutos // 60
+
+        minutos_restantes = minutos % 60
+
+        return horas, minutos_restantes
+
+
+
+# CLASE 3: AnalizadorNumeros
+# Sirve para analizar números mediante condiciones y operadores matemáticos.
+# Relacionado con ejercicios: 8, 11 y 15.
+
+
+class AnalizadorNumeros:
+
+
+    def es_par(self, numero):
+
+        return numero % 2 == 0
+
+
+
+    def suma_digitos(self, numero):
+
+        suma = 0
+
+        while numero > 0:
+
+            digito = numero % 10
+
+            suma += digito
+
+            numero = numero // 10
+
+
+        return suma
+
+
+
+    def es_multiplo(self, numero, multiplo):
+
+        return numero % multiplo == 0
+
+
+
+# CLASE 4: Cajero
+# Sirve para calcular cantidades mínimas de billetes y monedas.
+# Relacionado con ejercicio 10.
+
+
+class Cajero:
+
+
+    def calcular_billetes(self, monto):
+
+        resultado = {}
+
+
+        billetes = [50, 20, 10, 5, 1]
+
+
+        for billete in billetes:
+
+            cantidad = monto // billete
+
+            resultado[billete] = cantidad
+
+            monto = monto % billete
+
+
+        return resultado
+
+
+
+# CLASE 5: Producto
+# Sirve para representar productos con precio, cantidad y descuentos.
+# Relacionado con ejercicios 7 y 15.
+
+
+class Producto:
+
+
+    def __init__(self, nombre, precio, cantidad):
+
+        self.nombre = nombre
+
+        self.precio = precio
+
+        self.cantidad = cantidad
+
+
+
+    def calcular_total(self):
+
+        return self.precio * self.cantidad
+
+
+
+    def aplicar_descuento(self, porcentaje):
+
+        descuento = self.precio * porcentaje
+
+        return self.precio - descuento
+
+
+
+# CLASE 6: Inventario
+# Sirve para controlar productos almacenados y cantidades disponibles.
+# Relacionado con ejercicios 7, 10 y 15.
+
+
+class Inventario:
+
+
+    def __init__(self):
+
+        self.productos = {}
+
+
+
+    def agregar_producto(self, nombre, cantidad):
+
+        if nombre in self.productos:
+
+            self.productos[nombre] += cantidad
+
+        else:
+
+            self.productos[nombre] = cantidad
+
+
+
+    def retirar_producto(self, nombre, cantidad):
+
+        if nombre in self.productos:
+
+            if self.productos[nombre] >= cantidad:
+
+                self.productos[nombre] -= cantidad
+
+                return True
+
+
+        return False
+
+
+
+# CLASE 7: RegistroEstudiante
+# Sirve para almacenar notas y calcular resultados académicos.
+# Relacionado con ejercicio 2.
+
+
+class RegistroEstudiante:
+
+
+    def __init__(self):
+
+        self.notas = []
+
+
+
+    def agregar_nota(self, nota):
+
+        self.notas.append(nota)
+
+
+
+    def promedio(self):
+
+        suma = 0
+
+        for nota in self.notas:
+
+            suma += nota
+
+
+        return suma / len(self.notas)
+
+
+
+    def aprobado(self):
+
+        return self.promedio() >= 7
+
+
+
+# CLASE 8: ConversorGeometrico
+# Sirve para realizar cálculos de figuras geométricas.
+# Relacionado con ejercicio 3.
+
+
+import math
+
+
+class ConversorGeometrico:
+
+
+    def area_rectangulo(self, base, altura):
+
+        return base * altura
+
+
+
+    def perimetro_rectangulo(self, base, altura):
+
+        return 2 * (base + altura)
+
+
+
+    def area_circulo(self, radio):
+
+        return math.pi * radio ** 2
+
+
+
+    def perimetro_circulo(self, radio):
+
+        return 2 * math.pi * radio
+
+
+
+# CLASE 9: SistemaCompra
+# Sirve para simular compras aplicando descuentos e impuestos.
+# Relacionado con ejercicios 7 y 15.
+
+
+class SistemaCompra:
+
+
+    def calcular_total(self, precio, cantidad):
+
+        subtotal = precio * cantidad
+
+
+        if cantidad >= 10:
+
+            descuento = subtotal * 0.15
+
+        elif cantidad >= 5:
+
+            descuento = subtotal * 0.05
+
+        else:
+
+            descuento = 0
+
+
+        total = subtotal - descuento
+
+
+        return total
+
+
+
+# CLASE 10: ProcesadorTexto
+# Sirve para analizar palabras, contar frecuencia y buscar patrones.
+# Relacionado con ejercicios futuros de diccionarios y conjuntos.
+
+
+class ProcesadorTexto:
+
+
+    def contar_palabras(self, texto):
+
+        palabras = texto.split()
+
+        frecuencia = {}
+
+
+        for palabra in palabras:
+
+            if palabra in frecuencia:
+
+                frecuencia[palabra] += 1
+
+            else:
+
+                frecuencia[palabra] = 1
+
+
+        return frecuencia
+
+
+
+    def buscar_palabra(self, texto, palabra):
+
+        return palabra in texto.split()
+
+#EJERCICIO 1: Saludo con nombre y edad
+
+#Clase Persona.
+#Guarda datos de una persona y tiene un método para mostrar información.
+
+
+class Persona:
+
+    def __init__(self, nombre, edad):
+
+        self.nombre = nombre
+        self.edad = edad
+
+
+    def saludar(self):
+
+        return f"Hola {self.nombre}, tienes {self.edad} años"
+
+
+
+#EJERCICIO 2: Promedio de notas
+
+#Clase Estudiante.
+#Guarda notas y calcula promedio además de determinar estado.
+
+
+class Estudiante:
+
+    def __init__(self, nombre):
+
+        self.nombre = nombre
+        self.notas = []
+
+
+    def agregar_nota(self, nota):
+
+        self.notas.append(nota)
+
+
+    def promedio(self):
+
+        suma = 0
+
+        for nota in self.notas:
+
+            suma += nota
+
+        return suma / len(self.notas)
+
+
+    def estado(self):
+
+        if self.promedio() >= 7:
+
+            return "Aprobado"
+
+        else:
+
+            return "Reprobado"
+
+
+
+#EJERCICIO 3: Figuras geométricas
+
+#Clase Figura.
+#Permite agrupar cálculos de áreas y perímetros.
+
+
+class Rectangulo:
+
+    def __init__(self, base, altura):
+
+        self.base = base
+        self.altura = altura
+
+
+    def area(self):
+
+        return self.base * self.altura
+
+
+    def perimetro(self):
+
+        return 2 * (self.base + self.altura)
+
+
+
+#EJERCICIO 4: Conversión de temperatura
+
+#Clase Conversor.
+#Agrupa diferentes conversiones.
+
+
+class Conversor:
+
+    def celsius_fahrenheit(self, celsius):
+
+        return celsius * 1.8 + 32
+
+
+
+#EJERCICIO 5: Conversión de segundos
+
+#Clase Tiempo.
+#Guarda segundos y los convierte en formato horas:minutos:segundos.
+
+
+class Tiempo:
+
+    def __init__(self, segundos):
+
+        self.segundos = segundos
+
+
+    def convertir(self):
+
+        horas = self.segundos // 3600
+
+        resto = self.segundos % 3600
+
+        minutos = resto // 60
+
+        segundos = resto % 60
+
+        return horas, minutos, segundos
+
+
+
+#EJERCICIO 6: Intercambio de valores
+
+#Clase Intercambiador.
+#Manipula valores almacenados.
+
+
+class Intercambiador:
+
+    def __init__(self, a, b):
+
+        self.a = a
+        self.b = b
+
+
+    def intercambiar(self):
+
+        self.a, self.b = self.b, self.a
+
+
+
+#EJERCICIO 7: IVA y descuentos
+
+#Clase Producto.
+#Guarda precio y aplica operaciones comerciales.
+
+
+class Producto:
+
+    def __init__(self, precio):
+
+        self.precio = precio
+
+
+    def descuento(self, porcentaje):
+
+        return self.precio * porcentaje
+
+
+    def iva(self):
+
+        return self.precio * 0.15
+
+
+    def total(self):
+
+        return self.precio + self.iva()
+
+
+
+#EJERCICIO 8: Par, impar y múltiplos
+
+#Clase Numero.
+#Permite analizar características de un número.
+
+
+class Numero:
+
+    def __init__(self, valor):
+
+        self.valor = valor
+
+
+    def es_par(self):
+
+        return self.valor % 2 == 0
+
+
+    def es_multiplo(self, numero):
+
+        return self.valor % numero == 0
+
+
+
+#EJERCICIO 9: Tiempo en formato hh:mm:ss
+
+#Clase Tiempo.
+#Puede reutilizarse para conversiones de tiempo.
+
+
+class TiempoFormato:
+
+    def __init__(self, hora):
+
+        self.hora = hora
+
+
+    def segundos_totales(self):
+
+        horas, minutos, segundos = self.hora.split(":")
+
+        return int(horas)*3600 + int(minutos)*60 + int(segundos)
+
+
+
+#EJERCICIO 10: Billetes y monedas
+
+#Clase Cajero.
+#Calcula cantidades mínimas de billetes.
+
+
+class Cajero:
+
+    def __init__(self, monto):
+
+        self.monto = monto
+
+
+    def calcular_billetes(self):
+
+        resultado = {}
+
+        valores = [50,20,10,5,1]
+
+        for valor in valores:
+
+            resultado[valor] = self.monto // valor
+
+            self.monto %= valor
+
+
+        return resultado
+
+
+
+#EJERCICIO 11 y 23: Dígitos de números
+
+#Clase AnalizadorNumero.
+#Trabaja con divisiones y análisis de números.
+
+
+class AnalizadorNumero:
+
+    def __init__(self, numero):
+
+        self.numero = numero
+
+
+    def cantidad_digitos(self):
+
+        numero = abs(self.numero)
+
+        contador = 0
+
+
+        while numero > 0:
+
+            contador += 1
+
+            numero //= 10
+
+
+        return contador
+
+
+
+#EJERCICIO 16 al 30: Ciclos, factorial, primos, Fibonacci
+
+#Clase AnalizadorMatematico.
+#Agrupa operaciones numéricas usando ciclos.
+
+
+class AnalizadorMatematico:
+
+
+    def factorial(self, n):
+
+        resultado = 1
+
+        for i in range(1, n + 1):
+
+            resultado *= i
+
+        return resultado
+
+
+
+    def es_primo(self, n):
+
+        for i in range(2, n):
+
+            if n % i == 0:
+
+                return False
+
+        return True
+
+
+
+    def fibonacci(self, cantidad):
+
+        lista = []
+
+        a = 0
+
+        b = 1
+
+
+        for i in range(cantidad):
+
+            lista.append(a)
+
+            a, b = b, a+b
+
+
+        return lista
+
+
+
+#EJERCICIO 19 y 20: Notas, máximos y mínimos
+
+#Clase RegistroNotas.
+#Guarda varias notas y permite obtener estadísticas.
+
+
+class RegistroNotas:
+
+    def __init__(self):
+
+        self.notas = []
+
+
+    def agregar(self, nota):
+
+        self.notas.append(nota)
+
+
+    def nota_mayor(self):
+
+        mayor = self.notas[0]
+
+        for nota in self.notas:
+
+            if nota > mayor:
+
+                mayor = nota
+
+        return mayor
+
+
+
+#EJERCICIO 26: Juego de adivinar número
+
+#Clase Juego.
+#Guarda estado del juego e intentos.
+
+
+class JuegoNumero:
+
+    def __init__(self, secreto):
+
+        self.secreto = secreto
+        self.intentos = 0
+
+
+    def jugar(self, numero):
+
+        self.intentos += 1
+
+        return numero == self.secreto
+
+
+
+#EJERCICIO 28: IVA con funciones
+
+#Clase Factura.
+#Reutiliza métodos para calcular valores finales.
+
+
+class Factura:
+
+    def __init__(self, precio):
+
+        self.precio = precio
+
+
+    def calcular_iva(self):
+
+        return self.precio * 0.15
+
+
+    def total(self):
+
+        return self.precio + self.calcular_iva()
+
+
+
+#EJERCICIO 29 y 30: Primos y números especiales
+
+#Clase AnalizadorAvanzado.
+#Combina métodos matemáticos reutilizables.
+
+
+class AnalizadorAvanzado:
+
+
+    def contar_primos(self, inicio, fin):
+
+        contador = 0
+
+
+        for numero in range(inicio, fin + 1):
+
+            if self.es_primo(numero):
+
+                contador += 1
+
+
+        return contador
+
+
+
+    def es_primo(self, numero):
+
+        if numero <= 1:
+
+            return False
+
+
+        for i in range(2, numero):
+
+            if numero % i == 0:
+
+                return False
+
+
+        return True
+
+# EJERCICIO 31:
+# Uso de clases para organizar funciones de un menú.
+# Cada método representa una acción diferente del programa.
+
+
+class Menu:
+
+    def __init__(self):
+        pass
+
+    def saludar(self):
+        nombre = input("Nombre: ")
+        print(f"Hola {nombre}")
+
+    def despedir(self):
+        nombre = input("Nombre: ")
+        print(f"Adiós {nombre}")
+
+    def calcular(self):
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
+
+        print(f"Suma: {num1 + num2}")
+        print(f"Resta: {num1 - num2}")
+        print(f"Multiplicación: {num1 * num2}")
+
+        if num2 != 0:
+            print(f"División: {num1 / num2}")
+        else:
+            print("No se puede dividir para cero")
+
+    def mostrar_menu(self):
+
+        while True:
+
+            print("\n--- MENÚ ---")
+            print("1. Saludar")
+            print("2. Despedir")
+            print("3. Calcular")
+            print("4. Salir")
+
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == "1":
+                self.saludar()
+
+            elif opcion == "2":
+                self.despedir()
+
+            elif opcion == "3":
+                self.calcular()
+
+            elif opcion == "4":
+                print("Programa finalizado")
+                break
+
+            else:
+                print("Opción inválida")
+
+
+menu = Menu()
+
+menu.mostrar_menu()
+
+# EJERCICIO 31: Menú con funciones separadas usando clase
+
+class Menu:
+    def saludar(self):
+        nombre = input("Nombre: ")
+        print(f"Hola {nombre}")
+
+    def despedir(self):
+        nombre = input("Nombre: ")
+        print(f"Adiós {nombre}")
+
+    def calcular(self):
+        a = float(input("Número 1: "))
+        b = float(input("Número 2: "))
+
+        print("Suma:", a + b)
+        print("Resta:", a - b)
+        print("Multiplicación:", a * b)
+
+        if b != 0:
+            print("División:", a / b)
+        else:
+            print("No se puede dividir para cero")
+
+    def iniciar(self):
+        while True:
+            print("\n1. Saludar")
+            print("2. Despedir")
+            print("3. Calcular")
+            print("4. Salir")
+
+            opcion = input("Opción: ")
+
+            if opcion == "1":
+                self.saludar()
+            elif opcion == "2":
+                self.despedir()
+            elif opcion == "3":
+                self.calcular()
+            elif opcion == "4":
+                break
+            else:
+                print("Opción inválida")
+
+
+#Menu().iniciar()
+
+
+
+# EJERCICIO 32
+
+class Rectangulo:
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def area(self):
+        return self.base * self.altura
+
+
+base = float(input("Base: "))
+altura = float(input("Altura: "))
+
+rect = Rectangulo(base, altura)
+
+print("Área:", rect.area())
+
+
+
+# EJERCICIO 33
+
+class Numeros:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def maximo(self):
+        return max(self.a, self.b, self.c)
+
+
+n = Numeros(10, 25, 7)
+
+print("Mayor:", n.maximo())
+
+
+
+# EJERCICIO 34
+
+class Año:
+    def __init__(self, anio):
+        self.anio = anio
+
+    def es_bisiesto(self):
+        return (self.anio % 4 == 0 and self.anio % 100 != 0) or self.anio % 400 == 0
+
+
+a = Año(2024)
+
+print(a.es_bisiesto())
+
+
+
+# EJERCICIO 35
+
+class Combinatoria:
+
+    def factorial(self, n):
+        resultado = 1
+
+        for i in range(1, n + 1):
+            resultado *= i
+
+        return resultado
+
+
+    def calcular(self, n, k):
+        if k > n:
+            return None
+
+        return self.factorial(n) / (
+            self.factorial(k) * self.factorial(n-k)
+        )
+
+
+c = Combinatoria()
+
+print(c.calcular(5, 2))
+
+
+
+# EJERCICIO 36
+
+class Calculadora:
+
+    def sumar(self, a, b):
+        return a + b
+
+    def restar(self, a, b):
+        return a - b
+
+    def multiplicar(self, a, b):
+        return a * b
+
+    def dividir(self, a, b):
+        if b == 0:
+            return None
+
+        return a / b
+
+
+calc = Calculadora()
+
+print(calc.sumar(5, 3))
+print(calc.restar(5, 3))
+print(calc.multiplicar(5, 3))
+print(calc.dividir(5, 3))
+
+
+
+# EJERCICIO 37
+
+class Texto:
+
+    def __init__(self, frase):
+        self.frase = frase
+
+    def contar_vocales(self):
+        contador = 0
+
+        for letra in self.frase.lower():
+
+            if letra in "aeiouáéíóú":
+                contador += 1
+
+        return contador
+
+
+texto = Texto("Programación Python")
+
+print("Vocales:", texto.contar_vocales())
+
+
+
+# EJERCICIO 38
+
+class Notas:
+
+    def __init__(self, lista):
+        self.lista = lista
+
+    def promedio(self):
+        return sum(self.lista) / len(self.lista)
+
+    def maxima(self):
+        return max(self.lista)
+
+    def minima(self):
+        return min(self.lista)
+
+
+notas = Notas([7, 8.5, 6, 9, 10, 5.5])
+
+print("Promedio:", notas.promedio())
+print("Máxima:", notas.maxima())
+print("Mínima:", notas.minima())
+
+# EJERCICIO 31: Menú con funciones separadas
+
+class Menu:
+    
+    def saludar(self):
+        nombre = input("Ingrese su nombre: ")
+        print(f"Hola {nombre}")
+
+    def despedir(self):
+        nombre = input("Ingrese su nombre: ")
+        print(f"Adiós {nombre}")
+
+    def calcular(self):
+        a = float(input("Número 1: "))
+        b = float(input("Número 2: "))
+
+        print(f"Suma: {a + b}")
+        print(f"Resta: {a - b}")
+        print(f"Multiplicación: {a * b}")
+
+        if b != 0:
+            print(f"División: {a / b}")
+        else:
+            print("No se puede dividir para cero")
+
+    def mostrar_menu(self):
+        print("\n--- MENU ---")
+        print("1. Saludar")
+        print("2. Despedir")
+        print("3. Calcular")
+        print("4. Salir")
+
+    def ejecutar(self):
+        while True:
+            self.mostrar_menu()
+
+            opcion = input("Seleccione: ")
+
+            if opcion == "1":
+                self.saludar()
+
+            elif opcion == "2":
+                self.despedir()
+
+            elif opcion == "3":
+                self.calcular()
+
+            elif opcion == "4":
+                print("Programa finalizado")
+                break
+
+            else:
+                print("Opción inválida")
+
+
+#objeto = Menu()
+#objeto.ejecutar()
+
+
+
+# EJERCICIO 32: Área de rectángulo
+
+class Rectangulo:
+
+    def area(self, base, altura):
+        return base * altura
+
+
+rect = Rectangulo()
+
+base = float(input("Base: "))
+altura = float(input("Altura: "))
+
+print(f"Área: {rect.area(base, altura)}")
+
+
+
+# EJERCICIO 33: Máximo de tres números
+
+class Numeros:
+
+    def maximo(self, a, b, c):
+
+        if a >= b and a >= c:
+            return a
+
+        elif b >= a and b >= c:
+            return b
+
+        return c
+
+
+n = Numeros()
+
+a = float(input("Número 1: "))
+b = float(input("Número 2: "))
+c = float(input("Número 3: "))
+
+print(f"Mayor: {n.maximo(a,b,c)}")
+
+
+
+# EJERCICIO 34: Año bisiesto
+
+class Fecha:
+
+    def es_bisiesto(self, anio):
+
+        return (anio % 4 == 0 and anio % 100 != 0) or anio % 400 == 0
+
+
+fecha = Fecha()
+
+anio = int(input("Ingrese año: "))
+
+print(fecha.es_bisiesto(anio))
+
+# EJERCICIO 3:
+# Clase para calcular área y perímetro de figuras geométricas.
+
+import math
+
+class Figura:
+    def __init__(self):
+        self.base = 0
+        self.altura = 0
+        self.radio = 0
+
+    def rectangulo(self):
+        self.base = float(input("Base: "))
+        self.altura = float(input("Altura: "))
+
+        area = self.base * self.altura
+        perimetro = 2 * (self.base + self.altura)
+
+        print(f"Área: {area}")
+        print(f"Perímetro: {perimetro}")
+
+    def circulo(self):
+        self.radio = float(input("Radio: "))
+
+        area = math.pi * self.radio ** 2
+        perimetro = 2 * math.pi * self.radio
+
+        print(f"Área: {area:.2f}")
+        print(f"Perímetro: {perimetro:.2f}")
+
+
+figura = Figura()
+
+figura.rectangulo()
+figura.circulo()
+
+# EJERCICIO 2:
+# Clase para calcular promedio de notas y determinar si aprueba o reprueba.
+
+class PromedioEstudiante:
+    def __init__(self):
+        self.n1 = 0
+        self.n2 = 0
+        self.n3 = 0
+        self.promedio = 0
+
+    def ingresar_notas(self):
+        self.n1 = float(input("Nota 1: "))
+        self.n2 = float(input("Nota 2: "))
+        self.n3 = float(input("Nota 3: "))
+
+    def calcular_promedio(self):
+        self.promedio = (self.n1 + self.n2 + self.n3) / 3
+
+    def mostrar_resultado(self):
+        if self.promedio >= 7:
+            estado = "Aprobado"
+        else:
+            estado = "Reprobado"
+
+        print(f"Promedio: {self.promedio:.2f}")
+        print(f"Estado: {estado}")
+
+
+estudiante = PromedioEstudiante()
+estudiante.ingresar_notas()
+estudiante.calcular_promedio()
+estudiante.mostrar_resultado()
+
+# EJERCICIO 4:
+# Clase para convertir temperatura Celsius a Fahrenheit.
+
+class ConversorTemperatura:
+    def __init__(self):
+        self.celsius = 0
+        self.fahrenheit = 0
+
+    def ingresar_temperatura(self):
+        self.celsius = float(input("Temperatura en Celsius: "))
+
+    def convertir(self):
+        self.fahrenheit = self.celsius * 9 / 5 + 32
+
+    def mostrar(self):
+        print(f"{self.celsius}°C equivalen a {self.fahrenheit}°F")
+
+
+temp = ConversorTemperatura()
+temp.ingresar_temperatura()
+temp.convertir()
+temp.mostrar()
+
+# EJERCICIO 5:
+# Clase para convertir segundos totales a horas, minutos y segundos.
+
+class Tiempo:
+    def __init__(self):
+        self.segundos_totales = 0
+
+    def ingresar(self):
+        self.segundos_totales = int(input("Segundos totales: "))
+
+    def convertir(self):
+        horas = self.segundos_totales // 3600
+
+        resto = self.segundos_totales % 3600
+
+        minutos = resto // 60
+
+        segundos = resto % 60
+
+        print(f"{horas}:{minutos:02d}:{segundos:02d}")
+
+
+tiempo = Tiempo()
+tiempo.ingresar()
+tiempo.convertir()
+
+# EJERCICIO 31: Menú con funciones separadas usando clases
+
+class Menu:
+
+    def saludar(self):
+        nombre = input("Nombre: ")
+        print(f"Hola {nombre}")
+
+    def despedir(self):
+        nombre = input("Nombre: ")
+        print(f"Adiós {nombre}")
+
+    def calcular(self):
+        a = float(input("Número 1: "))
+        b = float(input("Número 2: "))
+
+        print("Suma:", a + b)
+        print("Resta:", a - b)
+        print("Multiplicación:", a * b)
+
+        if b != 0:
+            print("División:", a / b)
+        else:
+            print("No se puede dividir para cero")
+
+    def mostrar_menu(self):
+
+        while True:
+            print("\n--- MENU ---")
+            print("1. Saludar")
+            print("2. Despedir")
+            print("3. Calcular")
+            print("4. Salir")
+
+            opcion = input("Opción: ")
+
+            if opcion == "1":
+                self.saludar()
+
+            elif opcion == "2":
+                self.despedir()
+
+            elif opcion == "3":
+                self.calcular()
+
+            elif opcion == "4":
+                break
+
+            else:
+                print("Opción inválida")
+
+
+menu = Menu()
+#menu.mostrar_menu()
+
+
+
+# EJERCICIO 32: Área rectángulo
+
+class Rectangulo:
+
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def calcular_area(self):
+        return self.base * self.altura
+
+
+base = float(input("Base: "))
+altura = float(input("Altura: "))
+
+rectangulo = Rectangulo(base, altura)
+
+print("Área:", rectangulo.calcular_area())
+
+
+
+# EJERCICIO 33: Máximo de tres números
+
+class Numeros:
+
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def maximo(self):
+
+        if self.a >= self.b and self.a >= self.c:
+            return self.a
+
+        elif self.b >= self.a and self.b >= self.c:
+            return self.b
+
+        return self.c
+
+
+a = float(input("Número 1: "))
+b = float(input("Número 2: "))
+c = float(input("Número 3: "))
+
+numeros = Numeros(a,b,c)
+
+print("Mayor:", numeros.maximo())
+
+
+
+# EJERCICIO 34: Año bisiesto
+
+class Anio:
+
+    def __init__(self, anio):
+        self.anio = anio
+
+    def es_bisiesto(self):
+
+        return (self.anio % 4 == 0 and self.anio % 100 != 0) or self.anio % 400 == 0
+
+
+anio = int(input("Ingrese año: "))
+
+objeto = Anio(anio)
+
+print(objeto.es_bisiesto())
+
+
+
+# EJERCICIO 35: Factorial y combinatoria
+
+class Matematicas:
+
+    def factorial(self, n):
+
+        resultado = 1
+
+        for i in range(1,n+1):
+            resultado *= i
+
+        return resultado
+
+
+    def combinatoria(self,n,k):
+
+        if k > n or k < 0:
+            return None
+
+        return self.factorial(n) / (self.factorial(k) * self.factorial(n-k))
+
+
+mat = Matematicas()
+
+n = int(input("n: "))
+k = int(input("k: "))
+
+print("Combinatoria:", mat.combinatoria(n,k))
+
+
+
+# EJERCICIO 36: Calculadora con clases
+
+class Calculadora:
+
+    def sumar(self,a,b):
+        return a+b
+
+    def restar(self,a,b):
+        return a-b
+
+    def multiplicar(self,a,b):
+        return a*b
+
+    def dividir(self,a,b):
+
+        if b == 0:
+            return None
+
+        return a/b
+
+
+
+calc = Calculadora()
+
+a = float(input("Número 1: "))
+b = float(input("Número 2: "))
+
+print("Suma:", calc.sumar(a,b))
+print("Resta:", calc.restar(a,b))
+print("Multiplicación:", calc.multiplicar(a,b))
+print("División:", calc.dividir(a,b))
+
+
+
+# EJERCICIO 37: Contar vocales
+
+class Texto:
+
+    def __init__(self, frase):
+        self.frase = frase
+
+
+    def contar_vocales(self):
+
+        contador = 0
+
+        for letra in self.frase.lower():
+
+            if letra in "aeiouáéíóú":
+                contador += 1
+
+        return contador
+
+
+
+frase = input("Ingrese frase: ")
+
+texto = Texto(frase)
+
+print("Vocales:", texto.contar_vocales())
+
+
+
+# EJERCICIO 38: Analizar notas
+
+class Notas:
+
+    def __init__(self, lista_notas):
+        self.notas = lista_notas
+
+
+    def promedio(self):
+
+        return sum(self.notas) / len(self.notas)
+
+
+    def maxima(self):
+
+        return max(self.notas)
+
+
+    def minima(self):
+
+        return min(self.notas)
+
+
+
+notas = [7,8.5,6,9,10,5.5]
+
+objeto = Notas(notas)
+
+print(f"Promedio: {objeto.promedio():.2f}")
+print(f"Máxima: {objeto.maxima():.2f}")
+print(f"Mínima: {objeto.minima():.2f}")
+
+
+# EJERCICIO 39:
+# Clase ListaDatos que elimina duplicados respetando el orden.
+
+class ListaDatos:
+
+    def __init__(self, lista):
+        self.lista = lista
+
+    def eliminar_duplicados(self):
+
+        resultado = []
+        vistos = set()
+
+        for elemento in self.lista:
+
+            if elemento not in vistos:
+                resultado.append(elemento)
+                vistos.add(elemento)
+
+        return resultado
+
+    # NUEVO MÉTODO
+    def cantidad_elementos(self):
+
+        return len(self.lista)
+
+
+lista = ListaDatos(["a", "b", "a", "c", "b", "d"])
+
+print("Lista sin duplicados:", lista.eliminar_duplicados())
+print("Cantidad de elementos:", lista.cantidad_elementos())
+
+
+
+# EJERCICIO 40:
+# Clase Texto que cuenta frecuencia de palabras.
+
+class Texto:
+
+    def __init__(self, texto):
+
+        self.texto = texto
+        self.frecuencia = {}
+
+
+    def contar_palabras(self):
+
+        palabras = self.texto.lower().split()
+
+        for palabra in palabras:
+
+            self.frecuencia[palabra] = self.frecuencia.get(palabra, 0) + 1
+
+        return self.frecuencia
+
+
+    def palabra_mas_repetida(self):
+
+        if not self.frecuencia:
+            self.contar_palabras()
+
+        return max(self.frecuencia, key=self.frecuencia.get)
+
+
+    # NUEVO MÉTODO
+    def cantidad_palabras(self):
+
+        return len(self.texto.split())
+
+
+
+texto = Texto("Python es fácil y Python es poderoso")
+
+print(texto.contar_palabras())
+print("Más repetida:", texto.palabra_mas_repetida())
+print("Cantidad palabras:", texto.cantidad_palabras())
+
+
+
+# EJERCICIO 41:
+# Clase Pasajero
+
+class Pasajero:
+
+
+    def __init__(self, nombre, cedula, edad):
+
+        self.nombre = nombre
+        self.cedula = cedula
+        self.edad = edad
+
+
+    def cumplir_anios(self):
+
+        self.edad += 1
+
+
+    def mostrar(self):
+
+        print(f"Nombre: {self.nombre}")
+        print(f"Cédula: {self.cedula}")
+        print(f"Edad: {self.edad}")
+
+
+    # NUEVO MÉTODO
+    def es_mayor_edad(self):
+
+        return self.edad >= 18
+
+
+
+pasajero1 = Pasajero("Ana", "123456", 20)
+pasajero2 = Pasajero("Luis", "987654", 15)
+pasajero3 = Pasajero("Maria", "456789", 30)
+
+
+pasajero1.cumplir_anios()
+
+
+pasajero1.mostrar()
+print("Mayor de edad:", pasajero1.es_mayor_edad())
+
+pasajero2.mostrar()
+print("Mayor de edad:", pasajero2.es_mayor_edad())
+
+pasajero3.mostrar()
+print("Mayor de edad:", pasajero3.es_mayor_edad())
+
+
+
+# EJERCICIO 42:
+# Clase CuentaBancaria
+
+class CuentaBancaria:
+
+
+    def __init__(self):
+
+        self.saldo_actual = 0
+        self.historial = []
+
+
+    def depositar(self, cantidad):
+
+        self.saldo_actual += cantidad
+        self.historial.append(f"+{cantidad}")
+
+
+    def retirar(self, cantidad):
+
+        if cantidad <= self.saldo_actual:
+
+            self.saldo_actual -= cantidad
+            self.historial.append(f"-{cantidad}")
+
+        else:
+
+            print("Fondos insuficientes")
+
+
+    def saldo(self):
+
+        return self.saldo_actual
+
+
+    def ver_historial(self):
+
+        return self.historial
+
+
+    def __str__(self):
+
+        return f"Saldo: ${self.saldo_actual}"
+
+
+    # NUEVO MÉTODO
+    def cantidad_operaciones(self):
+
+        return len(self.historial)
+
+
+
+cuenta = CuentaBancaria()
+
+cuenta.depositar(100)
+cuenta.depositar(50)
+cuenta.retirar(30)
+
+print(cuenta)
+print("Historial:", cuenta.ver_historial())
+print("Operaciones:", cuenta.cantidad_operaciones())
+
+
+
+# EJERCICIO 43:
+# Clase Producto
+
+class Producto:
+
+
+    productos_creados = []
+
+
+    def __init__(self, nombre, precio, stock):
+
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+        Producto.productos_creados.append(self)
+
+
+
+    def vender(self, cantidad):
+
+        if cantidad <= self.stock:
+
+            self.stock -= cantidad
+            print("Venta realizada")
+
+        else:
+
+            print("No hay stock")
+
+
+
+    def reabastecer(self, cantidad):
+
+        self.stock += cantidad
+
+
+
+    def valor_inventario(self):
+
+        return self.precio * self.stock
+
+
+
+    @classmethod
+    def total_inventario(cls):
+
+        total = 0
+
+        for producto in cls.productos_creados:
+
+            total += producto.valor_inventario()
+
+        return total
+
+
+
+    # NUEVO MÉTODO
+    def tiene_stock(self):
+
+        return self.stock > 0
+
+
+
+    def __str__(self):
+
+        return f"{self.nombre} - Stock: {self.stock}"
+
+
+
+p1 = Producto("Mouse",20,10)
+p2 = Producto("Teclado",30,5)
+
+
+p1.vender(2)
+p2.reabastecer(3)
+
+
+print(p1)
+print("Tiene stock:",p1.tiene_stock())
+
+print(p2)
+
+print("Inventario total:",Producto.total_inventario())
+
+# EJERCICIO 39
+# Clase ListaDatos para eliminar duplicados respetando orden
+
+class ListaDatos:
+
+    def __init__(self, lista):
+        self.lista = lista
+
+    def eliminar_duplicados(self):
+        resultado = []
+        vistos = set()
+
+        for elemento in self.lista:
+            if elemento not in vistos:
+                resultado.append(elemento)
+                vistos.add(elemento)
+
+        return resultado
+
+    def mostrar(self):
+        print(self.lista)
+
+
+datos = ListaDatos(["a", "b", "a", "c", "b", "d"])
+
+print("Lista original:")
+datos.mostrar()
+
+print("Sin duplicados:")
+print(datos.eliminar_duplicados())
+
+
+
+# EJERCICIO 40
+# Clase AnalizadorTexto para contar palabras
+
+class AnalizadorTexto:
+
+    def __init__(self, texto):
+        self.texto = texto.lower()
+        self.frecuencia = {}
+
+    def contar_palabras(self):
+
+        palabras = self.texto.split()
+
+        for palabra in palabras:
+
+            if palabra in self.frecuencia:
+                self.frecuencia[palabra] += 1
+
+            else:
+                self.frecuencia[palabra] = 1
+
+        return self.frecuencia
+
+
+    def palabra_mas_repetida(self):
+
+        mayor = 0
+        palabra_mayor = ""
+
+        for palabra, cantidad in self.frecuencia.items():
+
+            if cantidad > mayor:
+                mayor = cantidad
+                palabra_mayor = palabra
+
+        return palabra_mayor
+
+
+texto = input("Ingrese un texto: ")
+
+analizador = AnalizadorTexto(texto)
+
+print("Frecuencia:")
+print(analizador.contar_palabras())
+
+print("Palabra más repetida:")
+print(analizador.palabra_mas_repetida())
+
+
+
+# EJERCICIO 41
+# Clase Pasajero
+
+class Pasajero:
+
+    cantidad_pasajeros = 0
+
+    def __init__(self, nombre, cedula, edad):
+
+        self.nombre = nombre
+        self.cedula = cedula
+        self.edad = edad
+
+        Pasajero.cantidad_pasajeros += 1
+
+
+    def cumplir_anios(self):
+
+        self.edad += 1
+
+
+    def mostrar(self):
+
+        print(f"Nombre: {self.nombre}")
+        print(f"Cédula: {self.cedula}")
+        print(f"Edad: {self.edad}")
+
+
+    @classmethod
+    def mostrar_cantidad(cls):
+
+        print(f"Cantidad pasajeros: {cls.cantidad_pasajeros}")
+
+
+
+pasajero1 = Pasajero("Ana", "123", 20)
+pasajero2 = Pasajero("Luis", "456", 25)
+pasajero3 = Pasajero("Maria", "789", 30)
+
+
+pasajero1.cumplir_anios()
+
+
+pasajero1.mostrar()
+print()
+
+pasajero2.mostrar()
+print()
+
+pasajero3.mostrar()
+
+Pasajero.mostrar_cantidad()
+
+
+
+# EJERCICIO 42
+# Clase CuentaBancaria
+
+class CuentaBancaria:
+
+    def __init__(self, titular):
+
+        self.titular = titular
+        self._saldo = 0
+        self.historial = []
+
+
+    def depositar(self, cantidad):
+
+        if cantidad > 0:
+
+            self._saldo += cantidad
+            self.historial.append(f"+{cantidad}")
+
+
+    def retirar(self, cantidad):
+
+        if cantidad <= self._saldo:
+
+            self._saldo -= cantidad
+            self.historial.append(f"-{cantidad}")
+
+        else:
+
+            print("Fondos insuficientes")
+
+
+    def consultar_saldo(self):
+
+        return self._saldo
+
+
+    def ver_historial(self):
+
+        return self.historial
+
+
+    def cantidad_operaciones(self):
+
+        return len(self.historial)
+
+
+    def __str__(self):
+
+        return f"Cuenta de {self.titular} - Saldo: ${self._saldo}"
+
+
+
+cuenta = CuentaBancaria("Derick")
+
+
+cuenta.depositar(500)
+cuenta.depositar(200)
+cuenta.retirar(100)
+
+
+print(cuenta)
+
+print("Saldo:", cuenta.consultar_saldo())
+
+print("Historial:")
+print(cuenta.ver_historial())
+
+print("Operaciones realizadas:")
+print(cuenta.cantidad_operaciones())
+
+class Producto:
+
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def vender(self, cantidad):
+        if cantidad <= self.stock:
+            self.stock -= cantidad
+            print("Venta realizada correctamente")
+        else:
+            print("Stock insuficiente")
+
+    def reabastecer(self, cantidad):
+        self.stock += cantidad
+        print("Producto reabastecido")
+
+    def valor_inventario(self):
+        return self.precio * self.stock
+
+    # Método nuevo: cambiar precio
+    def cambiar_precio(self, nuevo_precio):
+        self.precio = nuevo_precio
+
+    # Método nuevo: verificar disponibilidad
+    def disponible(self):
+        return self.stock > 0
+
+    @classmethod
+    def total_inventario(cls, productos):
+
+        total = 0
+
+        for producto in productos:
+            total += producto.valor_inventario()
+
+        return total
+
+    def __str__(self):
+        return f"{self.nombre} | Precio: ${self.precio} | Stock: {self.stock}"
+
+
+producto1 = Producto("Mouse", 20, 10)
+producto2 = Producto("Teclado", 35, 5)
+producto3 = Producto("Monitor", 180, 3)
+
+
+producto1.vender(2)
+producto2.reabastecer(5)
+
+producto3.cambiar_precio(200)
+
+
+print(producto1)
+print("Valor inventario:", producto1.valor_inventario())
+
+print(producto2)
+print("Valor inventario:", producto2.valor_inventario())
+
+print(producto3)
+print("Valor inventario:", producto3.valor_inventario())
+
+
+productos = [producto1, producto2, producto3]
+
+
+print("Total inventario:",
+      Producto.total_inventario(productos))
+
+
+print("¿Mouse disponible?",
+      producto1.disponible())
+
+class Rectangulo:
+
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+
+    def area(self):
+        return self.base * self.altura
+
+
+    def perimetro(self):
+        return 2 * (self.base + self.altura)
+
+
+    # Método nuevo: cambiar dimensiones
+    def cambiar_dimensiones(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+
+    # Método nuevo: verificar si es cuadrado
+    def es_cuadrado(self):
+        return self.base == self.altura
+
+
+    def __str__(self):
+        return f"Rectángulo Base: {self.base} Altura: {self.altura}"
+
+
+
+rectangulo = Rectangulo(10, 5)
+
+
+print(rectangulo)
+
+print("Área:",
+      rectangulo.area())
+
+print("Perímetro:",
+      rectangulo.perimetro())
+
+
+print("¿Es cuadrado?",
+      rectangulo.es_cuadrado())
+
+
+rectangulo.cambiar_dimensiones(8,8)
+
+
+print("\nDespués del cambio")
+
+print(rectangulo)
+
+print("Área:",
+      rectangulo.area())
+
+print("¿Es cuadrado?",
+      rectangulo.es_cuadrado())
+
+import math
+
+
+class Circulo:
+
+
+    def __init__(self, radio):
+        self.radio = radio
+
+
+    def area(self):
+        return math.pi * self.radio ** 2
+
+
+    def circunferencia(self):
+        return 2 * math.pi * self.radio
+
+
+    def diametro(self):
+        return self.radio * 2
+
+
+    # Método nuevo: cambiar radio
+    def cambiar_radio(self, nuevo_radio):
+        self.radio = nuevo_radio
+
+
+    # Método nuevo: mostrar información
+    def mostrar_datos(self):
+
+        print("Radio:", self.radio)
+        print("Área:", self.area())
+        print("Circunferencia:",
+              self.circunferencia())
+        print("Diámetro:",
+              self.diametro())
+
+
+
+circulo = Circulo(5)
+
+
+circulo.mostrar_datos()
+
+
+circulo.cambiar_radio(10)
+
+
+print("\nDespués del cambio")
+
+circulo.mostrar_datos()
+
+class Estudiante:
+
+
+    def __init__(self, nombre):
+
+        self.nombre = nombre
+        self.notas = []
+
+
+    def agregar_nota(self, nota):
+
+        self.notas.append(nota)
+
+
+
+    def promedio(self):
+
+        return sum(self.notas) / len(self.notas)
+
+
+
+    def aprobado(self):
+
+        return self.promedio() >= 7
+
+
+
+    def cantidad_notas(self):
+
+        return len(self.notas)
+
+
+
+    # Método nuevo: eliminar nota
+    def eliminar_nota(self, posicion):
+
+        if posicion < len(self.notas):
+
+            self.notas.pop(posicion)
+
+
+
+    # Método nuevo: nota más alta
+    def nota_maxima(self):
+
+        return max(self.notas)
+
+
+
+    # Método nuevo: nota más baja
+    def nota_minima(self):
+
+        return min(self.notas)
+
+
+
+    def mostrar(self):
+
+        print("Nombre:",
+              self.nombre)
+
+        print("Notas:",
+              self.notas)
+
+        print("Promedio:",
+              self.promedio())
+
+        print("Aprobado:",
+              self.aprobado())
+
+
+
+estudiante = Estudiante("Derick")
+
+
+estudiante.agregar_nota(8)
+estudiante.agregar_nota(9)
+estudiante.agregar_nota(7)
+
+
+estudiante.mostrar()
+
+
+print("Cantidad notas:",
+      estudiante.cantidad_notas())
+
+
+print("Nota máxima:",
+      estudiante.nota_maxima())
+
+
+print("Nota mínima:",
+      estudiante.nota_minima())
+
+
+estudiante.eliminar_nota(1)
+
+
+print("\nDespués de eliminar")
+
+estudiante.mostrar()
+
+
+class Vehiculo:
+
+
+    def __init__(self, marca, modelo):
+
+        self.marca = marca
+        self.modelo = modelo
+        self.km = 0
+
+
+
+    def recorrer(self, kilometros):
+
+        self.km += kilometros
+
+
+
+    def necesita_mantenimiento(self):
+
+        return self.km >= 10000
+
+
+
+    def reiniciar_mantenimiento(self):
+
+        self.km = 0
+
+
+
+    # Método nuevo: calcular costo mantenimiento
+
+    def costo_mantenimiento(self):
+
+        return 150
+
+
+
+    # Método nuevo: obtener estado
+
+    def estado(self):
+
+        if self.necesita_mantenimiento():
+
+            return "Necesita mantenimiento"
+
+        else:
+
+            return "Vehículo en buen estado"
+
+
+
+    def __str__(self):
+
+        return f"""
+Marca: {self.marca}
+Modelo: {self.modelo}
+Kilómetros: {self.km}
+"""
+
+
+
+vehiculo = Vehiculo("Toyota",
+                    "Corolla")
+
+
+vehiculo.recorrer(12000)
+
+
+print(vehiculo)
+
+
+print(vehiculo.estado())
+
+
+print("Costo mantenimiento:",
+      vehiculo.costo_mantenimiento())
+
+
+vehiculo.reiniciar_mantenimiento()
+
+
+print("\nDespués del mantenimiento")
+
+
+print(vehiculo)
+
+
+print(vehiculo.estado())
+
+# ==========================================
+# EJERCICIO 43
+# Clase Producto con métodos:
+# vender(), reabastecer(), valor_inventario()
+# Nuevo método: total_inventario()
+# Nuevos cambios:
+# - aplicar_descuento()
+# - tiene_stock()
+# - mostrar_estado()
+# ==========================================
+
+
+class Producto:
+
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def vender(self, cantidad):
+
+        if cantidad <= self.stock:
+            self.stock -= cantidad
+            print("Venta realizada")
+        else:
+            print("No existe suficiente stock")
+
+
+    def reabastecer(self, cantidad):
+
+        self.stock += cantidad
+
+
+    def valor_inventario(self):
+
+        return self.precio * self.stock
+
+
+    def aplicar_descuento(self, porcentaje):
+
+        descuento = self.precio * (porcentaje / 100)
+
+        self.precio -= descuento
+
+
+    def tiene_stock(self):
+
+        return self.stock > 0
+
+
+    def mostrar_estado(self):
+
+        print(f"Producto: {self.nombre}")
+        print(f"Precio: {self.precio}")
+        print(f"Stock: {self.stock}")
+
+
+    @classmethod
+    def total_inventario(cls, productos):
+
+        total = 0
+
+        for producto in productos:
+
+            total += producto.valor_inventario()
+
+        return total
+
+
+    def __str__(self):
+
+        return f"{self.nombre} - ${self.precio} - Stock: {self.stock}"
+
+
+
+producto1 = Producto("Mouse", 20, 10)
+producto2 = Producto("Teclado", 35, 5)
+producto3 = Producto("Monitor", 200, 3)
+
+
+producto1.vender(2)
+
+producto2.reabastecer(10)
+
+producto3.aplicar_descuento(10)
+
+
+productos = [producto1, producto2, producto3]
+
+
+print(producto1)
+print(producto2)
+print(producto3)
+
+
+print("Valor total inventario:",
+      Producto.total_inventario(productos))
+
+
+print("Tiene stock:",
+      producto1.tiene_stock())
+
+
+
+# ==========================================
+# EJERCICIO 44
+# Clase Rectangulo
+# Métodos:
+# area()
+# perimetro()
+# __str__()
+# Nuevos cambios:
+# - cambiar_dimensiones()
+# - es_cuadrado()
+# ==========================================
+
+
+class Rectangulo:
+
+
+    def __init__(self, base, altura):
+
+        self.base = base
+        self.altura = altura
+
+
+
+    def area(self):
+
+        return self.base * self.altura
+
+
+
+    def perimetro(self):
+
+        return 2 * (self.base + self.altura)
+
+
+
+    def cambiar_dimensiones(self, nueva_base, nueva_altura):
+
+        self.base = nueva_base
+        self.altura = nueva_altura
+
+
+
+    def es_cuadrado(self):
+
+        return self.base == self.altura
+
+
+
+    def __str__(self):
+
+        return f"Rectángulo Base:{self.base} Altura:{self.altura}"
+
+
+
+
+rectangulo = Rectangulo(10,5)
+
+
+print(rectangulo)
+
+print("Área:", rectangulo.area())
+
+print("Perímetro:", rectangulo.perimetro())
+
+
+print("¿Es cuadrado?",
+      rectangulo.es_cuadrado())
+
+
+rectangulo.cambiar_dimensiones(8,8)
+
+
+print(rectangulo)
+
+print("¿Es cuadrado?",
+      rectangulo.es_cuadrado())
+
+
+
+
+# ==========================================
+# EJERCICIO 45
+# Clase Circulo
+# Métodos:
+# area()
+# circunferencia()
+# diametro()
+# Nuevos cambios:
+# - cambiar_radio()
+# - es_mayor_que()
+# ==========================================
+
+
+import math
+
+
+
+class Circulo:
+
+
+    def __init__(self, radio):
+
+        self.radio = radio
+
+
+
+    def area(self):
+
+        return math.pi * self.radio ** 2
+
+
+
+    def circunferencia(self):
+
+        return 2 * math.pi * self.radio
+
+
+
+    def diametro(self):
+
+        return self.radio * 2
+
+
+
+    def cambiar_radio(self, nuevo_radio):
+
+        self.radio = nuevo_radio
+
+
+
+    def es_mayor_que(self, otro):
+
+        return self.area() > otro.area()
+
+
+
+    def __str__(self):
+
+        return f"Círculo Radio: {self.radio}"
+
+
+
+
+circulo1 = Circulo(5)
+
+circulo2 = Circulo(3)
+
+
+
+print(circulo1)
+
+print("Área:", circulo1.area())
+
+print("Circunferencia:",
+      circulo1.circunferencia())
+
+print("Diámetro:",
+      circulo1.diametro())
+
+
+print("¿Círculo 1 es mayor que círculo 2?",
+      circulo1.es_mayor_que(circulo2))
+
+
+
+
+
+# ==========================================
+# EJERCICIO 46
+# Clase Estudiante
+# Métodos:
+# agregar_nota()
+# promedio()
+# aprobado()
+# cantidad_notas()
+# Nuevos cambios:
+# - nota_maxima()
+# - nota_minima()
+# - eliminar_nota()
+# ==========================================
+
+
+
+class Estudiante:
+
+
+    def __init__(self, nombre):
+
+        self.nombre = nombre
+
+        self.notas = []
+
+
+
+    def agregar_nota(self, nota):
+
+        self.notas.append(nota)
+
+
+
+    def promedio(self):
+
+        return sum(self.notas) / len(self.notas)
+
+
+
+    def aprobado(self):
+
+        return self.promedio() >= 7
+
+
+
+    def cantidad_notas(self):
+
+        return len(self.notas)
+
+
+
+    def nota_maxima(self):
+
+        return max(self.notas)
+
+
+
+    def nota_minima(self):
+
+        return min(self.notas)
+
+
+
+    def eliminar_nota(self, posicion):
+
+        self.notas.pop(posicion)
+
+
+
+    def mostrar(self):
+
+        print("Nombre:", self.nombre)
+
+        print("Notas:", self.notas)
+
+        print("Promedio:", self.promedio())
+
+        print("Aprobado:", self.aprobado())
+
+
+
+
+estudiante = Estudiante("Derick")
+
+
+estudiante.agregar_nota(8)
+
+estudiante.agregar_nota(9)
+
+estudiante.agregar_nota(7)
+
+
+estudiante.mostrar()
+
+
+print("Cantidad:",
+      estudiante.cantidad_notas())
+
+
+print("Nota mayor:",
+      estudiante.nota_maxima())
+
+
+print("Nota menor:",
+      estudiante.nota_minima())
+
+
+
+
+# ==========================================
+# EJERCICIO 47
+# Clase Vehiculo
+# Métodos:
+# recorrer()
+# necesita_mantenimiento()
+# reiniciar_mantenimiento()
+# Nuevos cambios:
+# - acelerar()
+# - mostrar_km()
+# - comparar_km()
+# ==========================================
+
+
+
+class Vehiculo:
+
+
+    def __init__(self, marca, modelo):
+
+        self.marca = marca
+
+        self.modelo = modelo
+
+        self.km = 0
+
+        self.velocidad = 0
+
+
+
+    def recorrer(self, kilometros):
+
+        self.km += kilometros
+
+
+
+    def necesita_mantenimiento(self):
+
+        return self.km >= 10000
+
+
+
+    def reiniciar_mantenimiento(self):
+
+        self.km = 0
+
+
+
+    def acelerar(self, aumento):
+
+        self.velocidad += aumento
+
+
+
+    def mostrar_km(self):
+
+        return self.km
+
+
+
+    def comparar_km(self, otro):
+
+        if self.km > otro.km:
+
+            return f"{self.marca} tiene más kilómetros"
+
+        elif otro.km > self.km:
+
+            return f"{otro.marca} tiene más kilómetros"
+
+        else:
+
+            return "Ambos tienen los mismos kilómetros"
+
+
+
+    def __str__(self):
+
+        return f"{self.marca} {self.modelo} - KM: {self.km} - Velocidad: {self.velocidad}"
+
+
+
+
+
+vehiculo1 = Vehiculo("Toyota","Corolla")
+
+vehiculo2 = Vehiculo("Mazda","3")
+
+
+
+vehiculo1.recorrer(12000)
+
+vehiculo2.recorrer(8000)
+
+
+vehiculo1.acelerar(80)
+
+
+print(vehiculo1)
+
+print(vehiculo2)
+
+
+print("Mantenimiento:",
+      vehiculo1.necesita_mantenimiento())
+
+
+print(vehiculo1.comparar_km(vehiculo2))
+
+
+vehiculo1.reiniciar_mantenimiento()
+
+
+print(vehiculo1)
 
 
 # LISTAS (list)
