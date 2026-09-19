@@ -5,7 +5,9 @@
 #Clases y Colecciones (sin herencia)
 
 #EJERCICIO 1: Validador de notas con promedio
-#Clase Calificador que: (1) tenga método validar_nota(nota) que retorne True si 0 ≤ nota ≤ 100, False en caso contrario; (2) tenga método cargar_notas(*args) que reciba múltiples notas, las valide, agregue solo las válidas a una lista interna, y retorne esa lista; (3) tenga método promedio() que retorne el promedio de notas almacenadas.
+#Clase Calificador que: (1) tenga método validar_nota(nota) que retorne True si 0 ≤ nota ≤ 100, False en caso contrario
+#(2) tenga método cargar_notas(*args) que reciba múltiples notas, las valide, agregue solo las válidas a una lista interna, y retorne esa lista
+#(3) tenga método promedio() que retorne el promedio de notas almacenadas.
 
 #1. Entender el problema
 #Entrada: El usuario ingresa varias notas.
@@ -77,6 +79,122 @@ estudiante.cargar_notas(90, 80, 70, 105, -5)
 
 print(estudiante.notas)
 print(estudiante.promedio())
+
+# EJERCICIO:
+# Crear una clase Ventas que almacene únicamente ventas mayores que 0.
+# La clase debe tener los siguientes métodos:
+# - validar(monto)
+# - agregar_ventas(*ventas)
+# - total()
+# - promedio()
+# - venta_mayor()
+# - venta_menor()
+#
+# Crear un objeto de la clase, agregar las ventas:
+# 120, 250, -40, 90, 600 y 0.
+# Finalmente mostrar:
+# - Las ventas válidas.
+# - El total vendido.
+# - El promedio.
+# - La venta mayor.
+# - La venta menor.
+
+# Bosquejo a mano
+# Crear la clase Ventas
+# Crear una lista vacía para almacenar las ventas
+# Crear un método validar(monto)
+# Si el monto es mayor que 0:
+#     Retornar True
+# Si no:
+#     Retornar False
+# Crear un método agregar_ventas(*ventas)
+# Recorrer todas las ventas recibidas
+# Si la venta es válida:
+#     Guardarla en la lista
+# Retornar la lista
+# Crear un método total()
+# Si no existen ventas:
+#     Retornar 0
+# Caso contrario:
+#     Retornar la suma de todas las ventas
+# Crear un método promedio()
+# Si no existen ventas:
+#     Retornar 0
+# Caso contrario:
+#     Retornar el total dividido para la cantidad de ventas
+# Crear un método venta_mayor()
+# Si no existen ventas:
+#     Retornar None
+# Caso contrario:
+#     Retornar la venta más alta
+# Crear un método venta_menor()
+# Si no existen ventas:
+#     Retornar None
+# Caso contrario:
+#     Retornar la venta más baja
+# Crear un objeto
+# Agregar varias ventas
+# Mostrar las ventas válidas
+# Mostrar el total
+# Mostrar el promedio
+# Mostrar la venta mayor
+# Mostrar la venta menor
+
+class Ventas:
+
+    def __init__(self):
+        self.ventas = []
+
+    def validar(self, monto):
+        return monto > 0
+
+    def agregar_ventas(self, *ventas):
+
+        for venta in ventas:
+
+            if self.validar(venta):
+                self.ventas.append(venta)
+
+        return self.ventas
+
+    def total(self):
+
+        if len(self.ventas) == 0:
+            return 0
+
+        return sum(self.ventas)
+
+    def promedio(self):
+
+        if len(self.ventas) == 0:
+            return 0
+
+        return self.total() / len(self.ventas)
+
+    def venta_mayor(self):
+
+        if len(self.ventas) == 0:
+            return None
+
+        return max(self.ventas)
+
+    def venta_menor(self):
+
+        if len(self.ventas) == 0:
+            return None
+
+        return min(self.ventas)
+
+
+ventas = Ventas()
+
+ventas.agregar_ventas(120, 250, -40, 90, 600, 0)
+
+print("Ventas válidas:", ventas.ventas)
+print("Total vendido:", ventas.total())
+print("Promedio:", ventas.promedio())
+print("Venta mayor:", ventas.venta_mayor())
+print("Venta menor:", ventas.venta_menor())
 
 #5. Prueba de escritorio
 
@@ -172,6 +290,81 @@ texto.agregar_multiples("hola", "python", "hola", "clase")
 print(texto.palabra_lista)
 print(texto.palabra_conjunto)
 print(texto.contar_palabras_unicas())
+
+# EJERCICIO:
+# Crear una clase Encuesta que almacene las respuestas de varias personas.
+#
+# Métodos:
+# - agregar_respuesta(respuesta)
+# - agregar_varias(*respuestas)
+# - respuesta_mas_comun()
+# - cantidad_respuestas()
+#
+# Crear un objeto y agregar las respuestas:
+# "Sí", "No", "Sí", "Sí", "No", "Tal vez"
+#
+# Finalmente mostrar:
+# - Todas las respuestas.
+# - La cantidad de respuestas.
+# - La respuesta que más se repitió.
+
+# Bosquejo a mano
+# Crear la clase Encuesta
+# Crear una lista vacía para almacenar las respuestas
+# Crear un método agregar_respuesta(respuesta)
+# Agregar la respuesta a la lista
+# Crear un método agregar_varias(*respuestas)
+# Recorrer todas las respuestas recibidas
+# Llamar al método agregar_respuesta()
+# Retornar la lista
+# Crear un método cantidad_respuestas()
+# Retornar la cantidad de respuestas
+# Crear un método respuesta_mas_comun()
+# Crear un diccionario vacío
+# Recorrer la lista de respuestas
+# Contar cuántas veces aparece cada respuesta
+# Retornar la respuesta con mayor frecuencia
+# Crear un objeto
+# Agregar varias respuestas
+# Mostrar la lista
+# Mostrar la cantidad de respuestas
+# Mostrar la respuesta más común
+
+class Encuesta:
+
+    def __init__(self):
+        self.respuestas = []
+
+    def agregar_respuesta(self, respuesta):
+        self.respuestas.append(respuesta)
+
+    def agregar_varias(self, *respuestas):
+
+        for respuesta in respuestas:
+            self.agregar_respuesta(respuesta)
+
+        return self.respuestas
+
+    def cantidad_respuestas(self):
+        return len(self.respuestas)
+
+    def respuesta_mas_comun(self):
+
+        contador = {}
+
+        for respuesta in self.respuestas:
+            contador[respuesta] = contador.get(respuesta, 0) + 1
+
+        return max(contador, key=contador.get)
+
+
+encuesta = Encuesta()
+
+encuesta.agregar_varias("Sí", "No", "Sí", "Sí", "No", "Tal vez")
+
+print(encuesta.respuestas)
+print(encuesta.cantidad_respuestas())
+print(encuesta.respuesta_mas_comun())
 
 
 #5. Prueba de escritorio
