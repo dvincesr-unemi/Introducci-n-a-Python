@@ -1,3 +1,309 @@
+# KEY EN PYTHON
+
+# La palabra key significa "criterio de comparación".
+#
+# Se utiliza en funciones como:
+#
+# - max()
+# - min()
+# - sorted()
+#
+# para decirle a Python:
+#
+# "¿Qué valor debe usar para comparar los elementos?"
+
+
+# -------------------------------------------------
+
+# EJEMPLO SIN KEY
+
+numeros = [5, 10, 2, 8]
+
+mayor = max(numeros)
+
+print(mayor)
+
+# Python compara directamente los números:
+#
+# 5, 10, 2, 8
+#
+# Resultado:
+# 10
+
+
+# -------------------------------------------------
+
+# EJEMPLO CON KEY
+
+productos = [
+    {"nombre": "Laptop", "precio": 850},
+    {"nombre": "Mouse", "precio": 25},
+    {"nombre": "Monitor", "precio": 300}
+]
+
+
+producto_caro = max(
+    productos,
+    key=lambda producto: producto["precio"]
+)
+
+
+print(producto_caro)
+
+
+# Aquí Python no compara los diccionarios completos.
+#
+# Usa el key para saber qué debe comparar.
+#
+# El lambda devuelve:
+#
+# Laptop  -> 850
+# Mouse   -> 25
+# Monitor -> 300
+#
+# Entonces max() compara:
+#
+# 850, 25, 300
+#
+# y devuelve el producto que tenga el mayor precio.
+
+
+# -------------------------------------------------
+
+# SIN KEY Python no sabe qué comparar:
+
+# Ejemplo:
+
+productos = [
+    {"nombre": "Laptop", "precio": 850},
+    {"nombre": "Mouse", "precio": 25}
+]
+
+
+# max(productos)
+#
+# No tiene un criterio claro:
+#
+# ¿Comparo por nombre?
+# ¿Por precio?
+# ¿Por todo el diccionario?
+
+
+# Por eso usamos:
+
+max(
+    productos,
+    key=lambda producto: producto["precio"]
+)
+
+
+# -------------------------------------------------
+
+# KEY CON SORTED()
+
+personas = [
+    {"nombre": "Ana", "edad": 25},
+    {"nombre": "Luis", "edad": 18},
+    {"nombre": "Carlos", "edad": 30}
+]
+
+
+ordenadas = sorted(
+    personas,
+    key=lambda persona: persona["edad"]
+)
+
+
+# Ordena usando la edad:
+#
+# Luis   18
+# Ana    25
+# Carlos 30
+
+
+# -------------------------------------------------
+
+# RESUMEN:
+#
+# key = "usa este valor para comparar"
+#
+# Ejemplo:
+#
+# max(lista, key=lambda x: x["precio"])
+#
+# significa:
+#
+# "Busca el elemento máximo,
+# pero decide cuál es máximo usando el precio."
+
+# LAMBDA EN PYTHON
+
+# Lambda es una forma de crear funciones pequeñas
+# en una sola línea.
+#
+# Estructura:
+#
+# lambda parametros: resultado
+#
+# Ejemplo:
+
+duplicar = lambda numero: numero * 2
+
+print(duplicar(5))
+
+# Salida:
+# 10
+#
+# Esto es equivalente a crear una función normal:
+
+def duplicar(numero):
+    return numero * 2
+
+
+# -------------------------------------------------
+
+# USO PRINCIPAL DE LAMBDA:
+#
+# Lambda se usa mucho cuando una función
+# necesita recibir otra función temporalmente.
+#
+# Ejemplo con max():
+
+productos = [
+    {"nombre": "Laptop", "precio": 850},
+    {"nombre": "Mouse", "precio": 25},
+    {"nombre": "Monitor", "precio": 300}
+]
+
+
+producto_caro = max(
+    productos,
+    key=lambda producto: producto["precio"]
+)
+
+
+print(producto_caro)
+
+
+# ¿Qué significa?
+#
+# max() necesita saber qué valor debe comparar.
+#
+# Los elementos son diccionarios:
+#
+# {
+#    "nombre": "Laptop",
+#    "precio": 850
+# }
+#
+# Entonces usamos:
+#
+# lambda producto: producto["precio"]
+#
+# Que significa:
+#
+# "Recibe un producto y devuelve su precio
+# para usarlo como criterio de comparación."
+
+
+# Python internamente hace algo parecido a:
+
+# Laptop  -> 850
+# Mouse   -> 25
+# Monitor -> 300
+#
+# Luego max() compara esos valores
+# y devuelve el producto con mayor precio.
+
+
+# -------------------------------------------------
+
+# USO CON MIN()
+
+producto_barato = min(
+    productos,
+    key=lambda producto: producto["precio"]
+)
+
+
+# Devuelve:
+# {"nombre": "Mouse", "precio": 25}
+
+
+# -------------------------------------------------
+
+# USO CON sorted()
+
+productos_ordenados = sorted(
+    productos,
+    key=lambda producto: producto["precio"]
+)
+
+
+# Ordena los productos de menor a mayor precio.
+
+
+# Si queremos de mayor a menor:
+
+productos_ordenados = sorted(
+    productos,
+    key=lambda producto: producto["precio"],
+    reverse=True
+)
+
+
+# -------------------------------------------------
+
+# EJEMPLO CON LISTAS NORMALES
+
+numeros = [5, 10, 2, 8]
+
+mayor_cuadrado = max(
+    numeros,
+    key=lambda numero: numero ** 2
+)
+
+
+# Compara los números usando su cuadrado:
+#
+# 5  -> 25
+# 10 -> 100
+# 2  -> 4
+# 8  -> 64
+#
+# Resultado:
+# 10
+
+
+# -------------------------------------------------
+
+# REGLA PARA RECORDAR:
+#
+# Cuando veas:
+#
+# key=lambda x: algo
+#
+# Léelo como:
+#
+# "Usa algo de cada elemento para comparar."
+#
+#
+# Ejemplos:
+#
+# max(personas, key=lambda p: p["edad"])
+#
+# Busca la persona con mayor edad.
+#
+#
+# min(productos, key=lambda p: p["precio"])
+#
+# Busca el producto más barato.
+#
+#
+# sorted(nombres, key=lambda n: len(n))
+#
+# Ordena nombres según su longitud.
+
 class NumeroPrimo:
 
     # Atributo de clase (compartido por todas las instancias)

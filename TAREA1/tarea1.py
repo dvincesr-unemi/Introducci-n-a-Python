@@ -464,6 +464,81 @@ producto1.agregar_articulo("Mouse", 20)
 
 print(producto1.total_carrito())
 
+# Ejercicio
+
+# Crear una clase Biblioteca que almacene libros en un diccionario.
+# La clave será el nombre del libro y el valor será el número de páginas.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. agregar_libro(nombre, paginas)
+#    Agrega un libro al diccionario.
+#
+# 2. total_paginas()
+#    Devuelve la suma de todas las páginas de los libros.
+#
+# 3. libros_largos(minimo_paginas)
+#    Devuelve una lista con los nombres de los libros
+#    que tengan al menos la cantidad de páginas indicada.
+#
+# 4. libro_mas_largo()
+#    Devuelve el nombre del libro que tenga
+#    la mayor cantidad de páginas.
+
+
+# Bosquejo
+
+# 1. Crear la clase Biblioteca.
+# 2. En el constructor crear un diccionario vacío.
+# 3. En agregar_libro() guardar el libro y sus páginas.
+# 4. En total_paginas() sumar todos los valores del diccionario.
+# 5. En libros_largos():
+#    - Crear una lista vacía.
+#    - Recorrer el diccionario con .items().
+#    - Si las páginas son mayores o iguales al mínimo,
+#      agregar el nombre del libro a la lista.
+#    - Retornar la lista.
+# 6. En libro_mas_largo():
+#    - Crear una variable para guardar el nombre del libro con más páginas.
+#    - Crear una variable para guardar la mayor cantidad de páginas.
+#    - Recorrer el diccionario con .items().
+#    - Comparar las páginas del libro actual con la mayor cantidad registrada.
+#    - Si son mayores, actualizar el nombre del libro y la cantidad de páginas.
+#    - Retornar el nombre del libro con más páginas.
+
+class Biblioteca:
+    def __init__(self):
+        self.libros = {}
+    def agregar_libro(self, libro, paginas):
+        self.libros[libro] = paginas
+    def total_paginas(self):
+        return sum(self.libros.values())
+    def libros_largos(self, minimo_paginas):
+        largos = []
+        for libro, paginas in self.libros.items():
+            if paginas >= minimo_paginas:
+                largos.append(libro)
+        return largos
+    def libro_mas_largo(self):
+        mayor_libro = ""
+        mayor_paginas = 0
+        for libro, paginas in self.libros.items():
+            if paginas > mayor_paginas:
+                mayor_paginas = paginas
+                mayor_libro = libro
+        return mayor_libro
+
+biblioteca = Biblioteca()
+
+biblioteca.agregar_libro("El Principito", 96)
+biblioteca.agregar_libro("Don Quijote", 863)
+biblioteca.agregar_libro("Clean Code", 464)
+biblioteca.agregar_libro("Python Básico", 210)
+biblioteca.agregar_libro("Cien Años de Soledad", 417)
+
+print("Total de páginas:", biblioteca.total_paginas())
+print("Libros largos:", biblioteca.libros_largos(300))
+print("Libro más largo:", biblioteca.libro_mas_largo())
 
 #5. Prueba de escritorio
 
@@ -570,6 +645,123 @@ resultado = inversor.invertir_multiples(
 
 print(resultado)
 
+# Ejercicio
+
+# Crear una clase AnalizadorSecuencia.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. filtrar_pares(lista)
+#    Devuelve una nueva lista que contenga
+#    únicamente los números pares.
+#
+# 2. filtrar_multiples(*listas)
+#    Recibe varias listas.
+#    Para cada una debe llamar al método
+#    filtrar_pares() y guardar el resultado
+#    en un diccionario.
+#
+#    La clave será la lista original convertida
+#    en tupla y el valor será la lista de números
+#    pares.
+#
+# 3. contar_pares(lista)
+#    Devuelve la cantidad de números pares
+#    que contiene una lista.
+#
+# 4. invertir_lista_reversed(lista)
+#    Devuelve una nueva lista con los elementos
+#    en orden inverso utilizando la función
+#    reversed().
+
+
+# Bosquejo
+
+# 1. Crear la clase AnalizadorSecuencia.
+#
+# 2. En filtrar_pares():
+#    - Crear una lista vacía.
+#    - Recorrer la lista recibida.
+#    - Si el número es par, agregarlo a la nueva lista.
+#    - Retornar la lista.
+#
+# 3. En filtrar_multiples():
+#    - Crear un diccionario vacío.
+#    - Recorrer todas las listas recibidas.
+#    - Llamar al método filtrar_pares().
+#    - Guardar la lista original como tupla
+#      y la lista de pares como valor.
+#    - Retornar el diccionario.
+#
+# 4. En contar_pares():
+#    - Crear un contador con valor inicial de 0.
+#    - Recorrer la lista.
+#    - Si el número es par, aumentar el contador en 1.
+#    - Retornar el contador.
+#
+# 5. En invertir_lista_reversed():
+#    - Crear una lista vacía.
+#    - Recorrer la lista utilizando reversed().
+#    - Agregar cada elemento a la nueva lista.
+#    - Retornar la lista invertida.
+
+class AnalizadorSecuencia:
+
+    def filtrar_pares(self, numeros):
+
+        pares = []
+
+        for numero in numeros:
+            if numero % 2 == 0:
+                pares.append(numero)
+
+        return pares
+
+    def filtrar_multiples(self, *varios_numeros):
+
+        varios_pares = {}
+
+        for numeros in varios_numeros:
+
+            pares = self.filtrar_pares(numeros)
+
+            varios_pares[tuple(numeros)] = pares
+
+        return varios_pares
+
+    def contar_pares(self, lista):
+
+        contador = 0
+
+        for numero in lista:
+            if numero % 2 == 0:
+                contador += 1
+
+        return contador
+    
+    def invertir_lista_reversed(self, lista):
+
+        lista_invertida = []
+
+        for elemento in reversed(lista):
+
+            lista_invertida.append(elemento)
+
+        return lista_invertida
+
+analizador = AnalizadorSecuencia()
+
+print(analizador.filtrar_pares([3, 8, 11, 14, 20, 25]))
+
+print(analizador.filtrar_multiples(
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15]
+))
+
+print(analizador.contar_pares([2, 5, 8, 9, 12, 17, 20]))
+
+print(analizador.invertir_lista_reversed([10, 20, 30, 40, 50]))
 
 #5. Prueba de escritorio
 
@@ -582,10 +774,10 @@ print(resultado)
 #[1, 2, 3, 4]
 
 #Recorrido:
-#i = 3 → lista[3] = 4
-#i = 2 → lista[2] = 3
-#i = 1 → lista[1] = 2
-#i = 0 → lista[0] = 1
+#i = 3  lista[3] = 4
+#i = 2  lista[2] = 3
+#i = 1  lista[1] = 2
+#i = 0  lista[0] = 1
 
 #Lista invertida:
 #[4, 3, 2, 1]
@@ -701,9 +893,6 @@ class AnalizarNumeros:
         return len(self.pares), len(self.impares)
 
 
-
-# Parámetros de prueba
-
 analizador = AnalizarNumeros()
 
 resultado = analizador.separar(10, 15, 22, 7, 30, 41, 8)
@@ -712,6 +901,128 @@ print(resultado)
 
 print(analizador.cantidad_pares_impares())
 
+# Ejercicio
+
+# Crear una clase ClasificadorTemperaturas.
+#
+# La clase debe almacenar las temperaturas
+# altas y bajas utilizando dos listas.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. es_alta(temperatura)
+#    Devuelve True si la temperatura es
+#    mayor o igual a 30, caso contrario False.
+#
+# 2. clasificar(*temperaturas)
+#    Recibe varias temperaturas.
+#    Debe clasificarlas en un diccionario
+#    con las claves "altas" y "bajas".
+#    Además, debe guardar las temperaturas
+#    en los atributos correspondientes.
+#
+# 3. cantidad_temperaturas()
+#    Devuelve una tupla con la cantidad de
+#    temperaturas altas y bajas registradas.
+#
+# 4. promedio_altas()
+#    Devuelve el promedio de las temperaturas
+#    altas registradas.
+#    Si no existen temperaturas altas,
+#    debe devolver 0.
+
+
+# Bosquejo
+
+# 1. Crear la clase ClasificadorTemperaturas.
+#
+# 2. En el constructor:
+#    - Crear una lista para temperaturas altas.
+#    - Crear una lista para temperaturas bajas.
+#
+# 3. En es_alta():
+#    - Verificar si la temperatura es mayor
+#      o igual a 30.
+#    - Retornar True o False.
+#
+# 4. En clasificar():
+#    - Crear un diccionario con las claves
+#      "altas" y "bajas".
+#    - Recorrer todas las temperaturas.
+#    - Llamar al método es_alta().
+#    - Guardar cada temperatura tanto en el
+#      diccionario como en los atributos.
+#    - Retornar el diccionario.
+#
+# 5. En cantidad_temperaturas():
+#    - Obtener la cantidad de elementos
+#      de cada lista utilizando len().
+#    - Retornar ambas cantidades.
+#
+# 6. En promedio_altas():
+#    - Verificar si existen temperaturas altas.
+#    - Si no existen, retornar 0.
+#    - Sumar todas las temperaturas altas.
+#    - Dividir la suma para la cantidad de
+#      temperaturas altas.
+#    - Retornar el promedio.
+
+class ClasificadorTemperaturas:
+
+    def __init__(self):
+        self.temperaturas_bajas = []
+        self.temperaturas_altas = []
+
+    def es_alta(self, temperatura):
+        return temperatura >= 30
+
+    def clasificar(self, *temperaturas):
+
+        clasificacion = {
+            "altas": [],
+            "bajas": []
+        }
+
+        for temperatura in temperaturas:
+
+            if self.es_alta(temperatura):
+
+                clasificacion["altas"].append(temperatura)
+                self.temperaturas_altas.append(temperatura)
+
+            else:
+
+                clasificacion["bajas"].append(temperatura)
+                self.temperaturas_bajas.append(temperatura)
+
+        return clasificacion
+
+    def cantidad_temperaturas(self):
+
+        total_altas = len(self.temperaturas_altas)
+        total_bajas = len(self.temperaturas_bajas)
+
+        return total_bajas, total_altas
+
+    def promedio_altas(self):
+
+        if len(self.temperaturas_altas) == 0:
+            return 0
+
+        return sum(self.temperaturas_altas) / len(self.temperaturas_altas)
+
+
+clasificador = ClasificadorTemperaturas()
+
+resultado = clasificador.clasificar(
+    18, 32, 27, 35, 29, 41, 22, 30, 16, 38
+)
+
+print(resultado)
+
+print(clasificador.cantidad_temperaturas())
+
+print(clasificador.promedio_altas())
 
 #5. Prueba de escritorio
 
@@ -878,10 +1189,6 @@ class GestorTemperatura:
 
             self.registrar_temperatura(temp)
 
-
-
-# Parámetros de prueba
-
 clima = GestorTemperatura()
 
 clima.registrar_temperatura(25)
@@ -896,6 +1203,119 @@ print("Temperatura mínima:", clima.minima())
 print("Temperatura máxima:", clima.maxima())
 
 print("Promedio:", clima.promedio())
+
+# Ejercicio
+
+# Crear una clase GestorCalificaciones.
+#
+# La clase debe almacenar las calificaciones
+# de los estudiantes en una lista.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. registrar_calificacion(nota)
+#    Agrega una calificación a la lista.
+#
+# 2. nota_menor()
+#    Devuelve la calificación más baja registrada.
+#
+# 3. nota_mayor()
+#    Devuelve la calificación más alta registrada.
+#
+# 4. promedio_notas()
+#    Devuelve el promedio de todas las calificaciones.
+#
+# 5. registrar_varias(*notas)
+#    Recibe varias calificaciones y las registra
+#    utilizando el método registrar_calificacion().
+#
+# 6. aprobados()
+#    Devuelve una lista con las calificaciones
+#    mayores o iguales a 70.
+
+
+# Bosquejo
+
+# 1. Crear la clase GestorCalificaciones.
+#
+# 2. En el constructor:
+#    - Crear una lista vacía para almacenar
+#      las calificaciones.
+#
+# 3. En registrar_calificacion():
+#    - Agregar la calificación a la lista.
+#
+# 4. En nota_menor():
+#    - Retornar la calificación mínima usando min().
+#
+# 5. En nota_mayor():
+#    - Retornar la calificación máxima usando max().
+#
+# 6. En promedio_notas():
+#    - Sumar todas las calificaciones.
+#    - Dividir la suma para la cantidad de
+#      calificaciones.
+#    - Retornar el promedio.
+#
+# 7. En registrar_varias():
+#    - Recorrer todas las calificaciones recibidas.
+#    - Llamar al método registrar_calificacion()
+#      para guardar cada una.
+#
+# 8. En aprobados():
+#    - Crear una lista vacía.
+#    - Recorrer las calificaciones.
+#    - Si una calificación es mayor o igual a 70,
+#      agregarla a la lista.
+#    - Retornar la lista.
+
+class GestorCalificaciones:
+
+    def __init__(self):
+        self.calificaciones = []
+
+    def agregar_calificacion(self, calificacion):
+        self.calificaciones.append(calificacion)
+
+    def nota_menor(self):
+        return min(self.calificaciones)
+
+    def nota_mayor(self):
+        return max(self.calificaciones)
+
+    def promedio_notas(self):
+        return sum(self.calificaciones) / len(self.calificaciones)
+
+    def registrar_varias(self, *notas):
+        for nota in notas:
+            self.agregar_calificacion(nota)
+
+    def aprobados(self):
+        aprobados = []
+
+        for nota in self.calificaciones:
+            if nota >= 70:
+                aprobados.append(nota)
+
+        return aprobados
+
+gestor = GestorCalificaciones()
+
+gestor.agregar_calificacion(85)
+
+gestor.registrar_varias(
+    60, 95, 72, 40, 88, 69
+)
+
+print(gestor.calificaciones)
+
+print("Menor:", gestor.nota_menor())
+
+print("Mayor:", gestor.nota_mayor())
+
+print("Promedio:", gestor.promedio_notas())
+
+print("Aprobados:", gestor.aprobados())
 
 
 #5. Prueba de escritorio
@@ -1072,8 +1492,6 @@ class GestorPersonas:
         return suma / len(self.edades)
 
 
-#Parámetros de prueba
-
 gestor = GestorPersonas()
 
 gestor.agregar_personas("Derick", 19)
@@ -1087,6 +1505,150 @@ print(gestor.personas_mayores(18))
 
 print(gestor.edad_promedio())
 
+# Ejercicio
+
+# Crear una clase GestorProductos.
+#
+# La clase debe almacenar productos utilizando
+# una lista de diccionarios.
+#
+# Cada producto tendrá:
+# - nombre
+# - precio
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. agregar_producto(nombre, precio)
+#    Agrega un producto a la lista.
+#
+# 2. productos_caros(precio_minimo)
+#    Devuelve una lista con los nombres de los
+#    productos cuyo precio sea mayor o igual
+#    al precio indicado.
+#
+# 3. precio_promedio()
+#    Devuelve el precio promedio de todos
+#    los productos registrados.
+#
+# 4. producto_mas_caro()
+#    Devuelve el nombre del producto con
+#    el precio más alto.
+
+
+# Bosquejo
+
+# 1. Crear la clase GestorProductos.
+#
+# 2. En el constructor:
+#    - Crear una lista vacía para guardar productos.
+#
+# 3. En agregar_producto():
+#    - Crear un diccionario con nombre y precio.
+#    - Agregarlo a la lista.
+#
+# 4. En productos_caros():
+#    - Crear una lista vacía.
+#    - Recorrer la lista de productos.
+#    - Comparar el precio con el mínimo.
+#    - Agregar el nombre si cumple la condición.
+#    - Retornar la lista.
+#
+# 5. En precio_promedio():
+#    - Verificar si no existen productos.
+#    - Sumar todos los precios.
+#    - Dividir entre la cantidad de productos.
+#    - Retornar el promedio.
+#
+# 6. En producto_mas_caro():
+#    - Crear variables para guardar el producto
+#      con mayor precio.
+#    - Recorrer todos los productos.
+#    - Comparar precios.
+#    - Actualizar el producto más caro.
+#    - Retornar el nombre.
+
+class GestorProductos:
+
+    def __init__(self):
+        self.productos = []
+
+
+    def agregar_producto(self, nombre, precio):
+
+        producto = {
+            "nombre": nombre,
+            "precio": precio
+        }
+
+        self.productos.append(producto)
+
+
+    def productos_caros(self, precio_minimo):
+
+        caros = []
+
+        for producto in self.productos:
+
+            if producto["precio"] >= precio_minimo:
+
+                caros.append(producto["nombre"])
+
+        return caros
+
+
+    def precio_promedio(self):
+
+        if len(self.productos) == 0:
+            return 0
+
+        suma = 0
+
+        for producto in self.productos:
+
+            suma += producto["precio"]
+
+        return suma / len(self.productos)
+
+    def producto_mas_caro_max(self):
+        if len(self.productos) == 0:
+            return None
+        producto_caro = max(
+            self.productos,
+            key=lambda producto: producto["precio"]
+            )
+        return producto_caro["nombre"]
+    
+    def producto_mas_caro(self):
+
+        if len(self.productos) == 0:
+            return None
+
+        producto_caro = self.productos[0]
+
+        for producto in self.productos:
+
+            if producto["precio"] > producto_caro["precio"]:
+
+                producto_caro = producto
+
+        return producto_caro["nombre"]
+
+tienda = GestorProductos()
+
+tienda.agregar_producto("Laptop", 850)
+tienda.agregar_producto("Mouse", 25)
+tienda.agregar_producto("Teclado", 60)
+tienda.agregar_producto("Monitor", 300)
+tienda.agregar_producto("Celular", 500)
+
+
+print(tienda.productos)
+
+print("Productos caros:", tienda.productos_caros(200))
+
+print("Precio promedio:", tienda.precio_promedio())
+
+print("Producto más caro:", tienda.producto_mas_caro())
 
 #5. Prueba de escritorio
 
@@ -1243,9 +1805,6 @@ class Equipos:
 
         return mayor
 
-
-#Parámetros de prueba
-
 liga = Equipos()
 
 liga.crear_equipo("Barcelona")
@@ -1265,6 +1824,156 @@ print(liga.equipos)
 
 print(liga.equipo_mayor_integrantes())
 
+# Ejercicio
+
+# Crear una clase Cursos.
+#
+# La clase debe administrar cursos y los estudiantes
+# inscritos en cada curso.
+#
+# Cada curso será una clave del diccionario y tendrá
+# una lista con sus estudiantes.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. crear_curso(nombre)
+#    Crea un curso vacío dentro del diccionario.
+#
+# 2. agregar_estudiante(curso, estudiante)
+#    Agrega un estudiante a un curso existente.
+#
+# 3. curso_mayor_estudiantes()
+#    Devuelve el nombre del curso que tiene
+#    más estudiantes inscritos.
+#
+# 4. cantidad_estudiantes_curso(curso)
+#    Devuelve la cantidad de estudiantes que
+#    tiene un curso específico.
+#
+# 5. cursos_con_muchos_estudiantes(minimo)
+#    Devuelve una lista con los cursos que tienen
+#    una cantidad de estudiantes mayor o igual
+#    al mínimo indicado.
+
+
+# Bosquejo
+
+# 1. Crear la clase Cursos.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío.
+#
+# 3. En crear_curso():
+#    - Crear una nueva clave con el nombre
+#      del curso.
+#    - Asignarle una lista vacía.
+#
+# 4. En agregar_estudiante():
+#    - Buscar el curso mediante su clave.
+#    - Agregar el estudiante usando append().
+#
+# 5. En curso_mayor_estudiantes():
+#    - Crear variables para guardar:
+#       * curso con mayor cantidad.
+#       * cantidad actual mayor.
+#    - Recorrer el diccionario con items().
+#    - Comparar la cantidad de estudiantes.
+#    - Actualizar si encuentra uno mayor.
+#    - Retornar el curso.
+#
+# 6. En cantidad_estudiantes_curso():
+#    - Obtener la lista del curso.
+#    - Usar len() para contar estudiantes.
+#    - Retornar la cantidad.
+#
+# 7. En cursos_con_muchos_estudiantes():
+#    - Crear una lista vacía.
+#    - Recorrer todos los cursos.
+#    - Si la cantidad cumple la condición,
+#      agregar el nombre del curso.
+#    - Retornar la lista.
+
+class Cursos:
+
+    def __init__(self):
+
+        self.cursos = {}
+
+
+    def crear_curso(self, nombre):
+
+        self.cursos[nombre] = []
+
+
+    def agregar_estudiante(self, curso, estudiante):
+
+        self.cursos[curso].append(estudiante)
+
+
+    def curso_mayor_estudiantes(self):
+
+        mayor = ""
+        cantidad = 0
+
+        for curso, estudiantes in self.cursos.items():
+
+            if len(estudiantes) > cantidad:
+
+                cantidad = len(estudiantes)
+                mayor = curso
+
+        return mayor
+
+
+    def cantidad_estudiantes_curso(self, curso):
+
+        return len(self.cursos[curso])
+
+
+    def cursos_con_muchos_estudiantes(self, minimo):
+
+        resultado = []
+
+        for curso, estudiantes in self.cursos.items():
+
+            if len(estudiantes) >= minimo:
+
+                resultado.append(curso)
+
+        return resultado
+
+academia = Cursos()
+
+academia.crear_curso("Python")
+academia.crear_curso("Java")
+academia.crear_curso("Bases de Datos")
+
+
+academia.agregar_estudiante("Python", "Ana")
+academia.agregar_estudiante("Python", "Luis")
+academia.agregar_estudiante("Python", "Carlos")
+academia.agregar_estudiante("Python", "Pedro")
+
+
+academia.agregar_estudiante("Java", "Maria")
+academia.agregar_estudiante("Java", "Jose")
+
+
+academia.agregar_estudiante("Bases de Datos", "Daniel")
+academia.agregar_estudiante("Bases de Datos", "Sofia")
+academia.agregar_estudiante("Bases de Datos", "Carlos")
+
+
+print(academia.cursos)
+
+print("Curso con más estudiantes:",
+      academia.curso_mayor_estudiantes())
+
+print("Cantidad en Python:",
+      academia.cantidad_estudiantes_curso("Python"))
+
+print("Cursos con muchos estudiantes:",
+      academia.cursos_con_muchos_estudiantes(3))
 
 #5. Prueba de escritorio
 
@@ -1443,10 +2152,6 @@ class AnalizadorString:
 
         return contador
 
-
-
-#Parámetros de prueba
-
 analizador = AnalizadorString()
 
 
@@ -1467,6 +2172,153 @@ print(analizador.contar_por_tipo(texto3))
 print(analizador.texto_mas_largo)
 
 
+# Ejercicio
+
+# Crear una clase AnalizadorTexto.
+#
+# La clase debe analizar palabras y guardar
+# información sobre los textos procesados.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. es_mayuscula(letra)
+#    Devuelve True si una letra está en mayúscula.
+#
+# 2. analizar_texto(texto)
+#    Debe contar:
+#    - letras mayúsculas.
+#    - letras minúsculas.
+#    - espacios.
+#    - caracteres especiales.
+#
+#    Además debe guardar en un atributo
+#    el texto con mayor cantidad de caracteres.
+#
+# 3. texto_mas_largo()
+#    Devuelve el texto más largo registrado.
+#
+# 4. cantidad_caracteres(texto)
+#    Devuelve la cantidad total de caracteres
+#    del texto recibido.
+
+
+# Bosquejo
+
+# 1. Crear la clase AnalizadorTexto.
+#
+# 2. En el constructor:
+#    - Crear una variable vacía para guardar
+#      el texto más largo.
+#
+# 3. En es_mayuscula():
+#    - Verificar si la letra está en mayúscula.
+#    - Retornar True o False.
+#
+# 4. En analizar_texto():
+#    - Crear un diccionario contador.
+#    - Recorrer cada carácter del texto.
+#    - Verificar si es mayúscula.
+#    - Verificar si es minúscula.
+#    - Verificar si es espacio.
+#    - Si no cumple ninguna condición,
+#      contarlo como especial.
+#    - Comparar la longitud del texto actual
+#      con el texto más largo guardado.
+#    - Retornar el diccionario.
+#
+# 5. En texto_mas_largo():
+#    - Retornar el atributo guardado.
+#
+# 6. En cantidad_caracteres():
+#    - Usar len().
+#    - Retornar la cantidad.
+
+class AnalizadorTexto:
+
+    def __init__(self):
+
+        self.texto_largo = ""
+
+
+    def es_mayuscula(self, letra):
+
+        return letra.isupper()
+
+
+    def analizar_texto(self, texto):
+
+        contador = {
+            "mayusculas": 0,
+            "minusculas": 0,
+            "espacios": 0,
+            "especiales": 0
+        }
+
+
+        for caracter in texto:
+
+
+            if self.es_mayuscula(caracter):
+
+                contador["mayusculas"] += 1
+
+
+            elif caracter.islower():
+
+                contador["minusculas"] += 1
+
+
+            elif caracter == " ":
+
+                contador["espacios"] += 1
+
+
+            else:
+
+                contador["especiales"] += 1
+
+
+
+        if len(texto) > len(self.texto_largo):
+
+            self.texto_largo = texto
+
+
+        return contador
+
+
+    def texto_mas_largo(self):
+
+        return self.texto_largo
+
+
+    def cantidad_caracteres(self, texto):
+
+        return len(texto)
+
+
+
+analizador = AnalizadorTexto()
+
+
+resultado1 = analizador.analizar_texto(
+    "Hola Mundo 123!"
+)
+
+resultado2 = analizador.analizar_texto(
+    "PYTHON Es Genial!!"
+)
+
+
+print(resultado1)
+
+print(resultado2)
+
+print("Texto más largo:",
+      analizador.texto_mas_largo())
+
+print("Cantidad:",
+      analizador.cantidad_caracteres("Hola Mundo"))
 
 #5. Prueba de escritorio
 
@@ -1674,9 +2526,6 @@ class Tareas:
 
         return False
 
-
-#Parámetros de prueba
-
 tareas = Tareas()
 
 tareas.agregar_tarea("Estudiar Python", "Alta")
@@ -1694,6 +2543,153 @@ print(tareas.lista_tuplas)
 
 print(tareas.eliminar_completada("Ir al cine"))
 
+
+# Ejercicio
+
+# Crear una clase Peliculas.
+#
+# La clase debe almacenar películas usando una lista
+# de tuplas.
+#
+# Cada película tendrá:
+# - nombre
+# - genero
+# - duracion
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. agregar_pelicula(nombre, genero, duracion)
+#    Guarda una película como una tupla.
+#
+# 2. peliculas_largas()
+#    Devuelve una lista con los nombres de las
+#    películas que tengan una duración mayor o
+#    igual a 120 minutos.
+#
+# 3. eliminar_pelicula(nombre)
+#    Elimina una película según su nombre.
+#    Devuelve True si la elimina y False si no existe.
+#
+# 4. buscar_por_genero(genero)
+#    Devuelve una lista con los nombres de películas
+#    que pertenecen al género indicado.
+
+
+# Bosquejo
+
+# 1. Crear la clase Peliculas.
+#
+# 2. En el constructor:
+#    - Crear una lista vacía para guardar tuplas.
+#
+# 3. En agregar_pelicula():
+#    - Crear una tupla con los datos.
+#    - Agregarla a la lista.
+#
+# 4. En peliculas_largas():
+#    - Crear una lista vacía.
+#    - Recorrer las tuplas.
+#    - Revisar la duración.
+#    - Agregar nombres que cumplan la condición.
+#
+# 5. En eliminar_pelicula():
+#    - Recorrer la lista desempaquetando la tupla.
+#    - Comparar nombres.
+#    - Eliminar la tupla completa.
+#    - Retornar True o False.
+#
+# 6. En buscar_por_genero():
+#    - Crear una lista vacía.
+#    - Recorrer las películas.
+#    - Comparar el género.
+#    - Agregar nombres encontrados.
+#    - Retornar la lista.
+
+class Peliculas:
+
+    def __init__(self):
+
+        self.lista_peliculas = []
+
+
+    def agregar_pelicula(self, nombre, genero, duracion):
+
+        pelicula = (nombre, genero, duracion)
+
+        self.lista_peliculas.append(pelicula)
+
+
+
+    def peliculas_largas(self):
+
+        largas = []
+
+        for nombre, genero, duracion in self.lista_peliculas:
+
+            if duracion >= 120:
+
+                largas.append(nombre)
+
+        return largas
+
+
+
+    def eliminar_pelicula(self, nombre):
+
+        for pelicula in self.lista_peliculas:
+
+            if pelicula[0] == nombre:
+
+                self.lista_peliculas.remove(pelicula)
+
+                return True
+
+        return False
+
+
+
+    def buscar_por_genero(self, genero):
+
+        encontradas = []
+
+        for nombre, genero_pelicula, duracion in self.lista_peliculas:
+
+            if genero_pelicula.lower() == genero.lower():
+
+                encontradas.append(nombre)
+
+        return encontradas
+
+
+cine = Peliculas()
+
+
+cine.agregar_pelicula("Interestelar", "Ciencia Ficcion", 169)
+
+cine.agregar_pelicula("Avatar", "Fantasia", 162)
+
+cine.agregar_pelicula("Toy Story", "Animacion", 81)
+
+cine.agregar_pelicula("Matrix", "Ciencia Ficcion", 136)
+
+
+
+print(cine.lista_peliculas)
+
+
+print("Peliculas largas:",
+      cine.peliculas_largas())
+
+
+print("Ciencia Ficcion:",
+      cine.buscar_por_genero("ciencia ficcion"))
+
+
+print("Eliminar Matrix:",
+      cine.eliminar_pelicula("Matrix"))
+
+
+print(cine.lista_peliculas)
 
 #5. Prueba de escritorio
 
@@ -1858,9 +2854,6 @@ class ContadorFrecuencia:
 
         return 0
 
-
-#Parámetros de prueba
-
 contador = ContadorFrecuencia()
 
 contador.agregar_elemento("manzana")
@@ -1880,6 +2873,140 @@ print(contador.frecuencia_elemento("pera"))
 
 print(contador.frecuencia_elemento("naranja"))
 
+# Ejercicio
+
+# Crear una clase ContadorPalabras.
+#
+# La clase debe almacenar la frecuencia de palabras
+# utilizando un diccionario.
+#
+# La clave será la palabra y el valor será la cantidad
+# de veces que aparece.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. agregar_palabra(palabra)
+#    Aumenta la frecuencia de una palabra.
+#
+# 2. palabra_mas_repetida()
+#    Devuelve la palabra que aparece más veces.
+#
+# 3. cantidad_palabra(palabra)
+#    Devuelve cuántas veces aparece una palabra.
+#    Si no existe, devuelve 0.
+#
+# 4. palabras_repetidas(minimo)
+#    Devuelve una lista con las palabras que tengan
+#    una frecuencia mayor o igual al mínimo.
+
+
+# Bosquejo
+
+# 1. Crear la clase ContadorPalabras.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío.
+#
+# 3. En agregar_palabra():
+#    - Revisar si la palabra existe.
+#    - Si existe aumentar su valor.
+#    - Si no existe crearla con valor 1.
+#
+# 4. En palabra_mas_repetida():
+#    - Usar max().
+#    - Usar key para comparar los valores del diccionario.
+#
+# 5. En cantidad_palabra():
+#    - Verificar si existe la palabra.
+#    - Retornar su frecuencia.
+#
+# 6. En palabras_repetidas():
+#    - Crear una lista vacía.
+#    - Recorrer el diccionario.
+#    - Comparar la frecuencia.
+#    - Agregar palabras que cumplan la condición.
+
+
+class ContadorPalabras:
+
+    def __init__(self):
+
+        self.palabras = {}
+
+
+    def agregar_palabra(self, palabra):
+
+        if palabra in self.palabras:
+
+            self.palabras[palabra] += 1
+
+        else:
+
+            self.palabras[palabra] = 1
+
+
+
+    def palabra_mas_repetida(self):
+
+        if len(self.palabras) == 0:
+
+            return None
+
+        return max(
+            self.palabras,
+            key=self.palabras.get
+        )
+
+
+
+    def cantidad_palabra(self, palabra):
+
+        if palabra in self.palabras:
+
+            return self.palabras[palabra]
+
+        return 0
+
+
+
+    def palabras_repetidas(self, minimo):
+
+        repetidas = []
+
+        for palabra, cantidad in self.palabras.items():
+
+            if cantidad >= minimo:
+
+                repetidas.append(palabra)
+
+        return repetidas
+
+
+contador = ContadorPalabras()
+
+
+contador.agregar_palabra("python")
+contador.agregar_palabra("java")
+contador.agregar_palabra("python")
+contador.agregar_palabra("python")
+contador.agregar_palabra("java")
+contador.agregar_palabra("c++")
+contador.agregar_palabra("python")
+
+
+print(contador.palabras)
+
+
+print("Palabra más repetida:",
+      contador.palabra_mas_repetida())
+
+
+print("Cantidad de java:",
+      contador.cantidad_palabra("java"))
+
+
+print("Palabras repetidas:",
+      contador.palabras_repetidas(2))
 
 #5. Prueba de escritorio
 
@@ -2057,9 +3184,6 @@ class SelectorRango:
         return list(conjunto)
 
 
-
-#Parámetros de prueba
-
 selector = SelectorRango()
 
 
@@ -2075,7 +3199,112 @@ resultado = selector.elementos_en_multiples_rangos(
 
 print(resultado)
 
+# Ejercicio
 
+# Crear una clase SelectorEdades.
+#
+# La clase debe trabajar con rangos de edades.
+#
+# Los métodos serán:
+#
+# 1. crear_rango_edades(inicio, fin)
+#    Devuelve una tupla con todas las edades
+#    dentro del rango indicado.
+#
+# 2. edades_en_varios_rangos(*rangos)
+#    Recibe varios rangos de edades y devuelve
+#    una lista sin edades repetidas.
+#
+# 3. edades_mayores(edad_minima, *rangos)
+#    Devuelve una lista con las edades mayores
+#    o iguales a la edad indicada dentro de
+#    todos los rangos recibidos.
+
+
+# Bosquejo
+
+# 1. Crear la clase SelectorEdades.
+#
+# 2. En crear_rango_edades():
+#    - Usar range().
+#    - Convertir el resultado en tupla.
+#    - Retornar la tupla.
+#
+# 3. En edades_en_varios_rangos():
+#    - Crear un conjunto vacío.
+#    - Recorrer cada rango recibido.
+#    - Generar los números con range().
+#    - Agregar usando add().
+#    - Convertir el conjunto en lista.
+#
+# 4. En edades_mayores():
+#    - Crear una lista vacía.
+#    - Recorrer los rangos.
+#    - Revisar cada edad.
+#    - Si cumple la condición agregarla.
+#    - Retornar la lista.
+
+
+
+class SelectorEdades:
+
+    def crear_rango_edades(self, inicio, fin):
+
+        return tuple(range(inicio, fin + 1))
+
+
+    def edades_en_varios_rangos(self, *rangos):
+
+        edades = set()
+
+        for inicio, fin in rangos:
+
+            for edad in range(inicio, fin + 1):
+
+                edades.add(edad)
+
+        return list(edades)
+
+
+
+    def edades_mayores(self, edad_minima, *rangos):
+
+        resultado = []
+
+        for inicio, fin in rangos:
+
+            for edad in range(inicio, fin + 1):
+
+                if edad >= edad_minima:
+
+                    resultado.append(edad)
+
+        return resultado
+
+
+selector = SelectorEdades()
+
+
+print(selector.crear_rango_edades(18, 22))
+
+
+print(
+    selector.edades_en_varios_rangos(
+        (15, 20),
+        (18, 25),
+        (30, 33)
+    )
+)
+
+
+print(
+    selector.edades_mayores(
+        25,
+        (15, 20),
+        (18, 30),
+        (40, 42)
+    )
+)
 
 #5. Prueba de escritorio
 
@@ -2157,7 +3386,7 @@ print(resultado)
 
 #[1,2,3,4,5,6,7,8,10,11,12]
 
-#EJERCICIO 14: Combinador de listas
+#EJERCICIO 13: Combinador de listas
 #Clase CombinadorListas que: (1) tenga método intercalar(lista1, lista2) que retorne una lista alternando elementos de ambas
 #(2) tenga método intercalar_multiples(*listas) que reutilice para varias listas.
 
