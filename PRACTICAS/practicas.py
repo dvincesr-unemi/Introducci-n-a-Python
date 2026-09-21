@@ -12,6 +12,13 @@
 #
 # "¿Qué valor debe usar para comparar los elementos?"
 
+# EJEMPLO:
+def libro_mas_largo(self):
+
+    if len(self.libros) == 0:
+        return None
+
+    return max(self.libros, key=self.libros.get)
 
 # -------------------------------------------------
 

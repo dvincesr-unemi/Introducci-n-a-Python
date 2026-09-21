@@ -527,7 +527,7 @@ class Biblioteca:
                 mayor_paginas = paginas
                 mayor_libro = libro
         return mayor_libro
-
+    
 biblioteca = Biblioteca()
 
 biblioteca.agregar_libro("El Principito", 96)
@@ -1455,15 +1455,10 @@ class GestorPersonas:
         self.edades = []
 
     def agregar_personas(self, nombre, edad):
-
         personas = {
-            "nombre": "",
-            "edad": 0
-        }
-
-        personas["nombre"] = nombre
-        personas["edad"] = edad
-
+            "nombre": nombre,
+            "edad": edad
+            }
         self.edades.append(personas)
 
     def personas_mayores(self, edad_minima):
