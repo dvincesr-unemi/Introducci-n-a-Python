@@ -527,6 +527,10 @@ class Biblioteca:
                 mayor_paginas = paginas
                 mayor_libro = libro
         return mayor_libro
+    def libro_mas_largo_max(self):
+        if len(self.libros) == 0:
+            return None
+        return max(self.libros, key = self.libros.get)
     
 biblioteca = Biblioteca()
 
@@ -3172,7 +3176,9 @@ class SelectorRango:
 
         for inicio, fin in rangos:
 
-            for numero in range(inicio, fin + 1):
+            rango = self.crear_rango(inicio, fin)
+
+            for numero in rango:
 
                 conjunto.add(numero)
 
@@ -4276,10 +4282,7 @@ class MultiploFinder:
 
         for numero in numeros:
 
-            resultado[numero] = self.encontrar_multiplos(
-                numero,
-                limite
-            )
+            resultado[numero] = self.encontrar_multiplos(numero,limite)
 
         return resultado
 
@@ -5313,19 +5316,13 @@ class CalculadorDistancia:
         punto_cercano = puntos[0]
 
 
-        menor_distancia = self.distancia_euclidiana(
-            referencia,
-            punto_cercano
-        )
+        menor_distancia = self.distancia_euclidiana(referencia, punto_cercano )
 
 
         for punto in puntos[1:]:
 
 
-            distancia = self.distancia_euclidiana(
-                referencia,
-                punto
-            )
+            distancia = self.distancia_euclidiana(referencia,punto)
 
 
             if distancia < menor_distancia:
