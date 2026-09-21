@@ -3478,11 +3478,6 @@ class CombinadorListas:
 
         return resultado
 
-
-
-#Parámetros de prueba
-
-
 combinador = CombinadorListas()
 
 
@@ -3503,7 +3498,139 @@ resultado = combinador.intercalar_multiples(
 
 print(resultado)
 
+# Ejercicio
 
+# Crear una clase ProcesadorListas.
+#
+# La clase debe trabajar con listas de números.
+#
+# Los métodos serán:
+#
+# 1. unir_alternado(lista1, lista2)
+#    Combina dos listas tomando un elemento
+#    de cada lista alternadamente.
+#
+# 2. unir_varias(*listas)
+#    Recibe varias listas y las une utilizando
+#    el método unir_alternado().
+#
+# 3. eliminar_repetidos(lista)
+#    Devuelve una nueva lista eliminando valores
+#    repetidos.
+
+
+# Bosquejo
+
+# 1. Crear la clase ProcesadorListas.
+#
+# 2. En unir_alternado():
+#    - Crear una lista vacía.
+#    - Encontrar la longitud menor.
+#    - Recorrer usando índices.
+#    - Agregar elementos alternadamente.
+#    - Agregar los elementos sobrantes.
+#    - Retornar la lista.
+#
+# 3. En unir_varias():
+#    - Crear una lista vacía.
+#    - Recorrer todas las listas recibidas.
+#    - Llamar al método unir_alternado().
+#    - Guardar el resultado acumulado.
+#
+# 4. En eliminar_repetidos():
+#    - Crear un conjunto vacío.
+#    - Recorrer la lista.
+#    - Agregar elementos al conjunto.
+#    - Convertir nuevamente a lista.
+#    - Retornar resultado.
+
+class ProcesadorListas:
+
+
+    def unir_alternado(self, lista1, lista2):
+
+        resultado = []
+
+        longitud = min(len(lista1), len(lista2))
+
+
+        for i in range(longitud):
+
+            resultado.append(lista1[i])
+
+            resultado.append(lista2[i])
+
+
+
+        if len(lista1) > longitud:
+
+            resultado.extend(lista1[longitud:])
+
+
+        if len(lista2) > longitud:
+
+            resultado.extend(lista2[longitud:])
+
+
+        return resultado
+
+
+
+    def unir_varias(self, *listas):
+
+        resultado = []
+
+
+        for lista in listas:
+
+            resultado = self.unir_alternado(resultado, lista)
+
+
+        return resultado
+
+
+
+    def eliminar_repetidos(self, lista):
+
+        conjunto = set()
+
+
+        for elemento in lista:
+
+            conjunto.add(elemento)
+
+
+        return list(conjunto)
+
+
+
+procesador = ProcesadorListas()
+
+
+lista1 = [1, 2, 3, 4]
+
+lista2 = [10, 20, 30]
+
+
+print(
+    procesador.unir_alternado(lista1, lista2)
+)
+
+
+print(
+    procesador.unir_varias(
+        [1, 2],
+        [3, 4],
+        [5, 6]
+    )
+)
+
+
+print(
+    procesador.eliminar_repetidos(
+        [1, 2, 2, 3, 4, 4, 5]
+    )
+)
 
 #5. Prueba de escritorio
 
@@ -3595,8 +3722,6 @@ print(resultado)
 #(2) tenga método estudiantes_aprobados(nota_minima) que retorne lista de estudiantes
 #(3) tenga método mejor_estudiante() que retorne nombre y nota del que tiene mayor calificación.
 
-
-
 #1. Entender el problema
 
 #Entrada:
@@ -3612,8 +3737,6 @@ print(resultado)
 #Salida:
 #Lista de estudiantes aprobados.
 #Nombre y nota del mejor estudiante.
-
-
 
 #2. Bosquejo a mano
 
@@ -3636,8 +3759,6 @@ print(resultado)
 #Recorrer diccionario.
 #Comparar notas.
 #Guardar estudiante con mayor nota.
-
-
 
 #3. Descubrir el patrón
 
@@ -3713,10 +3834,6 @@ class RegistroNotas:
         return estudiante_mayor, mayor
 
 
-
-#Parámetros de prueba
-
-
 registro = RegistroNotas()
 
 
@@ -3738,7 +3855,144 @@ print(registro.estudiantes_aprobados(80))
 
 print(registro.mejor_estudiante())
 
+# Ejercicio
 
+# Crear una clase RegistroVentas.
+#
+# La clase debe almacenar las ventas de vendedores
+# utilizando un diccionario.
+#
+# La clave será el nombre del vendedor y el valor
+# será el total vendido.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. registrar_venta(vendedor, total)
+#    Registra o actualiza el total vendido
+#    por un vendedor.
+#
+# 2. vendedores_destacados(minimo)
+#    Devuelve una lista con los vendedores
+#    cuyo total de ventas sea mayor o igual
+#    al valor indicado.
+#
+# 3. mejor_vendedor()
+#    Devuelve el nombre del vendedor con
+#    el mayor total de ventas y el monto vendido.
+#
+# 4. promedio_ventas()
+#    Devuelve el promedio de todas las ventas
+#    registradas.
+
+
+# Bosquejo
+
+# 1. Crear la clase RegistroVentas.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío.
+#
+# 3. En registrar_venta():
+#    - Guardar el vendedor y el total
+#      en el diccionario.
+#
+# 4. En vendedores_destacados():
+#    - Crear una lista vacía.
+#    - Recorrer el diccionario con items().
+#    - Si el total cumple la condición,
+#      agregar el vendedor.
+#    - Retornar la lista.
+#
+# 5. En mejor_vendedor():
+#    - Verificar si el diccionario está vacío.
+#    - Crear variables para guardar el mayor
+#      total y el vendedor correspondiente.
+#    - Recorrer el diccionario.
+#    - Comparar los totales.
+#    - Retornar el vendedor y el total.
+#
+# 6. En promedio_ventas():
+#    - Verificar si existen ventas.
+#    - Sumar todos los valores del diccionario.
+#    - Dividir entre la cantidad de vendedores.
+#    - Retornar el promedio.
+
+class RegistroVentas:
+
+    def __init__(self):
+
+        self.ventas = {}
+
+
+    def registrar_venta(self, vendedor, total):
+
+        self.ventas[vendedor] = total
+
+
+    def vendedores_destacados(self, minimo):
+
+        destacados = []
+
+        for vendedor, total in self.ventas.items():
+
+            if total >= minimo:
+
+                destacados.append(vendedor)
+
+        return destacados
+
+
+    def mejor_vendedor(self):
+
+        if len(self.ventas) == 0:
+
+            return None
+
+
+        mayor = 0
+
+        vendedor_mayor = None
+
+
+        for vendedor, total in self.ventas.items():
+
+            if total > mayor:
+
+                mayor = total
+
+                vendedor_mayor = vendedor
+
+
+        return vendedor_mayor, mayor
+
+
+    def promedio_ventas(self):
+
+        if len(self.ventas) == 0:
+
+            return 0
+
+        return sum(self.ventas.values()) / len(self.ventas)
+
+
+registro = RegistroVentas()
+
+registro.registrar_venta("Ana", 1200)
+registro.registrar_venta("Luis", 850)
+registro.registrar_venta("Carlos", 1600)
+registro.registrar_venta("Maria", 950)
+
+
+print(registro.ventas)
+
+print("Destacados:",
+      registro.vendedores_destacados(1000))
+
+print("Mejor vendedor:",
+      registro.mejor_vendedor())
+
+print("Promedio:",
+      registro.promedio_ventas())
 
 #5. Prueba de escritorio
 
@@ -3822,8 +4076,6 @@ print(registro.mejor_estudiante())
 #(2) tenga método es_perfecto(numero) que retorne True si la suma de sus divisores (excepto él mismo) es igual a él
 #(3) tenga método encontrar_multiples_divisores(*numeros) que retorne un diccionario {número: tupla_divisores}
 
-
-
 #1. Entender el problema
 
 #Entrada:
@@ -3840,7 +4092,6 @@ print(registro.mejor_estudiante())
 #Tupla de divisores.
 #True o False si es perfecto.
 #Diccionario con números y sus divisores.
-
 
 
 #2. Bosquejo a mano
@@ -3872,8 +4123,6 @@ print(registro.mejor_estudiante())
 #Guardar número como clave.
 #Guardar sus divisores como valor.
 
-
-
 #3. Descubrir el patrón
 
 #Se utiliza:
@@ -3889,8 +4138,6 @@ print(registro.mejor_estudiante())
 #Se usa un diccionario porque relaciona:
 
 #Número -> divisores
-
-
 
 #4. Código
 
@@ -3908,8 +4155,6 @@ class DivisorFinder:
                 divisores.append(i)
 
         return tuple(divisores)
-
-
 
     def es_perfecto(self, numero):
 
@@ -3942,10 +4187,6 @@ class DivisorFinder:
         return resultado
 
 
-
-#Parámetros de prueba
-
-
 buscador = DivisorFinder()
 
 
@@ -3967,7 +4208,102 @@ print(
     )
 )
 
+# Ejercicio
 
+# Crear una clase MultiploFinder.
+#
+# La clase debe trabajar con múltiplos de números.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. encontrar_multiplos(numero, limite)
+#    Devuelve una tupla con todos los múltiplos
+#    de un número hasta el límite indicado.
+#
+# 2. cantidad_multiplos(numero, limite)
+#    Devuelve la cantidad de múltiplos encontrados.
+#
+# 3. encontrar_multiples_listas(limite, *numeros)
+#    Recibe varios números y devuelve un diccionario
+#    donde la clave es el número y el valor es
+#    la tupla de sus múltiplos.
+
+
+# Bosquejo
+
+# 1. Crear la clase MultiploFinder.
+#
+# 2. En encontrar_multiplos():
+#    - Crear una lista vacía.
+#    - Recorrer desde 1 hasta el límite.
+#    - Si el número es múltiplo, agregarlo.
+#    - Convertir la lista en tupla.
+#    - Retornar la tupla.
+#
+# 3. En cantidad_multiplos():
+#    - Llamar a encontrar_multiplos().
+#    - Retornar la cantidad usando len().
+#
+# 4. En encontrar_multiples_listas():
+#    - Crear un diccionario vacío.
+#    - Recorrer los números recibidos.
+#    - Guardar la tupla de múltiplos
+#      correspondiente a cada número.
+#    - Retornar el diccionario.
+
+class MultiploFinder:
+
+    def encontrar_multiplos(self, numero, limite):
+
+        multiplos = []
+
+        for i in range(1, limite + 1):
+
+            if i % numero == 0:
+
+                multiplos.append(i)
+
+        return tuple(multiplos)
+
+
+
+    def cantidad_multiplos(self, numero, limite):
+
+        multiplos = self.encontrar_multiplos(numero, limite)
+
+        return len(multiplos)
+
+
+
+    def encontrar_multiples_listas(self, limite, *numeros):
+
+        resultado = {}
+
+        for numero in numeros:
+
+            resultado[numero] = self.encontrar_multiplos(
+                numero,
+                limite
+            )
+
+        return resultado
+
+
+finder = MultiploFinder()
+
+
+print(finder.encontrar_multiplos(3, 20))
+
+print(finder.cantidad_multiplos(3, 20))
+
+print(
+    finder.encontrar_multiples_listas(
+        20,
+        2,
+        3,
+        5
+    )
+)
 
 #5. Prueba de escritorio
 
@@ -4045,8 +4381,6 @@ print(
 #(2) tenga método codificar_palabra(palabra, desplazamiento) que reutilice para toda la palabra
 #(3) tenga un diccionario como atributo para historial de codificaciones.
 
-
-
 #1. Entender el problema
 
 #Entrada:
@@ -4064,8 +4398,6 @@ print(
 #Letra codificada.
 #Palabra codificada.
 #Diccionario con historial.
-
-
 
 #2. Bosquejo a mano
 
@@ -4089,8 +4421,6 @@ print(
 #Llamar codificar_letra().
 #Concatenar letras.
 #Guardar palabra original y codificada en historial.
-
-
 
 #3. Descubrir el patrón
 
@@ -4167,10 +4497,6 @@ class CodificadorCesar:
         return resultado
 
 
-
-#5. Parámetros de prueba
-
-
 cesar = CodificadorCesar()
 
 
@@ -4185,7 +4511,105 @@ print(cesar.codificar_palabra("hola", 3))
 
 print(cesar.historial)
 
+# Ejercicio
 
+# Crear una clase ConvertidorTexto.
+#
+# La clase debe convertir palabras a mayúsculas
+# letra por letra y guardar el resultado
+# en un historial.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. convertir_letra(letra)
+#    Recibe una letra y la convierte a mayúscula.
+#    Si no es una letra, la devuelve igual.
+#
+# 2. convertir_palabra(palabra)
+#    Convierte toda la palabra llamando al método
+#    convertir_letra().
+#    Guarda la palabra original y la convertida
+#    en el historial.
+#
+# 3. obtener_conversion(palabra)
+#    Devuelve la conversión almacenada de una
+#    palabra. Si no existe, devuelve
+#    "Palabra no encontrada."
+
+
+# Bosquejo
+
+# 1. Crear la clase ConvertidorTexto.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío para el historial.
+#
+# 3. En convertir_letra():
+#    - Verificar si el carácter es una letra.
+#    - Si lo es, convertirlo a mayúscula.
+#    - Si no, devolverlo igual.
+#
+# 4. En convertir_palabra():
+#    - Crear una cadena vacía.
+#    - Recorrer la palabra letra por letra.
+#    - Llamar a convertir_letra().
+#    - Concatenar cada resultado.
+#    - Guardar la conversión en el historial.
+#    - Retornar la palabra convertida.
+#
+# 5. En obtener_conversion():
+#    - Verificar si la palabra existe
+#      en el historial.
+#    - Si existe, devolver la conversión.
+#    - Si no existe, devolver el mensaje.
+
+class ConvertidorTexto:
+
+    def __init__(self):
+
+        self.historial = {}
+
+
+    def convertir_letra(self, letra):
+
+        if letra.isalpha():
+
+            return letra.upper()
+
+        return letra
+
+
+    def convertir_palabra(self, palabra):
+
+        resultado = ""
+
+        for letra in palabra:
+
+            resultado += self.convertir_letra(letra)
+
+        self.historial[palabra] = resultado
+
+        return resultado
+
+
+    def obtener_conversion(self, palabra):
+
+        if palabra in self.historial:
+
+            return self.historial[palabra]
+
+        return "Palabra no encontrada."
+
+
+convertidor = ConvertidorTexto()
+
+print(convertidor.convertir_palabra("python"))
+
+print(convertidor.convertir_palabra("Hola123"))
+
+print(convertidor.obtener_conversion("python"))
+
+print(convertidor.obtener_conversion("java"))
 
 #Resultado esperado:
 
@@ -4396,6 +4820,169 @@ print(
     agrupador.edad_promedio_categoria("adulto")
 )
 
+# Ejercicio
+
+# Crear una clase ClasificadorNotas.
+#
+# La clase debe clasificar notas en diferentes
+# categorías según su valor.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. clasificar_nota(nota)
+#    Devuelve:
+#    - "reprobado" si la nota es menor a 70.
+#    - "regular" si está entre 70 y 84.
+#    - "bueno" si está entre 85 y 94.
+#    - "excelente" si es 95 o más.
+#
+# 2. agrupar_notas(*notas)
+#    Agrupa las notas según su categoría y
+#    las guarda en un diccionario.
+#
+# 3. promedio_categoria(categoria)
+#    Devuelve el promedio de las notas de
+#    una categoría.
+#
+# 4. cantidad_categoria(categoria)
+#    Devuelve la cantidad de notas que tiene
+#    una categoría.
+
+
+# Bosquejo
+
+# 1. Crear la clase ClasificadorNotas.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío.
+#
+# 3. En clasificar_nota():
+#    - Comparar la nota.
+#    - Retornar la categoría correspondiente.
+#
+# 4. En agrupar_notas():
+#    - Crear un diccionario con listas vacías.
+#    - Recorrer las notas.
+#    - Obtener la categoría llamando
+#      a clasificar_nota().
+#    - Agregar la nota a la lista adecuada.
+#    - Retornar el diccionario.
+#
+# 5. En promedio_categoria():
+#    - Verificar que exista la categoría.
+#    - Si está vacía retornar 0.
+#    - Sumar las notas.
+#    - Calcular el promedio.
+#
+# 6. En cantidad_categoria():
+#    - Verificar que exista la categoría.
+#    - Retornar la cantidad usando len().
+
+
+# Código
+
+
+class ClasificadorNotas:
+
+    def __init__(self):
+
+        self.grupos = {}
+
+
+    def clasificar_nota(self, nota):
+
+        if nota < 70:
+
+            return "reprobado"
+
+        elif nota <= 84:
+
+            return "regular"
+
+        elif nota <= 94:
+
+            return "bueno"
+
+        else:
+
+            return "excelente"
+
+
+    def agrupar_notas(self, *notas):
+
+        self.grupos = {
+            "reprobado": [],
+            "regular": [],
+            "bueno": [],
+            "excelente": []
+        }
+
+        for nota in notas:
+
+            categoria = self.clasificar_nota(nota)
+
+            self.grupos[categoria].append(nota)
+
+        return self.grupos
+
+
+    def promedio_categoria(self, categoria):
+
+        if categoria not in self.grupos:
+
+            return 0
+
+        if len(self.grupos[categoria]) == 0:
+
+            return 0
+
+        suma = 0
+
+        for nota in self.grupos[categoria]:
+
+            suma += nota
+
+        return suma / len(self.grupos[categoria])
+
+
+    def cantidad_categoria(self, categoria):
+
+        if categoria not in self.grupos:
+
+            return 0
+
+        return len(self.grupos[categoria])
+
+
+clasificador = ClasificadorNotas()
+
+
+print(clasificador.clasificar_nota(88))
+
+
+print(
+    clasificador.agrupar_notas(
+        60,
+        72,
+        81,
+        89,
+        95,
+        100,
+        68,
+        90
+    )
+)
+
+
+print(
+    clasificador.promedio_categoria("bueno")
+)
+
+
+print(
+    clasificador.cantidad_categoria("excelente")
+)
+
 #5. Pruebas de escritorio
 # PRUEBA 1:
 # Método: clasificar_edad(edad)
@@ -4572,80 +5159,12 @@ print(
 # }
 
 
-
-# PRUEBA 3:
-# Método: edad_promedio_categoria(categoria)
-
-
-# Parámetro de prueba:
-
-# categoria = "adulto"
-
-
-# Estado del diccionario:
-
-# {
-# "niño": [5],
-# "adolescente": [15],
-# "adulto": [30],
-# "mayor": [70]
-# }
-
-
-
-# Busca:
-
-# self.grupos["adulto"]
-
-
-# Obtiene:
-
-# [30]
-
-
-# Inicializa:
-
-# suma = 0
-
-
-
-# Recorrido:
-
-# edad = 30
-
-
-# suma = suma + edad
-
-# suma = 0 + 30
-
-# suma = 30
-
-
-
-# Cantidad de elementos:
-
-# len([30]) = 1
-
-
-
-# Promedio:
-
-# 30 / 1 = 30
-
-
-
-# Resultado:
-
-# Retorna 30
-
 #EJERCICIO 18: Matriz de distancias
 
 #Clase CalculadorDistancia que:
 #(1) tenga método distancia_euclidiana(p1, p2) que reciba dos tuplas (x,y) y calcule la distancia
 #(2) tenga método punto_mas_cercano(referencia, *puntos) que retorne el punto más cercano a referencia
 #(3) tenga un atributo lista para guardar todas las distancias calculadas.
-
-
 
 #1. Entender el problema
 
@@ -4659,8 +5178,6 @@ print(
 
 
 #Un punto de referencia y varios puntos para comparar.
-
-
 
 #Proceso:
 
@@ -4677,8 +5194,6 @@ print(
 #Comparar las distancias obtenidas para encontrar
 #el punto más cercano.
 
-
-
 #Salida:
 
 #Retornar la distancia entre dos puntos.
@@ -4688,9 +5203,7 @@ print(
 #Guardar historial de distancias calculadas.
 
 
-
 #2. Bosquejo a mano
-
 
 #Crear clase CalculadorDistancia.
 
@@ -4829,16 +5342,7 @@ class CalculadorDistancia:
 
         return punto_cercano
 
-
-
-
-#Parámetros de prueba
-
-
-
 calculador = CalculadorDistancia()
-
-
 
 #Prueba de distancia entre dos puntos
 
@@ -4848,7 +5352,6 @@ print(
         (3,4)
     )
 )
-
 
 
 #Prueba de punto más cercano
@@ -4864,12 +5367,7 @@ print(
 )
 
 
-
-#Mostrar historial de distancias
-
-
 print(calculador.distancias)
-
 
 
 
@@ -4937,133 +5435,6 @@ print(calculador.distancias)
 #5.0
 
 
-
-
-
-#Prueba 2:
-
-
-
-#Parámetros:
-
-
-#referencia = (0,0)
-
-
-#puntos:
-
-#(5,5)
-
-#(2,2)
-
-#(10,10)
-
-
-
-#Primer punto:
-
-#punto_cercano = (5,5)
-
-
-
-#Calcula distancia:
-
-
-#√((5-0)^2 + (5-0)^2)
-
-
-#√50
-
-
-#7.07
-
-
-
-#Guarda:
-
-#menor_distancia = 7.07
-
-
-
-#Segundo punto:
-
-#punto = (2,2)
-
-
-
-#Calcula distancia:
-
-
-#√((2-0)^2 + (2-0)^2)
-
-
-#√8
-
-
-#2.82
-
-
-
-#Comparación:
-
-
-#2.82 < 7.07
-
-
-#Verdadero
-
-
-
-#Actualiza:
-
-
-#menor_distancia = 2.82
-
-#punto_cercano = (2,2)
-
-
-
-#Tercer punto:
-
-
-#punto = (10,10)
-
-
-
-#Calcula distancia:
-
-
-#√((10-0)^2 + (10-0)^2)
-
-
-#√200
-
-
-#14.14
-
-
-
-#Comparación:
-
-
-#14.14 < 2.82
-
-
-#Falso
-
-
-
-#No cambia el resultado.
-
-
-
-#Resultado final:
-
-
-#Punto más cercano:
-
-#(2,2)
-
 #EJERCICIO 19: Inventario de productos
 
 #Clase Inventario que:
@@ -5071,10 +5442,7 @@ print(calculador.distancias)
 #(2) tenga método restar_stock(producto, cantidad) que disminuya y retorne True si hay suficiente
 #(3) tenga método productos_bajo_stock(minimo) que retorne una lista de productos con cantidad < minimo.
 
-
-
 #1. Entender el problema
-
 
 #Entrada:
 
@@ -5085,7 +5453,6 @@ print(calculador.distancias)
 #Cantidad que se desea retirar.
 
 #Cantidad mínima para buscar productos con poco stock.
-
 
 
 #Proceso:
@@ -5118,7 +5485,6 @@ print(calculador.distancias)
 #Recorrer el diccionario.
 
 #Comparar las cantidades con el mínimo.
-
 
 
 #Salida:
@@ -5322,8 +5688,6 @@ print(inventario.stock)
 
 
 
-#Restar stock
-
 print(
     inventario.restar_stock(
         "Mouse",
@@ -5340,8 +5704,6 @@ print(
         5
     )
 )
-
-
 
 
 #5. Prueba de escritorio
@@ -5379,177 +5741,126 @@ print(
 
 #}
 
-#Prueba 2:
+# Ejercicio
 
+# Crear una clase Banco.
+#
+# La clase debe administrar el saldo de varias cuentas
+# utilizando un diccionario.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. depositar(cuenta, monto)
+#    Agrega dinero a una cuenta.
+#    Si la cuenta no existe, la crea.
+#
+# 2. retirar(cuenta, monto)
+#    Resta dinero de una cuenta.
+#    Solo debe hacerlo si existe suficiente saldo.
+#    Devuelve True si pudo retirar y False en caso contrario.
+#
+# 3. cuentas_bajo_saldo(minimo)
+#    Devuelve una lista con las cuentas cuyo saldo
+#    sea menor al mínimo indicado.
+#
+# 4. saldo_total()
+#    Devuelve la suma del dinero de todas las cuentas.
 
-#agregar_stock("Teclado",5)
 
+# Bosquejo
 
+# 1. Crear la clase Banco.
+#
+# 2. En el constructor:
+#    - Crear un diccionario vacío.
+#
+# 3. En depositar():
+#    - Verificar si la cuenta existe.
+#    - Si existe, sumar el monto.
+#    - Si no existe, crearla con ese monto.
+#
+# 4. En retirar():
+#    - Verificar si la cuenta existe.
+#    - Revisar si tiene saldo suficiente.
+#    - Restar el monto.
+#    - Retornar True o False.
+#
+# 5. En cuentas_bajo_saldo():
+#    - Crear una lista vacía.
+#    - Recorrer el diccionario.
+#    - Agregar las cuentas con saldo menor al mínimo.
+#    - Retornar la lista.
+#
+# 6. En saldo_total():
+#    - Sumar todos los valores del diccionario.
+#    - Retornar la suma.
 
-#Producto no existe.
 
+class Banco:
 
-#Se crea:
+    def __init__(self):
 
+        self.cuentas = {}
 
-#stock = {
 
-#"Mouse":10,
+    def depositar(self, cuenta, monto):
 
-#"Teclado":5
+        if cuenta in self.cuentas:
 
-#}
+            self.cuentas[cuenta] += monto
 
+        else:
 
+            self.cuentas[cuenta] = monto
 
-#Prueba 3:
 
+    def retirar(self, cuenta, monto):
 
-#agregar_stock("Mouse",3)
+        if cuenta in self.cuentas:
 
+            if self.cuentas[cuenta] >= monto:
 
+                self.cuentas[cuenta] -= monto
 
-#Producto existe.
+                return True
 
+        return False
 
-#Busca:
 
+    def cuentas_bajo_saldo(self, minimo):
 
-#stock["Mouse"]
+        cuentas = []
 
+        for cuenta, saldo in self.cuentas.items():
 
-#Valor actual:
+            if saldo < minimo:
 
-#10
+                cuentas.append(cuenta)
 
+        return cuentas
 
 
-#Realiza:
+    def saldo_total(self):
 
+        return sum(self.cuentas.values())
 
-#10 + 3 = 13
 
+banco = Banco()
 
 
-#Nuevo estado:
+banco.depositar("Ana", 1200)
+banco.depositar("Luis", 500)
+banco.depositar("Carlos", 2000)
 
+banco.retirar("Luis", 150)
+banco.retirar("Carlos", 700)
 
-#stock = {
 
-#"Mouse":13,
+print(banco.cuentas)
 
-#"Teclado":5
+print(banco.cuentas_bajo_saldo(600))
 
-#}
-
-
-#Prueba 4:
-
-
-#restar_stock("Mouse",4)
-
-
-
-#Verifica:
-
-
-#Producto existe.
-
-
-#Cantidad disponible:
-
-#13
-
-
-
-#Cantidad solicitada:
-
-#4
-
-
-
-#Comparación:
-
-
-#13 >= 4
-
-
-#Verdadero
-
-
-
-#Realiza:
-
-
-#13 - 4 = 9
-
-
-
-#Retorna:
-
-
-#True
-
-
-
-#Nuevo estado:
-
-
-#stock = {
-
-#"Mouse":9,
-
-#"Teclado":5
-
-#}
-
-
-
-#Prueba 5:
-
-
-#productos_bajo_stock(5)
-
-
-
-#Recorre:
-
-
-#Mouse:
-
-#9 < 5
-
-#Falso
-
-
-
-#Teclado:
-
-#5 < 5
-
-#Falso
-
-
-
-#Monitor:
-
-#2 < 5
-
-#Verdadero
-
-
-
-#Agrega:
-
-
-#"Monitor"
-
-
-
-#Resultado final:
-
-
-#["Monitor"]
+print(banco.saldo_total())
 
 #EJERCICIO 20: Analizador de patrones en textos
 
@@ -5558,11 +5869,7 @@ print(
 #(2) tenga método agrupar_por_longitud(texto) que retorne un diccionario {longitud: [palabras]}
 #(3) tenga método palabras_unicas() usando un conjunto.
 
-
-
 #1. Entender el problema
-
-
 #Entrada:
 
 #Un texto con varias palabras.
@@ -5765,20 +6072,120 @@ class AnalizadorPatrones:
 
         return set(self.palabras)
 
-
-
-
-#Parámetros de prueba
-
-
-
 analizador = AnalizadorPatrones()
 
 
 
 texto = "python programación prueba casa carro python"
 
+# Ejercicio
 
+# Crear una clase AnalizadorNumeros.
+#
+# La clase debe analizar listas de números.
+#
+# La clase debe tener los siguientes métodos:
+#
+# 1. encontrar_mayores(numeros, minimo)
+#    Devuelve una lista con los números
+#    mayores o iguales al mínimo indicado.
+#
+# 2. agrupar_por_paridad(numeros)
+#    Agrupa los números en un diccionario
+#    con las claves "pares" e "impares".
+#
+# 3. numeros_unicos()
+#    Devuelve un conjunto con los números
+#    analizados.
+
+
+# Bosquejo
+
+# 1. Crear la clase AnalizadorNumeros.
+#
+# 2. En el constructor:
+#    - Crear una lista vacía.
+#
+# 3. En encontrar_mayores():
+#    - Crear una lista vacía.
+#    - Recorrer los números.
+#    - Si cumplen la condición,
+#      agregarlos a la lista.
+#    - Guardar los números analizados.
+#    - Retornar la lista.
+#
+# 4. En agrupar_por_paridad():
+#    - Crear un diccionario con dos listas.
+#    - Recorrer los números.
+#    - Si es par agregarlo a "pares".
+#    - Si no, agregarlo a "impares".
+#    - Retornar el diccionario.
+#
+# 5. En numeros_unicos():
+#    - Convertir la lista almacenada en un set.
+#    - Retornar el conjunto.
+
+
+# Código
+
+
+class AnalizadorNumeros:
+
+    def __init__(self):
+
+        self.numeros = []
+
+
+    def encontrar_mayores(self, numeros, minimo):
+
+        mayores = []
+
+        for numero in numeros:
+
+            if numero >= minimo:
+
+                mayores.append(numero)
+
+        self.numeros = numeros
+
+        return mayores
+
+
+    def agrupar_por_paridad(self, numeros):
+
+        agrupacion = {
+            "pares": [],
+            "impares": []
+        }
+
+        for numero in numeros:
+
+            if numero % 2 == 0:
+
+                agrupacion["pares"].append(numero)
+
+            else:
+
+                agrupacion["impares"].append(numero)
+
+        return agrupacion
+
+
+    def numeros_unicos(self):
+
+        return set(self.numeros)
+
+
+analizador = AnalizadorNumeros()
+
+
+lista = [10, 5, 18, 7, 10, 22, 5, 31]
+
+print(analizador.encontrar_mayores(lista, 10))
+
+print(analizador.agrupar_por_paridad(lista))
+
+print(analizador.numeros_unicos())
 
 print(
     analizador.encontrar_palabras(
@@ -5894,105 +6301,3 @@ print(
 
 
 
-#Prueba 2:
-
-
-#agrupar_por_longitud()
-
-
-
-#Palabras:
-
-
-#python = 6
-
-#programación = 12
-
-#prueba = 6
-
-#casa = 4
-
-#carro = 5
-
-#python = 6
-
-
-
-#Diccionario generado:
-
-
-#{
-
-#6:[
-#"python",
-#"prueba",
-#"python"
-#],
-
-#12:[
-#"programación"
-#],
-
-#4:[
-#"casa"
-#],
-
-#5:[
-#"carro"
-#]
-
-#}
-
-
-
-#Resultado:
-
-
-#Diccionario agrupado por longitud.
-
-
-
-#Prueba 3:
-
-
-#palabras_unicas()
-
-
-
-#Lista guardada:
-
-
-#[
-#"python",
-#"programación",
-#"prueba",
-#"casa",
-#"carro",
-#"python"
-#]
-
-
-
-#Convertir a conjunto elimina repetidos:
-
-
-#{
-
-#"python",
-
-#"programación",
-
-#"prueba",
-
-#"casa",
-
-#"carro"
-
-#}
-
-
-
-#Resultado:
-
-
-#Conjunto de palabras únicas.
