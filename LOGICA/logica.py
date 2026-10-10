@@ -2461,3 +2461,456 @@ print("Después del mantenimiento:")
 print(vehiculo)
 
 #5. Prueba de escritorio
+
+# 1. Entender el problema
+# Entrada: Datos de una persona (nombre, cedula), de un empleado (codigo, salario),
+#          y especificos de un tripulante (rol, horas de vuelo acumuladas).
+# Proceso: Se crea una jerarquia multinivel: Persona -> Empleado -> Tripulante.
+#          Tripulante hereda atributos y metodos de Empleado y Persona, anade 'rol' y 'horas_vuelo',
+#          e implementa el metodo registrar_horas(h) para acumular horas de vuelo.
+# Salida: Presentacion polimorfica en consola y representacion textual con __str__().
+
+# 2. Bosquejo a mano
+# Mantener clase base Persona
+# Mantener clase hija Pasajero(Persona)
+# Mantener clase hija Empleado(Persona)
+# CAMBIO: Crear clase Tripulante(Empleado)
+# CAMBIO: Constructor __init__ que invoque super() de Empleado y anada rol y horas_vuelo
+# CAMBIO: Metodo registrar_horas(h) para sumar horas al odometro de vuelo
+# CAMBIO: Metodo __str__() especializado para Tripulante
+# Instanciar objetos y probar herencia multinivel
+
+# 3. Descubrir el patron
+# Herencia multinivel: Tripulante ES UN Empleado, y a su vez Empleado ES UNA Persona.
+# super().__init__() encadena la inicializacion hacia arriba en la jerarquia.
+# Polimorfismo: Tripulante puede presentarse() como Persona y aumentar_salario() como Empleado.
+
+# 4. Escribir codigo
+
+class Persona:
+    def __init__(self, nombre, cedula):
+        self.nombre = nombre
+        self.cedula = cedula
+
+    def presentarse(self):
+        print(f"Soy {self.nombre}, cedula {self.cedula}")
+
+    def __str__(self):
+        return f"{self.nombre} ({self.cedula})"
+
+
+class Pasajero(Persona):
+    def __init__(self, nombre, cedula, codigo_reserva):
+        super().__init__(nombre, cedula)
+        self.codigo_reserva = codigo_reserva
+        self.millas = 0
+
+    def sumar_millas(self, m):
+        self.millas += m
+
+    def __str__(self):
+        return f"Pasajero {self.nombre} [reserva: {self.codigo_reserva}] · {self.millas} millas"
+
+
+class Empleado(Persona):
+    def __init__(self, nombre, cedula, codigo_emp, salario):
+        super().__init__(nombre, cedula)
+        self.codigo_emp = codigo_emp
+        self.salario = salario
+
+    def aumentar_salario(self, porcentaje):
+        self.salario *= (1 + porcentaje / 100)
+
+    def __str__(self):
+        return f"Empleado {self.nombre} [{self.codigo_emp}] · ${self.salario:.2f}"
+
+
+# CAMBIO: Nueva clase con herencia multinivel
+class Tripulante(Empleado):
+    def __init__(self, nombre, cedula, codigo_emp, salario, rol):
+        super().__init__(nombre, cedula, codigo_emp, salario)
+        self.rol = rol
+        self.horas_vuelo = 0
+
+    def registrar_horas(self, horas):
+        self.horas_vuelo += horas
+
+    def __str__(self):
+        return (f"Tripulante {self.nombre} [{self.codigo_emp}] · Rol: {self.rol} "
+                f"· {self.horas_vuelo} hrs vuelo · ${self.salario:.2f}")
+
+
+# 5. Prueba de escritorio
+
+p = Pasajero("Ana", "0912345678", "AB-1234")
+e = Empleado("Luis", "0987654321", "EMP-01", 1200)
+t = Tripulante("Carlos", "0923456781", "TRP-05", 2500, "Piloto")
+
+p.sumar_millas(500)
+e.aumentar_salario(10)
+
+# Tripulante usa metodos de sus clases ancestros y propios:
+t.registrar_horas(85)          # Metodo propio de Tripulante
+t.aumentar_salario(5)          # Metodo heredado de Empleado
+
+# Todos heredan presentarse() desde Persona:
+p.presentarse()
+e.presentarse()
+t.presentarse()
+
+# Cada clase resuelve su propio __str__():
+print(p)
+print(e)
+print(t)
+
+# EJERCICIO 49: Jerarquia de clases geometricas con clase base Figura y clases hijas Rectangulo, Circulo y Triangulo.
+# CAMBIO: Se anade el metodo perimetro() a la clase base y a las tres figuras existentes (asumiendo triangulo equilatero o isosceles segun lados, o triangulo con hipotenusa/lados definidos; aqui se reciben los lados necesarios). Ademas, se anade la clase Cuadrado que hereda de Rectangulo reutilizando su constructor y calculos con super().
+
+# 1. Entender el problema
+# Entrada: Dimensiones geometricas (base, altura, radio, lados).
+# Proceso: 
+#   - Figura define los contratos abstractos area() y perimetro().
+#   - Rectangulo, Circulo y Triangulo implementan ambos metodos.
+#   - Cuadrado hereda de Rectangulo pasando el mismo valor para base y altura a super().__init__(lado, lado).
+# Salida: Area, perimetro y acumulados calculados de forma polimorfica.
+
+# 2. Bosquejo a mano
+# Actualizar clase base Figura con area() y CAMBIO: perimetro()
+# Actualizar Rectangulo con CAMBIO: perimetro() -> 2 * (base + altura)
+# Actualizar Circulo con CAMBIO: perimetro() -> 2 * pi * radio
+# Actualizar Triangulo con lados para perimetro() -> lado1 + lado2 + lado3 (o base y altura con lados adicionales)
+# CAMBIO: Crear clase Cuadrado(Rectangulo) con constructor __init__(lado) que invoque super().__init__(lado, lado)
+# Probar recorrido polimorfico mostrando area y perimetro de cada figura
+
+# 3. Descubrir el patron
+# Polimorfismo: Una lista heterogenea de figuras responde a las mismas firmas (.area() y .perimetro()) sin condicionales if/else.
+# Especializacion: Un Cuadrado ES UN Rectangulo donde base == altura, heredando automaticamente area() y perimetro() sin reescribir logica.
+
+# 4. Escribir codigo
+
+import math
+
+
+class Figura:
+    def area(self):
+        raise NotImplementedError("Cada figura debe implementar area()")
+
+    # CAMBIO
+    def perimetro(self):
+        raise NotImplementedError("Cada figura debe implementar perimetro()")
+
+
+class Rectangulo(Figura):
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+
+    def area(self):
+        return self.base * self.altura
+
+    # CAMBIO
+    def perimetro(self):
+        return 2 * (self.base + self.altura)
+
+
+# CAMBIO: Nueva clase que hereda de Rectangulo
+class Cuadrado(Rectangulo):
+    def __init__(self, lado):
+        super().__init__(lado, lado)
+
+
+class Circulo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return math.pi * self.radio ** 2
+
+    # CAMBIO
+    def perimetro(self):
+        return 2 * math.pi * self.radio
+
+
+class Triangulo(Figura):
+    def __init__(self, base, altura, lado1=None, lado2=None):
+        self.base = base
+        self.altura = altura
+        # Si no se definen lados laterales, se asume triangulo rectangulo para el perimetro
+        self.lado1 = lado1 if lado1 is not None else math.sqrt(base**2 + altura**2)
+        self.lado2 = lado2 if lado2 is not None else altura
+
+    def area(self):
+        return (self.base * self.altura) / 2
+
+    # CAMBIO
+    def perimetro(self):
+        return self.base + self.lado1 + self.lado2
+
+
+# 5. Prueba de escritorio
+
+figuras = [
+    Rectangulo(5, 3),
+    Circulo(5),
+    Triangulo(4, 3, lado1=5, lado2=3),
+    Cuadrado(4)  # CAMBIO
+]
+
+for f in figuras:
+    nombre = type(f).__name__
+    print(f"{nombre:<12} | Area: {f.area():.2f} | Perimetro: {f.perimetro():.2f}")
+
+total_area = sum(f.area() for f in figuras)
+total_perimetro = sum(f.perimetro() for f in figuras)
+
+print("-" * 45)
+print(f"Area total     : {total_area:.2f}")
+print(f"Perimetro total: {total_perimetro:.2f}")
+
+# EJERCICIO 50: Clase base Vehiculo con marca y modelo. Clases hijas Auto con puertas y Moto con cilindraje.
+# CAMBIO: Se agrega a la clase base Vehiculo el atributo anio y el metodo es_clasico() que retorna True si el vehiculo tiene mas de 25 anos de antiguedad, heredandose directamente a Auto y Moto.
+
+# 1. Entender el problema
+# Entrada: Marca, modelo, anio de fabricacion y datos especificos (puertas para Auto, cilindraje para Moto).
+# Proceso: La clase Vehiculo centraliza marca, modelo y anio. El metodo es_clasico calcula la antiguedad restando el anio al anio base actual (2026). Las clases hijas llaman a super().__init__ para guardar estos datos y agregan sus atributos particulares.
+# Salida: Informacion detallada en texto y evaluacion de si cada vehiculo es clasico.
+
+# 2. Bosquejo a mano
+# Actualizar clase Vehiculo agregando anio al constructor
+# Crear en Vehiculo el metodo es_clasico()
+# Modificar Auto para que reciba anio y lo envie a super()
+# Modificar Moto para que reciba anio y lo envie a super()
+# Adaptar los metodos __str__ de cada clase
+# Crear objetos de prueba y recorrerlos con un bucle
+
+# 3. Descubrir el patron
+# Herencia simple: Auto y Moto reutilizan la logica comun del padre sin duplicar codigo.
+# Reutilizacion de metodos: es_clasico() se define una sola vez en Vehiculo y sirve para cualquier tipo de transporte hijo.
+
+# 4. Escribir codigo
+
+class Vehiculo:
+    def __init__(self, marca, modelo, anio):
+        self.marca = marca
+        self.modelo = modelo
+        self.anio = anio
+
+    # Metodo heredado por todos los vehiculos
+    def es_clasico(self):
+        anio_actual = 2026
+        return (anio_actual - self.anio) >= 25
+
+    def __str__(self):
+        return f"{self.marca} {self.modelo} ({self.anio})"
+
+
+class Auto(Vehiculo):
+    def __init__(self, marca, modelo, anio, puertas):
+        super().__init__(marca, modelo, anio)
+        self.puertas = puertas
+
+    def __str__(self):
+        return f"Auto: {self.marca} {self.modelo} ({self.anio}), {self.puertas} puertas"
+
+
+class Moto(Vehiculo):
+    def __init__(self, marca, modelo, anio, cilindraje):
+        super().__init__(marca, modelo, anio)
+        self.cilindraje = cilindraje
+
+    def __str__(self):
+        return f"Moto: {self.marca} {self.modelo} ({self.anio}), {self.cilindraje}cc"
+
+
+# 5. Prueba de escritorio
+
+auto1 = Auto("Toyota", "Corolla", 2018, 4)
+auto2 = Auto("Volkswagen", "Escarabajo", 1985, 2)
+moto1 = Moto("Honda", "CBR", 2022, 600)
+
+garaje = [auto1, auto2, moto1]
+
+for v in garaje:
+    clasico_txt = "Si" if v.es_clasico() else "No"
+    print(f"{v} | Clasico: {clasico_txt}")
+
+# EJERCICIO 51: Jerarquia de clases Animal con metodo hablar() sobrescrito por cada clase hija (Perro, Gato, Ave).
+# CAMBIO: Se agrega a la clase base Animal el atributo energia con valor inicial de 100, el metodo dormir() que recupera energia, y se modifica hablar() para que gaste 10 de energia solo si el animal tiene suficiente para emitir sonido.
+
+# 1. Entender el problema
+# Entrada: Nombre del animal y la accion que realiza (hablar o dormir).
+# Proceso: La clase base Animal maneja el nombre y el nivel de energia (inicia en 100). Cada vez que habla, se verifica que tenga energia mayor o igual a 10 y se descuenta ese valor; si no tiene suficiente, avisa que esta cansado. El metodo dormir recupera 30 puntos de energia. Cada subclase define su sonido particular manteniendo este control de estado.
+# Salida: Mensaje en consola con el sonido correspondiente y el estado actual de energia.
+
+# 2. Bosquejo a mano
+# Modificar clase Animal para inicializar energia en 100 dentro de __init__
+# Crear en Animal el metodo gastar_energia() para validar si puede actuar
+# Crear en Animal el metodo dormir() para recargar energia
+# Sobrescribir hablar() en Perro, Gato y Ave validando la energia antes de sonar
+# Probar el recorrido con una lista de animales haciendolos hablar varias veces y luego descansar
+
+# 3. Descubrir el patron
+# Polimorfismo puro: Todos los objetos responden al mensaje hablar() a su propia manera.
+# Encapsulamiento del estado: La energia es administrada por la logica comun del animal para que ninguna accion se ejecute si el recurso se agoto.
+
+# 4. Escribir codigo
+
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.energia = 100
+
+    def puede_actuar(self, costo=10):
+        if self.energia >= costo:
+            self.energia -= costo
+            return True
+        print(f"{self.nombre} no tiene energia para hablar (Energia: {self.energia}). Necesita dormir.")
+        return False
+
+    def dormir(self):
+        self.energia = min(100, self.energia + 30)
+        print(f"{self.nombre} durmio una siesta. Energia actual: {self.energia}")
+
+    def hablar(self):
+        if self.puede_actuar():
+            print(f"{self.nombre}: (sonido genérico)")
+
+
+class Perro(Animal):
+    def hablar(self):
+        if self.puede_actuar():
+            print(f"{self.nombre}: Guau guau! (Energia restante: {self.energia})")
+
+
+class Gato(Animal):
+    def hablar(self):
+        if self.puede_actuar():
+            print(f"{self.nombre}: Miau miau (Energia restante: {self.energia})")
+
+
+class Ave(Animal):
+    def hablar(self):
+        if self.puede_actuar():
+            print(f"{self.nombre}: Pio pio (Energia restante: {self.energia})")
+
+
+# 5. Prueba de escritorio
+
+perro = Perro("Rex")
+gato = Gato("Felix")
+ave = Ave("Piolin")
+
+animales = [perro, gato, ave]
+
+# Primera ronda de sonidos
+for a in animales:
+    a.hablar()
+
+# Desgastamos la energia de Felix para probar la condicion
+for _ in range(9):
+    gato.hablar()
+
+# Felix intenta hablar sin energia
+gato.hablar()
+
+# Felix duerme y vuelve a hablar
+gato.dormir()
+gato.hablar()
+
+# EJERCICIO 52: Clase base Empleado con metodo abstracto sueldo_mensual(). Subclases EmpleadoPorHoras y EmpleadoFijo.
+# CAMBIO: Se agrega el metodo calcular_bono(desempeno) en la clase base Empleado que otorga un bono porcentual extra sobre el sueldo mensual si el desempeno es sobresaliente, y se anade una nueva subclase EmpleadoComision que calcula sueldo base mas porcentaje de ventas.
+
+# 1. Entender el problema
+# Entrada: Nombre del empleado, parametros salariales segun modalidad (horas/tarifa, sueldo fijo, o base/ventas/comision) y calificacion de desempeno.
+# Proceso: La clase base Empleado define el contrato abstracto sueldo_mensual() y el calculo de bono general. Cada subclase implementa su propia formula para determinar el sueldo mensual. La nueva clase EmpleadoComision suma el salario base al producto de las ventas logradas por su porcentaje de comision.
+# Salida: Detalle individual de sueldo, aplicacion de bonos y el total acumulado de la nomina empresarial.
+
+# 2. Bosquejo a mano
+# Definir clase base Empleado con sueldo_mensual() abstracto
+# Crear en Empleado el metodo calcular_bono(sobresaliente)
+# Adaptar EmpleadoPorHoras con su calculo horas * tarifa
+# Adaptar EmpleadoFijo con su monto fijo
+# Crear la nueva clase EmpleadoComision con base + (ventas * tasa)
+# Recorrer lista polimorfica sumando nomina base y bonos evaluados
+
+# 3. Descubrir el patron
+# Clase abstracta / plantilla: Empleado obliga a sus derivadas a calcular el sueldo segun su propio contrato.
+# Reutilizacion de comportamiento: calcular_bono() usa el polimorfismo internamente invocando self.sueldo_mensual() sin importar de que tipo de empleado se trate.
+
+# 4. Escribir codigo
+
+class Empleado:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def sueldo_mensual(self):
+        raise NotImplementedError("La subclase debe definir sueldo_mensual()")
+
+    # Metodo que aprovecha el polimorfismo llamando a sueldo_mensual()
+    def calcular_bono(self, es_sobresaliente=False):
+        if es_sobresaliente:
+            return round(self.sueldo_mensual() * 0.15, 2)
+        return 0.0
+
+    def __str__(self):
+        return f"{self.nombre}: ${self.sueldo_mensual():.2f}"
+
+
+class EmpleadoPorHoras(Empleado):
+    def __init__(self, nombre, horas, tarifa):
+        super().__init__(nombre)
+        self.horas = horas
+        self.tarifa = tarifa
+
+    def sueldo_mensual(self):
+        return self.horas * self.tarifa
+
+
+class EmpleadoFijo(Empleado):
+    def __init__(self, nombre, sueldo):
+        super().__init__(nombre)
+        self.sueldo = sueldo
+
+    def sueldo_mensual(self):
+        return self.sueldo
+
+
+# Subclase adicional para vendedores
+class EmpleadoComision(Empleado):
+    def __init__(self, nombre, sueldo_base, total_ventas, porcentaje_comision):
+        super().__init__(nombre)
+        self.sueldo_base = sueldo_base
+        self.total_ventas = total_ventas
+        self.porcentaje_comision = porcentaje_comision
+
+    def sueldo_mensual(self):
+        comision = self.total_ventas * (self.porcentaje_comision / 100)
+        return self.sueldo_base + comision
+
+
+# 5. Prueba de escritorio
+
+empleados = [
+    EmpleadoPorHoras("Ana", 160, 8),
+    EmpleadoFijo("Luis", 1500),
+    EmpleadoComision("Marcos", 600, 8000, 5)
+]
+
+total_nomina = 0
+total_bonos = 0
+
+for emp in empleados:
+    sueldo = emp.sueldo_mensual()
+    # Evaluamos bono solo para empleados destacados (ejemplo: Ana y Marcos)
+    destacado = emp.nombre in ["Ana", "Marcos"]
+    bono = emp.calcular_bono(destacado)
+    
+    total_nomina += sueldo
+    total_bonos += bono
+    
+    print(f"{emp} | Bono por desempeno: ${bono:.2f} | Total a cobrar: ${sueldo + bono:.2f}")
+
+print("-" * 55)
+print(f"Nomina base total: ${total_nomina:.2f}")
+print(f"Bonos acumulados : ${total_bonos:.2f}")
+print(f"Gasto final      : ${total_nomina + total_bonos:.2f}")
